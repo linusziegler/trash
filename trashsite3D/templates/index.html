@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>urtrash</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <div id="canvas-container"></div>
+    <div id="info-panel" class="info-panel">
+        <div class="info-content">
+            <div id="object-name" class="info-text">No object selected</div>
+            <div id="object-details" class="info-text"></div>
+        </div>
+    </div>
+    <div id="controls-info" class="controls-info">
+        <div id="stats-global" class="info-text">Loading...</div>
+    </div>
+    <div id="mouse-circle" class="mouse-circle"></div>
+</body>
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.182.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.182.0/examples/jsm/"
+  }
+}
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script type="module" src="{{ url_for('static', filename='app.js') }}"></script>
+
+</html>

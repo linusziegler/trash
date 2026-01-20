@@ -1,0 +1,58 @@
+{
+  "trash5": {
+    "id": "trash5",
+    "name": "trash5",
+    "added": "2026-01-20T20:44:30.213891",
+    "type": "glb",
+    "path": "/objects/trash5.glb",
+    "size": 1535244
+  },
+  "trash4": {
+    "id": "trash4",
+    "name": "trash4",
+    "added": "2026-01-20T20:44:30.213906",
+    "type": "glb",
+    "path": "/objects/trash4.glb",
+    "size": 1089880
+  },
+  "trash6": {
+    "id": "trash6",
+    "name": "trash6",
+    "added": "2026-01-20T20:44:30.213912",
+    "type": "glb",
+    "path": "/objects/trash6.glb",
+    "size": 3009876
+  },
+  "trash7": {
+    "id": "trash7",
+    "name": "trash7",
+    "added": "2026-01-20T20:44:30.213926",
+    "type": "glb",
+    "path": "/objects/trash7.glb",
+    "size": 390864
+  },
+  "trash3": {
+    "id": "trash3",
+    "name": "trash3",
+    "added": "2026-01-20T20:44:30.213930",
+    "type": "glb",
+    "path": "/objects/trash3.glb",
+    "size": 718988
+  },
+  "trash2": {
+    "id": "trash2",
+    "name": "trash2",
+    "added": "2026-01-20T20:44:30.213933",
+    "type": "glb",
+    "path": "/objects/trash2.glb",
+    "size": 1682972
+  },
+  "trash1": {
+    "id": "trash1",
+    "name": "trash1",
+    "added": "2026-01-20T20:44:30.213936",
+    "type": "glb",
+    "path": "/objects/trash1.glb",
+    "size": 1654552
+  }
+}

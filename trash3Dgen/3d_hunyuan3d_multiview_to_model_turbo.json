@@ -1,8 +1,8 @@
 {
   "3": {
     "inputs": {
-      "seed": 1091557656400313,
-      "steps": 8,
+      "seed": 131628866129404,
+      "steps": 16,
       "cfg": 4,
       "sampler_name": "euler",
       "scheduler": "normal",
@@ -67,7 +67,7 @@
   "61": {
     "inputs": {
       "num_chunks": 1000,
-      "octree_resolution": 96,
+      "octree_resolution": 128,
       "samples": [
         "3",
         0
@@ -108,7 +108,7 @@
   },
   "66": {
     "inputs": {
-      "resolution": 1024,
+      "resolution": 2048,
       "batch_size": 1
     },
     "class_type": "EmptyLatentHunyuan3Dv2",
@@ -145,7 +145,7 @@
   },
   "78": {
     "inputs": {
-      "guidance": 2.5,
+      "guidance": 3.5,
       "conditioning": [
         "65",
         0

@@ -23,14 +23,6 @@
     "path": "/objects/trash6.glb",
     "size": 3009876
   },
-  "trash7": {
-    "id": "trash7",
-    "name": "trash7",
-    "added": "2026-01-20T20:44:30.213926",
-    "type": "glb",
-    "path": "/objects/trash7.glb",
-    "size": 390864
-  },
   "trash3": {
     "id": "trash3",
     "name": "trash3",
@@ -54,5 +46,29 @@
     "type": "glb",
     "path": "/objects/trash1.glb",
     "size": 1654552
+  },
+  "mug_00001_": {
+    "id": "mug_00001_",
+    "name": "mug_00001_",
+    "added": "2026-01-20T22:08:24.607934",
+    "type": "glb",
+    "path": "/objects/mug_00001_.glb",
+    "size": 1369904
+  },
+  "nuts_00001_": {
+    "id": "nuts_00001_",
+    "name": "nuts_00001_",
+    "added": "2026-01-20T22:08:35.449877",
+    "type": "glb",
+    "path": "/objects/nuts_00001_.glb",
+    "size": 3223748
+  },
+  "glasses_00001_": {
+    "id": "glasses_00001_",
+    "name": "glasses_00001_",
+    "added": "2026-01-20T22:09:25.455255",
+    "type": "glb",
+    "path": "/objects/glasses_00001_.glb",
+    "size": 417044
   }
 }

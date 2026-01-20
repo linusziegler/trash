@@ -1,18 +1,41 @@
-# script triggers ComfyUI workflow when a new folder with 4 inputimages is added to WATCH_DIR
+# script triggers ComfyUI workflow when a new folder with 4 input images is added to WATCH_DIR
+# and periodically syncs COMFY_OUTPUT -> OBJECT_OUT using robocopy (every 10 seconds)
 
 import json
 import time
 import shutil
 import requests
+import subprocess
+import threading
 from pathlib import Path
 from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
 
-WATCH_DIR = Path("/absolute/path/to/watched_input")
-COMFY_ROOT = Path("/absolute/path/to/ComfyUI")
+# -----------------------------------------------------------------------------
+# Paths
+# -----------------------------------------------------------------------------
+
+# Directory of this script (trashsite3D/)
+SCRIPT_DIR = Path(__file__).resolve().parent
+# Project root (one level above script dir)
+BASE_DIR = SCRIPT_DIR.parent
+print(f"Base directory: {BASE_DIR}")
+
+# Source folder that images end up in
+WATCH_DIR = BASE_DIR / "image_in"
+
+COMFY_ROOT = Path("C:/Users/duraX/Documents/ComfyUI")  # <-- adjust if needed
 COMFY_INPUT = COMFY_ROOT / "input"
+OUTPUT_FOLDER = "trashscans"
+COMFY_OUTPUT = COMFY_ROOT / "output" / OUTPUT_FOLDER
+OBJECT_OUT = BASE_DIR / "object_out"
+
 WORKFLOW_JSON = Path("3d_hunyuan3d_multiview_to_model_turbo.json")
 COMFY_API = "http://127.0.0.1:8000/prompt"
+
+# -----------------------------------------------------------------------------
+# View mapping
+# -----------------------------------------------------------------------------
 
 SUFFIX_MAP = {
     "front": "front",
@@ -20,6 +43,47 @@ SUFFIX_MAP = {
     "right": "right",
     "back": "back",
 }
+
+# -----------------------------------------------------------------------------
+# Robocopy sync (every 10 seconds)
+# -----------------------------------------------------------------------------
+
+def run_robocopy_once():
+    cmd = [
+        "robocopy",
+        str(COMFY_OUTPUT),
+        str(OBJECT_OUT),
+        "/E",        # copy new & updated files, no deletes
+        "/R:0",      # no retries
+        "/W:0",      # no wait
+        "/NFL",      # no file list
+        "/NDL",      # no dir list
+        "/NJH",      # no job header
+        "/NJS",      # no job summary
+    ]
+
+    # robocopy uses non-zero exit codes for success -> suppress output
+    subprocess.run(
+        cmd,
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
+        shell=True
+    )
+
+
+def robocopy_sync_loop(interval=10):
+    COMFY_OUTPUT.mkdir(parents=True, exist_ok=True)
+    OBJECT_OUT.mkdir(parents=True, exist_ok=True)
+
+    print(f"Robocopy sync started (every {interval}s)")
+
+    while True:
+        run_robocopy_once()
+        time.sleep(interval)
+
+# -----------------------------------------------------------------------------
+# Watchdog handler
+# -----------------------------------------------------------------------------
 
 class NewFolderHandler(FileSystemEventHandler):
     def on_created(self, event):
@@ -29,7 +93,7 @@ class NewFolderHandler(FileSystemEventHandler):
         folder = Path(event.src_path)
         print(f"New folder detected: {folder.name}")
 
-        # wait for files to finish copying
+        # wait briefly for files to finish copying
         time.sleep(1)
 
         images = {}
@@ -54,7 +118,7 @@ class NewFolderHandler(FileSystemEventHandler):
             shutil.copy(path, target)
 
         # load workflow
-        with open(WORKFLOW_JSON) as f:
+        with open(WORKFLOW_JSON, "r", encoding="utf-8") as f:
             workflow = json.load(f)
 
         # update image nodes
@@ -64,7 +128,7 @@ class NewFolderHandler(FileSystemEventHandler):
         workflow["82"]["inputs"]["image"] = "back.png"
 
         # output name
-        workflow["67"]["inputs"]["filename_prefix"] = f"trashscans/{name}"
+        workflow["67"]["inputs"]["filename_prefix"] = f"{OUTPUT_FOLDER}/{name}"
 
         # send to ComfyUI
         r = requests.post(COMFY_API, json={"prompt": workflow})
@@ -72,14 +136,29 @@ class NewFolderHandler(FileSystemEventHandler):
 
         print(f"Started ComfyUI job for {name}")
 
+# -----------------------------------------------------------------------------
+# Main
+# -----------------------------------------------------------------------------
+
 if __name__ == "__main__":
     WATCH_DIR.mkdir(parents=True, exist_ok=True)
+    COMFY_INPUT.mkdir(parents=True, exist_ok=True)
+    OBJECT_OUT.mkdir(parents=True, exist_ok=True)
+
+    # start robocopy sync thread
+    sync_thread = threading.Thread(
+        target=robocopy_sync_loop,
+        args=(10,),
+        daemon=True
+    )
+    sync_thread.start()
 
     observer = Observer()
     observer.schedule(NewFolderHandler(), str(WATCH_DIR), recursive=False)
     observer.start()
 
     print(f"Watching {WATCH_DIR}")
+    print(f"Syncing files between {COMFY_OUTPUT} and {OBJECT_OUT}")
 
     try:
         while True:

@@ -1,74 +1,74 @@
 {
   "trash5": {
     "id": "trash5",
-    "name": "trash5",
-    "added": "2026-01-20T20:44:30.213891",
+    "name": "trash render 1",
+    "added": 1768838428.1825929,
     "type": "glb",
     "path": "/objects/trash5.glb",
     "size": 1535244
   },
   "trash4": {
     "id": "trash4",
-    "name": "trash4",
-    "added": "2026-01-20T20:44:30.213906",
+    "name": "trash render 2",
+    "added": 1768836714.5122042,
     "type": "glb",
     "path": "/objects/trash4.glb",
     "size": 1089880
   },
   "trash6": {
     "id": "trash6",
-    "name": "trash6",
-    "added": "2026-01-20T20:44:30.213912",
+    "name": "trash render 3",
+    "added": 1768838692.8333497,
     "type": "glb",
     "path": "/objects/trash6.glb",
     "size": 3009876
   },
   "trash3": {
     "id": "trash3",
-    "name": "trash3",
-    "added": "2026-01-20T20:44:30.213930",
+    "name": "trash render 4",
+    "added": 1768821738.8764634,
     "type": "glb",
     "path": "/objects/trash3.glb",
     "size": 718988
   },
   "trash2": {
     "id": "trash2",
-    "name": "trash2",
-    "added": "2026-01-20T20:44:30.213933",
+    "name": "trash render 5",
+    "added": 1768820719.715959,
     "type": "glb",
     "path": "/objects/trash2.glb",
     "size": 1682972
   },
   "trash1": {
     "id": "trash1",
-    "name": "trash1",
-    "added": "2026-01-20T20:44:30.213936",
+    "name": "trash render 6",
+    "added": 1768820445.946831,
     "type": "glb",
     "path": "/objects/trash1.glb",
     "size": 1654552
   },
-  "mug_00001_": {
-    "id": "mug_00001_",
-    "name": "mug_00001_",
-    "added": "2026-01-20T22:08:24.607934",
-    "type": "glb",
-    "path": "/objects/mug_00001_.glb",
-    "size": 1369904
-  },
   "nuts_00001_": {
     "id": "nuts_00001_",
-    "name": "nuts_00001_",
-    "added": "2026-01-20T22:08:35.449877",
+    "name": "trash render 7",
+    "added": 1768985793.1963792,
     "type": "glb",
     "path": "/objects/nuts_00001_.glb",
     "size": 3223748
   },
-  "glasses_00001_": {
-    "id": "glasses_00001_",
-    "name": "glasses_00001_",
-    "added": "2026-01-20T22:09:25.455255",
+  "object1_00001_": {
+    "id": "object1_00001_",
+    "name": "trash render 8",
+    "added": 1768985793.2136533,
     "type": "glb",
-    "path": "/objects/glasses_00001_.glb",
+    "path": "/objects/object1_00001_.glb",
     "size": 417044
+  },
+  "mug_00001_": {
+    "id": "mug_00001_",
+    "name": "trash render 9",
+    "added": 1768985793.1937437,
+    "type": "glb",
+    "path": "/objects/mug_00001_.glb",
+    "size": 1369904
   }
 }

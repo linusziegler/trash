@@ -75,7 +75,7 @@ function init() {
     setInterval(loadObjects, 2000);
 }
 
-function loadObject(name, type, position, id) {
+function loadObject(name, position, id, fileSize, addedTime) {
     // Try to load GLB file, fallback to cube if not found
     const glbPath = `objects/${id}.glb`;
 
@@ -123,11 +123,11 @@ function loadObject(name, type, position, id) {
             model.userData = {
                 id: id,
                 name: name,
-                added: new Date().toLocaleString(),
+                added: new Date(addedTime).toLocaleString(),
                 gridPosition: position.clone(),
                 isSelected: false,
                 vertexCount: vertexCount,
-                fileSize: Math.round((vertexCount / 10000) * 48) / 100  // Arbitrary file size in MB based on vertex count
+                fileSize: (fileSize) / (1024 * 1024) // Convert bytes to MB
             };
 
             scene.add(model);
@@ -195,7 +195,7 @@ async function loadObjects() {
         objectsList.forEach((obj, index) => {
             if (!loadedObjectIds.has(obj.id)) {
                 const position = gridLayout(index);
-                loadObject(obj.name, null, position, obj.id);
+                loadObject(obj.name, position, obj.id, obj.size, obj.added);
                 loadedObjectIds.add(obj.id);
                 console.log('Added object:', obj.name);
             }
@@ -337,7 +337,7 @@ function showInfoPanel(data) {
     const panel = document.getElementById('info-panel');
 
     nameEl.textContent = data.name;
-    detailsEl.innerHTML = `${data.added}<br>${data.vertexCount} Vertices<br>${data.fileSize} MB`;
+    detailsEl.innerHTML = `${data.added}<br>${data.vertexCount} Vertices<br>${Math.round(data.fileSize * 100) / 100} MB`;
 
     panel.classList.add('visible');
 }

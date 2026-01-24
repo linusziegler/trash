@@ -98,6 +98,15 @@ function loadObject(name, position, id, fileSize, addedTime) {
                 }
             });
 
+            // add invisible hitbox for easier raycasting
+            const bboxHelper = new THREE.Box3().setFromObject(model);
+            const bboxSize = bboxHelper.getSize(new THREE.Vector3());
+            const bboxGeometry = new THREE.BoxGeometry(bboxSize.x, bboxSize.y, bboxSize.z);
+            const bboxMaterial = new THREE.MeshBasicMaterial({ visible: false });
+            const bboxMesh = new THREE.Mesh(bboxGeometry, bboxMaterial);
+            bboxMesh.position.copy(bboxHelper.getCenter(new THREE.Vector3()));
+            model.add(bboxMesh);
+
             // Center the model
             const center = bbox.getCenter(new THREE.Vector3());
             model.position.copy(position);

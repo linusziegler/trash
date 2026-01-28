@@ -7,6 +7,9 @@ Flask-CORS==4.0.0
 watchdog 
 requests
 
+# Requirements for file sync
+wexpect
+
 # Requirements for raspberry pi script
 pygame
 opencv-python 

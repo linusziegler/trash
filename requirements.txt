@@ -6,3 +6,7 @@ Flask-CORS==4.0.0
 # Requirements for automated object generation
 watchdog 
 requests
+
+# Requirements for raspberry pi script
+pygame
+opencv-python 

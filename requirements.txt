@@ -8,7 +8,7 @@ watchdog
 requests
 
 # Requirements for file sync
-wexpect
+paramiko
 
 # Requirements for raspberry pi script
 pygame

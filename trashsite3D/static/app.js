@@ -153,26 +153,27 @@ function loadObject(name, position, id, fileSize, addedTime) {
 
 function createFallbackCube(name, position, id) {
     // Fallback: create a simple cube
-    const material = new THREE.MeshPhongMaterial({
-        color: Math.random() * 0xffffff,
-        shininess: 100
-    });
+    const material = new THREE.MeshPhongMaterial({});
+
 
     const geometry = new THREE.BoxGeometry(2, 2, 2);
     const mesh = new THREE.Mesh(geometry, material);
     mesh.position.copy(position);
-    mesh.castShadow = true;
-    mesh.receiveShadow = true;
+    mesh.castShadow = false;
+    mesh.receiveShadow = false;
+    mesh.material.color = new THREE.Color(0xffffff);
+    mesh.material.emissive = new THREE.Color(0x8846fa);
+    mesh.material.emissiveIntensity = 0.;
 
     // Store metadata
     mesh.userData = {
         id: id,
-        name: name,
+        name: "loading...",
         added: new Date().toLocaleString(),
         gridPosition: position.clone(),
         isSelected: false,
-        vertexCount: geometry.attributes.position.count,
-        fileSize: Math.floor(Math.random() * 50) + 10 // Mock file size in MB
+        vertexCount: 0,
+        fileSize: 0
     };
 
     scene.add(mesh);

@@ -1,11 +1,19 @@
+# Script to periodically rsync images from raspberry pi to main machine.
 import subprocess
 import time
 import os
+from pathlib import Path
 
 REMOTE_USER = "trash"
 REMOTE_HOST = "10.12.194.1"
 REMOTE_DIR = "/home/trash/trash_imgs/" # <--- directory on raspberry pi 
-LOCAL_DIR = "../image_in" # <--- directory on main machine
+
+# Directory of this script (trashsite3D/)
+SCRIPT_DIR = Path(__file__).resolve().parent
+# Project root (one level above script dir)
+BASE_DIR = SCRIPT_DIR.parent
+LOCAL_DIR = BASE_DIR / "image_in"
+
 POLL_INTERVAL = 10  # seconds
 SSH_PASSWORD = "trash"  # hard-coded password :-)
 

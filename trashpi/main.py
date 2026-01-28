@@ -22,13 +22,13 @@ MARGIN = 20
 
 # Storage config
 MAX_CAPACITY_MB = 2048
-PROGRESS_BAR_LENGTH = 30
+PROGRESS_BAR_LENGTH = 36
 
 # Capture config
 CAPTURE_ROOT = "/home/trash/trash_imgs"
 CAPTURE_INTERVAL = 45        # seconds between objects
 SHOT_DELAY = 1               # seconds between images
-MOTOR_DELAY = 5           # seconds for motor move
+MOTOR_DELAY = 4           # seconds for motor move
 VIEWS = ["front", "left", "back", "right"]
 
 CAMERA_INDEX = 0
@@ -93,8 +93,8 @@ camera = WebcamStream(
 def add_text(text):
     lines.append(str(text))
 
-def update_storage_from_file(path):
-    size_mb = os.path.getsize(path) // (1024 * 1024)
+def update_storage():
+    size_mb = 5  # assume each capture uses ~5mb
     global used_space_mb
     used_space_mb = min(MAX_CAPACITY_MB, used_space_mb + size_mb)
 
@@ -109,7 +109,7 @@ def draw_storage_indicator():
     bar = "[" + "#" * filled + "-" * empty + "]"
     percent_text = f"{int(percent * 100)}%"
 
-    y_start = screen_h - MARGIN - (FONT_SIZE * 3)
+    y_start = screen_h - MARGIN - ((FONT_SIZE + LINE_SPACING) * 3)
 
     for i, line in enumerate([
         f"Used Space: {used_space_mb} mb",
@@ -141,7 +141,7 @@ def take_photo(path):
         return
 
     cv2.imwrite(path, frame)
-    update_storage_from_file(path)
+    update_storage()
 
 # -----------------------------
 # CAPTURE STATE MACHINE

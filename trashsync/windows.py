@@ -2,14 +2,14 @@ import paramiko
 from pathlib import Path
 import os
 import time
-import stat  # <--- needed for S_ISDIR
+import stat
 
 # Raspberry Pi SSH info
 REMOTE_HOST = "10.12.194.1"
 REMOTE_PORT = 22
 USERNAME = "trash"
 PASSWORD = "trash"
-REMOTE_DIR = "/home/trash/trash_imgs/"  # folder containing subfolders like object_1, object_2
+REMOTE_DIR = "/home/trash/trash_imgs/"  # contains subfolders like object_1, object_2
 
 # Local folder
 SCRIPT_DIR = Path(__file__).resolve().parent
@@ -19,37 +19,39 @@ os.makedirs(LOCAL_DIR, exist_ok=True)
 
 POLL_INTERVAL = 10  # seconds
 
-def sync_remote_dir(sftp, remote_path, local_path):
-    """
-    Recursively copy remote directory to local path,
-    preserving subfolder structure, skipping existing files,
-    and preserving modification times.
-    """
+def count_files(sftp, remote_path):
+    """Count the number of files in a remote folder (ignores subfolders)."""
+    return sum(1 for entry in sftp.listdir_attr(remote_path) if not stat.S_ISDIR(entry.st_mode))
+
+def copy_folder(sftp, remote_path, local_path):
+    """Copy all files in a remote folder to the local folder."""
     os.makedirs(local_path, exist_ok=True)
-
     for entry in sftp.listdir_attr(remote_path):
-        remote_entry = remote_path.rstrip("/") + "/" + entry.filename
-        local_entry = local_path / entry.filename
-
-        if stat.S_ISDIR(entry.st_mode):  # <-- use stat.S_ISDIR
-            # It's a directory → recurse into it
-            sync_remote_dir(sftp, remote_entry, local_entry)
-        else:
-            # It's a file → copy only if it doesn't exist
-            if not local_entry.exists():
-                sftp.get(remote_entry, str(local_entry))
-                # Preserve modification time
-                mtime = entry.st_mtime
-                os.utime(local_entry, (mtime, mtime))
-                print(f"Copied {remote_entry} → {local_entry}")
+        if not stat.S_ISDIR(entry.st_mode):
+            remote_file = remote_path.rstrip("/") + "/" + entry.filename
+            local_file = local_path / entry.filename
+            if not local_file.exists():
+                sftp.get(remote_file, str(local_file))
+                os.utime(local_file, (entry.st_mtime, entry.st_mtime))
+                print(f"Copied {remote_file} → {local_file}")
 
 def sync_images():
     try:
         transport = paramiko.Transport((REMOTE_HOST, REMOTE_PORT))
         transport.connect(username=USERNAME, password=PASSWORD)
-        sftp = paramiko.SFTPClient.from_transport(transport)
+        sftp : paramiko.SFTPClient = paramiko.SFTPClient.from_transport(transport)
 
-        sync_remote_dir(sftp, REMOTE_DIR, LOCAL_DIR)
+        # Iterate over subfolders in REMOTE_DIR
+        for entry in sftp.listdir_attr(REMOTE_DIR):
+            remote_subfolder = REMOTE_DIR.rstrip("/") + "/" + entry.filename
+            local_subfolder = LOCAL_DIR / entry.filename
+
+            if stat.S_ISDIR(entry.st_mode):
+                file_count = count_files(sftp, remote_subfolder)
+                if file_count == 4:
+                    copy_folder(sftp, remote_subfolder, local_subfolder)
+                else:
+                    print(f"Skipping {remote_subfolder}, contains {file_count} files")
 
         sftp.close()
         transport.close()

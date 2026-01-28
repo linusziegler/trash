@@ -1,5 +1,6 @@
 # script triggers ComfyUI workflow when a new folder with 4 input images is added to WATCH_DIR
 # and periodically syncs COMFY_OUTPUT -> OBJECT_OUT using robocopy (every 10 seconds)
+# CHANGE COMFY_ROOT to your ComfyUI installation path !!!!!!!
 
 import json
 import time
@@ -19,12 +20,14 @@ from watchdog.events import FileSystemEventHandler
 SCRIPT_DIR = Path(__file__).resolve().parent
 # Project root (one level above script dir)
 BASE_DIR = SCRIPT_DIR.parent
-print(f"Base directory: {BASE_DIR}")
+print(f"Specified Base directory: {BASE_DIR}")
 
 # Source folder that images end up in
 WATCH_DIR = BASE_DIR / "image_in"
 
-COMFY_ROOT = Path("C:/Users/duraX/Documents/ComfyUI")  # <-- adjust if needed
+COMFY_ROOT = Path("C:/Users/duraX/Documents/ComfyUI")  # <-- CHANGE THIS !!!
+print(f"Specified ComfyUI root: {COMFY_ROOT}")
+
 COMFY_INPUT = COMFY_ROOT / "input"
 OUTPUT_FOLDER = "trashscans"
 COMFY_OUTPUT = COMFY_ROOT / "output" / OUTPUT_FOLDER

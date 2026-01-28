@@ -2,13 +2,14 @@ import paramiko
 from pathlib import Path
 import os
 import time
+import stat  # <--- needed for S_ISDIR
 
 # Raspberry Pi SSH info
 REMOTE_HOST = "10.12.194.1"
 REMOTE_PORT = 22
 USERNAME = "trash"
 PASSWORD = "trash"
-REMOTE_DIR = "/home/trash/trash_imgs/"
+REMOTE_DIR = "/home/trash/trash_imgs/"  # folder containing subfolders like object_1, object_2
 
 # Local folder
 SCRIPT_DIR = Path(__file__).resolve().parent
@@ -21,7 +22,8 @@ POLL_INTERVAL = 10  # seconds
 def sync_remote_dir(sftp, remote_path, local_path):
     """
     Recursively copy remote directory to local path,
-    skipping files that already exist locally.
+    preserving subfolder structure, skipping existing files,
+    and preserving modification times.
     """
     os.makedirs(local_path, exist_ok=True)
 
@@ -29,14 +31,17 @@ def sync_remote_dir(sftp, remote_path, local_path):
         remote_entry = remote_path.rstrip("/") + "/" + entry.filename
         local_entry = local_path / entry.filename
 
-        if paramiko.S_ISDIR(entry.st_mode):
-            # It's a directory → recurse
+        if stat.S_ISDIR(entry.st_mode):  # <-- use stat.S_ISDIR
+            # It's a directory → recurse into it
             sync_remote_dir(sftp, remote_entry, local_entry)
         else:
             # It's a file → copy only if it doesn't exist
             if not local_entry.exists():
                 sftp.get(remote_entry, str(local_entry))
-                print(f"Copied {remote_entry} to {local_entry}")
+                # Preserve modification time
+                mtime = entry.st_mtime
+                os.utime(local_entry, (mtime, mtime))
+                print(f"Copied {remote_entry} → {local_entry}")
 
 def sync_images():
     try:

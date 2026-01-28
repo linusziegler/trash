@@ -18,24 +18,38 @@ os.makedirs(LOCAL_DIR, exist_ok=True)
 
 POLL_INTERVAL = 10  # seconds
 
+def sync_remote_dir(sftp, remote_path, local_path):
+    """
+    Recursively copy remote directory to local path,
+    skipping files that already exist locally.
+    """
+    os.makedirs(local_path, exist_ok=True)
+
+    for entry in sftp.listdir_attr(remote_path):
+        remote_entry = remote_path.rstrip("/") + "/" + entry.filename
+        local_entry = local_path / entry.filename
+
+        if paramiko.S_ISDIR(entry.st_mode):
+            # It's a directory → recurse
+            sync_remote_dir(sftp, remote_entry, local_entry)
+        else:
+            # It's a file → copy only if it doesn't exist
+            if not local_entry.exists():
+                sftp.get(remote_entry, str(local_entry))
+                print(f"Copied {remote_entry} to {local_entry}")
+
 def sync_images():
     try:
         transport = paramiko.Transport((REMOTE_HOST, REMOTE_PORT))
         transport.connect(username=USERNAME, password=PASSWORD)
         sftp = paramiko.SFTPClient.from_transport(transport)
 
-        for remote_file in sftp.listdir_attr(REMOTE_DIR):
-            remote_path = REMOTE_DIR + remote_file.filename
-            local_path = LOCAL_DIR / remote_file.filename
-
-            if not local_path.exists():  # copy only new files
-                sftp.get(remote_path, str(local_path))
-                print(f"Copied {remote_file.filename}")
+        sync_remote_dir(sftp, REMOTE_DIR, LOCAL_DIR)
 
         sftp.close()
         transport.close()
     except Exception as e:
-        print("Error syncing images:", e)
+        print("Error syncing:", e)
 
 def main():
     print("Starting SSH-based periodic sync...")

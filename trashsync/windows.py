@@ -1,3 +1,4 @@
+# WINDOWS VERSION Script to periodically rsync images from raspberry pi to main machine.
 import paramiko
 from pathlib import Path
 import os

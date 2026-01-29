@@ -1,4 +1,4 @@
-# Script to periodically rsync images from raspberry pi to main machine.
+# UNIX VERSION Script to periodically rsync images from raspberry pi to main machine.
 import subprocess
 import time
 import os

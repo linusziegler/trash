@@ -70,5 +70,13 @@
     "type": "glb",
     "path": "/objects/mug_00001_.glb",
     "size": 1369904
+  },
+  "nuts_00002_": {
+    "id": "nuts_00002_",
+    "name": "trash render 3",
+    "added": 1769100321.4354634,
+    "type": "glb",
+    "path": "/objects/nuts_00002_.glb",
+    "size": 3223748
   }
 }

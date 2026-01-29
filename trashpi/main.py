@@ -1,3 +1,4 @@
+# Script that runs on the pi. Once the pi is connected via cable, you can start the script through ssh trash@10.12.194.1
 import pygame
 import sys
 import os
@@ -11,7 +12,7 @@ from datetime import datetime
 # CONFIG
 # -----------------------------
 VISIBLE_LINES = 8
-FPS = 30
+FPS = 2
 
 BG_COLOR = (0, 0, 0)
 TEXT_COLOR = (255, 255, 255)
@@ -27,8 +28,8 @@ PROGRESS_BAR_LENGTH = 36
 # Capture config
 CAPTURE_ROOT = "/home/trash/trash_imgs"
 CAPTURE_INTERVAL = 45        # seconds between objects
-SHOT_DELAY = 1               # seconds between images
-MOTOR_DELAY = 4           # seconds for motor move
+SHOT_DELAY = 1               # seconds between image and motor movement
+MOTOR_DELAY = 4              # seconds for motor move
 VIEWS = ["front", "left", "back", "right"]
 
 CAMERA_INDEX = 0
@@ -64,34 +65,11 @@ class WebcamStream:
         self.cap.release()
 
 # -----------------------------
-# INIT
-# -----------------------------
-pygame.init()
-screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
-pygame.mouse.set_visible(False)
-
-screen_w, screen_h = screen.get_size()
-clock = pygame.time.Clock()
-
-font = pygame.font.Font("SGr-IosevkaTerm-ExtraBold.ttc", FONT_SIZE)
-
-lines = deque(maxlen=VISIBLE_LINES)
-used_space_mb = 0
-
-os.makedirs(CAPTURE_ROOT, exist_ok=True)
-
-# Start webcam
-camera = WebcamStream(
-    src=CAMERA_INDEX,
-    width=CAM_WIDTH,
-    height=CAM_HEIGHT
-).start()
-
-# -----------------------------
 # TERMINAL FUNCTIONS
 # -----------------------------
 def add_text(text):
     lines.append(str(text))
+    print(text)
 
 def update_storage():
     size_mb = 5  # assume each capture uses ~5mb
@@ -204,6 +182,30 @@ def update_capture():
         capture_active = False
 
 # -----------------------------
+# INIT
+# -----------------------------
+pygame.init()
+screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
+pygame.mouse.set_visible(False)
+
+screen_w, screen_h = screen.get_size()
+clock = pygame.time.Clock()
+
+font = pygame.font.Font("SGr-IosevkaTerm-ExtraBold.ttc", FONT_SIZE)
+
+lines = deque(maxlen=VISIBLE_LINES)
+used_space_mb = 0
+
+os.makedirs(CAPTURE_ROOT, exist_ok=True)
+
+# Start webcam
+camera = WebcamStream(
+    src=CAMERA_INDEX,
+    width=CAM_WIDTH,
+    height=CAM_HEIGHT
+).start()
+
+# -----------------------------
 # MAIN LOOP
 # -----------------------------
 add_text("SYSTEM READY")
@@ -211,31 +213,34 @@ add_text("AUTO MODE ENABLED")
 add_text(f"INTERVAL: {CAPTURE_INTERVAL}s")
 
 running = True
-while running:
-    clock.tick(FPS)
+try:
+    while running:
+        clock.tick(FPS)
 
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            running = False
-        if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
-            running = False
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
+            if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
+                running = False
 
-    now = time.time()
+        now = time.time()
 
-    if not capture_active and now - last_object_time >= CAPTURE_INTERVAL:
-        add_text(">> AUTO TRIGGER")
-        start_capture()
-        last_object_time = now
+        if not capture_active and now - last_object_time >= CAPTURE_INTERVAL:
+            add_text(">> AUTO TRIGGER")
+            start_capture()
+            last_object_time = now
 
-    if capture_active:
-        update_capture()
+        if capture_active:
+            update_capture()
 
-    draw_terminal()
-    pygame.display.flip()
-
-# -----------------------------
-# CLEANUP
-# -----------------------------
-camera.stop()
-pygame.quit()
-sys.exit()
+        draw_terminal()
+        pygame.display.flip()
+except Exception as e:
+    print(f"Error: {e}")
+finally:
+    # -----------------------------
+    # CLEANUP
+    # -----------------------------
+    camera.stop()
+    pygame.quit()
+    sys.exit()

@@ -92,7 +92,7 @@ def get_object_metadata():
         if obj_id not in metadata:
             metadata[obj_id] = {
                 "id": obj_id,
-                "name": f"trash render {idx + 1}",
+                "name": obj_id,
                 "added": glb_path.stat().st_birthtime,
                 "type": "glb",
                 "path": f"/objects/{obj_id}.glb",

@@ -74,7 +74,7 @@ def run_robocopy_once():
     )
 
 
-def robocopy_sync_loop(interval=10):
+def robocopy_sync_loop(interval):
     COMFY_OUTPUT.mkdir(parents=True, exist_ok=True)
     OBJECT_OUT.mkdir(parents=True, exist_ok=True)
 
@@ -151,7 +151,7 @@ if __name__ == "__main__":
     # start robocopy sync thread
     sync_thread = threading.Thread(
         target=robocopy_sync_loop,
-        args=(10,),
+        args=(5,),
         daemon=True
     )
     sync_thread.start()

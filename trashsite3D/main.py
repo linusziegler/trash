@@ -88,11 +88,11 @@ def get_object_metadata():
     updated = False
 
     # Add new objects
-    for idx, (obj_id, glb_path) in enumerate(glb_files.items()):
+    for idx, (obj_id, glb_path) in enumerate(sorted(glb_files.items(),)):
         if obj_id not in metadata:
             metadata[obj_id] = {
                 "id": obj_id,
-                "name": obj_id,
+                "name": obj_id.removesuffix("_00001_"),
                 "added": glb_path.stat().st_birthtime,
                 "type": "glb",
                 "path": f"/objects/{obj_id}.glb",

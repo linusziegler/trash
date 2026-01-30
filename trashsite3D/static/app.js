@@ -89,7 +89,7 @@ function loadObject(name, position, id, fileSize, addedTime) {
             const bbox = new THREE.Box3().setFromObject(model);
             const size = bbox.getSize(new THREE.Vector3());
             const maxDim = Math.max(size.x, size.y, size.z);
-            const scale = 4 / maxDim;
+            const scale = 3 / maxDim;
 
             // Bake scale into geometry
             model.traverse((child) => {
@@ -180,8 +180,8 @@ function createFallbackCube(name, position, id) {
     objects.push(mesh);
 }
 
-function gridLayout(index, itemsPerRow = 7) {
-    const spacing = 6.5;
+function gridLayout(index, itemsPerRow = 8) {
+    const spacing = 6.2;
     const row = Math.floor(index / itemsPerRow);
     const col = index % itemsPerRow;
 
@@ -223,7 +223,7 @@ async function loadObjects() {
 
         // Update stats
         const statsEl = document.getElementById('stats-global');
-        statsEl.innerHTML = `${loadedObjectIds.size} Objects <br>${totalVertexCount} vertices<br>${totalFileSize} MB`;
+        statsEl.innerHTML = `${loadedObjectIds.size} Objects <br>${totalVertexCount} Vertices<br>${totalFileSize} MB`;
         console.log('Total objects:', loadedObjectIds.size);
 
     } catch (error) {
@@ -342,12 +342,10 @@ function checkHover() {
 }
 
 function showInfoPanel(data) {
-    const nameEl = document.getElementById('object-name');
     const detailsEl = document.getElementById('object-details');
     const panel = document.getElementById('info-panel');
-
-    nameEl.textContent = data.name;
-    detailsEl.innerHTML = `${data.added}<br>${data.vertexCount} Vertices<br>${Math.round(data.fileSize * 100) / 100} MB`;
+    // detailsEl.innerHTML = `${data.added}<br>${data.vertexCount} Vertices<br>${Math.round(data.fileSize * 100) / 100} MB`;
+    detailsEl.innerHTML = `${data.name}<br>${data.vertexCount} Vertices<br>${Math.round(data.fileSize * 100) / 100} MB`;
 
     panel.classList.add('visible');
 }
@@ -367,7 +365,7 @@ function animate() {
         const targetCameraPos = new THREE.Vector3(
             selectedObject.position.x,
             selectedObject.position.y + cameraOffsetY,
-            selectedObject.position.z + 10
+            selectedObject.position.z + 8
         );
         camera.position.lerp(targetCameraPos, 0.1);
     } else {

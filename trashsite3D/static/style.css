@@ -33,7 +33,6 @@ canvas {
 
 .info-panel.visible {
     display: block;
-    pointer-events: auto;
 }
 
 .info-content {

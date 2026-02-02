@@ -13,6 +13,8 @@ let cameraBasePos = new THREE.Vector3(0, 15, 25);
 let cameraOffsetY = 0;
 let gltfLoader = new GLTFLoader();
 
+const itemsPerRow = 8;
+
 function init() {
     console.log('Initializing 3D scene...');
 
@@ -61,6 +63,7 @@ function init() {
     window.addEventListener('resize', onWindowResize);
     document.addEventListener('mousemove', onMouseMove);
     document.addEventListener('click', onClick);
+    document.addEventListener('wheel', onScroll);
     console.log('Event listeners added');
 
     // Start the animation loop
@@ -180,7 +183,7 @@ function createFallbackCube(name, position, id) {
     objects.push(mesh);
 }
 
-function gridLayout(index, itemsPerRow = 8) {
+function gridLayout(index) {
     const spacing = 6.2;
     const row = Math.floor(index / itemsPerRow);
     const col = index % itemsPerRow;
@@ -263,6 +266,14 @@ function onClick(event) {
         // Deselect if clicking empty space
         deselectObject();
     }
+}
+
+// implement scroll logic to move camera up and down
+function onScroll(event) {
+    cameraOffsetY -= event.deltaY * 0.03;
+    // Limit cameraOffsetY to reasonable bounds based on number of objects
+    let maxOffset = -4 * ((loadedObjectIds.size / itemsPerRow) - 1); // Adjust based on number of rows
+    cameraOffsetY = Math.max(maxOffset, Math.min(0, cameraOffsetY));
 }
 
 function selectObject(obj) {
@@ -364,10 +375,10 @@ function animate() {
         // Target position: directly in front of the selected object on Z-axis
         const targetCameraPos = new THREE.Vector3(
             selectedObject.position.x,
-            selectedObject.position.y + cameraOffsetY,
+            selectedObject.position.y,
             selectedObject.position.z + 8
         );
-        camera.position.lerp(targetCameraPos, 0.1);
+        camera.position.lerp(targetCameraPos, 0.05);
     } else {
         // Move camera back to base orthogonal position
         const targetCameraPos = new THREE.Vector3(
@@ -375,12 +386,12 @@ function animate() {
             cameraOffsetY,
             35
         );
-        camera.position.lerp(targetCameraPos, 0.1);
+        camera.position.lerp(targetCameraPos, 0.05);
     }
 
     // Rotate objects around Y-axis only
     objects.forEach(obj => {
-        obj.rotation.y += 0.003;
+        obj.rotation.y += 0.01;
     });
 
     renderer.render(scene, camera);

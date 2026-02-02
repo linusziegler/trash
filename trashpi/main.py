@@ -7,6 +7,7 @@ import cv2
 from threading import Thread
 from collections import deque
 from datetime import datetime
+import RPi.GPIO as GPIO
 
 # -----------------------------
 # CONFIG
@@ -17,17 +18,16 @@ FPS = 2
 BG_COLOR = (0, 0, 0)
 TEXT_COLOR = (255, 255, 255)
 
-FONT_SIZE = 32
-LINE_SPACING = 8
+FONT_SIZE = 36
+LINE_SPACING = 12
 MARGIN = 20
 
 # Storage config
 MAX_CAPACITY_MB = 2048
-PROGRESS_BAR_LENGTH = 36
+PROGRESS_BAR_LENGTH = 28
 
 # Capture config
 CAPTURE_ROOT = "/home/trash/trash_imgs"
-CAPTURE_INTERVAL = 45        # seconds between objects
 SHOT_DELAY = 1               # seconds between image and motor movement
 MOTOR_DELAY = 4              # seconds for motor move
 VIEWS = ["front", "left", "back", "right"]
@@ -35,6 +35,9 @@ VIEWS = ["front", "left", "back", "right"]
 CAMERA_INDEX = 0
 CAM_WIDTH = 1280
 CAM_HEIGHT = 720
+
+# GPIO Button config
+BUTTON_PIN = 17              # GPIO pin for the capture button
 
 # -----------------------------
 # WEBCAM THREAD
@@ -86,14 +89,18 @@ def draw_storage_indicator():
 
     bar = "[" + "#" * filled + "-" * empty + "]"
     percent_text = f"{int(percent * 100)}%"
+    
+    lines = [
+        f"used Space: {used_space_mb} mb",
+        f"maximum capacity: {MAX_CAPACITY_MB} mb",
+        f"{bar} {percent_text}",
+        "",
+        "ur_trash"
+    ]
 
-    y_start = screen_h - MARGIN - ((FONT_SIZE + LINE_SPACING) * 3)
+    y_start = screen_h - MARGIN - ((FONT_SIZE + LINE_SPACING) * len(lines))
 
-    for i, line in enumerate([
-        f"Used Space: {used_space_mb} mb",
-        f"Maximum Capacity: {MAX_CAPACITY_MB} mb",
-        f"{bar} {percent_text}"
-    ]):
+    for i, line in enumerate(lines):
         surf = font.render(line, True, TEXT_COLOR)
         screen.blit(surf, (MARGIN, y_start + i * (FONT_SIZE + LINE_SPACING)))
 
@@ -115,7 +122,7 @@ def draw_terminal():
 def take_photo(path):
     frame = camera.read()
     if frame is None:
-        add_text("!! CAMERA FRAME MISSING")
+        add_text("!! camera frame missing")
         return
 
     cv2.imwrite(path, frame)
@@ -129,7 +136,7 @@ capture_state = "IDLE"
 state_start_time = 0
 view_index = 0
 object_dir = ""
-last_object_time = time.time() - CAPTURE_INTERVAL
+last_object_time = time.time()
 
 def start_capture():
     global capture_active, capture_state, state_start_time
@@ -139,7 +146,7 @@ def start_capture():
     object_dir = os.path.join(CAPTURE_ROOT, object_id)
     os.makedirs(object_dir, exist_ok=True)
 
-    add_text(f"CAPTURE START: {object_id}")
+    add_text(f"capture start: {object_id}")
 
     capture_active = True
     capture_state = "MOVE"
@@ -178,7 +185,7 @@ def update_capture():
             capture_state = "MOVE"
 
     elif capture_state == "DONE":
-        add_text("CAPTURE COMPLETE")
+        add_text("capture complete")
         capture_active = False
 
 # -----------------------------
@@ -191,12 +198,16 @@ pygame.mouse.set_visible(False)
 screen_w, screen_h = screen.get_size()
 clock = pygame.time.Clock()
 
-font = pygame.font.Font("SGr-IosevkaTerm-ExtraBold.ttc", FONT_SIZE)
+font = pygame.font.Font("DotGothic16-Regular.ttf", FONT_SIZE)
 
 lines = deque(maxlen=VISIBLE_LINES)
 used_space_mb = 0
 
 os.makedirs(CAPTURE_ROOT, exist_ok=True)
+
+# Initialize gpio button 
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(BUTTON_PIN, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
 # Start webcam
 camera = WebcamStream(
@@ -208,9 +219,7 @@ camera = WebcamStream(
 # -----------------------------
 # MAIN LOOP
 # -----------------------------
-add_text("SYSTEM READY")
-add_text("AUTO MODE ENABLED")
-add_text(f"INTERVAL: {CAPTURE_INTERVAL}s")
+add_text("system ready")
 
 running = True
 try:
@@ -225,8 +234,9 @@ try:
 
         now = time.time()
 
-        if not capture_active and now - last_object_time >= CAPTURE_INTERVAL:
-            add_text(">> AUTO TRIGGER")
+        # trigger capture on button press
+        if not capture_active and GPIO.input(BUTTON_PIN) == GPIO.LOW:
+            add_text(">> button triggered")
             start_capture()
             last_object_time = now
 

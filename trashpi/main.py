@@ -8,12 +8,13 @@ from threading import Thread
 from collections import deque
 from datetime import datetime
 import RPi.GPIO as GPIO
+from adafruit_servokit import ServoKit
 
 # -----------------------------
 # CONFIG
 # -----------------------------
 VISIBLE_LINES = 8
-FPS = 2
+FPS = 5
 
 BG_COLOR = (0, 0, 0)
 TEXT_COLOR = (255, 255, 255)
@@ -28,8 +29,8 @@ PROGRESS_BAR_LENGTH = 28
 
 # Capture config
 CAPTURE_ROOT = "/home/trash/trash_imgs"
-SHOT_DELAY = 1               # seconds between image and motor movement
-MOTOR_DELAY = 4              # seconds for motor move
+SHOT_DELAY = 3               # seconds between image and motor movement
+MOTOR_DELAY = 3              # seconds for motor move
 VIEWS = ["front", "left", "back", "right"]
 
 CAMERA_INDEX = 0
@@ -38,6 +39,15 @@ CAM_HEIGHT = 720
 
 # GPIO Button config
 BUTTON_PIN = 17              # GPIO pin for the capture button
+
+# -----------------------------
+# SERVO CONFIG
+# -----------------------------
+SERVO_CHANNEL = 0
+SERVO_STEP_DEG = 60
+SERVO_STEP_DELAY = 0.01      # adjust servo speed
+SERVO_MIN = 0
+SERVO_MAX = 180
 
 # -----------------------------
 # WEBCAM THREAD
@@ -90,7 +100,7 @@ def draw_storage_indicator():
     bar = "[" + "#" * filled + "-" * empty + "]"
     percent_text = f"{int(percent * 100)}%"
     
-    lines = [
+    lines_local = [
         f"used Space: {used_space_mb} mb",
         f"maximum capacity: {MAX_CAPACITY_MB} mb",
         f"{bar} {percent_text}",
@@ -98,9 +108,9 @@ def draw_storage_indicator():
         "ur_trash"
     ]
 
-    y_start = screen_h - MARGIN - ((FONT_SIZE + LINE_SPACING) * len(lines))
+    y_start = screen_h - MARGIN - ((FONT_SIZE + LINE_SPACING) * len(lines_local))
 
-    for i, line in enumerate(lines):
+    for i, line in enumerate(lines_local):
         surf = font.render(line, True, TEXT_COLOR)
         screen.blit(surf, (MARGIN, y_start + i * (FONT_SIZE + LINE_SPACING)))
 
@@ -129,6 +139,30 @@ def take_photo(path):
     update_storage()
 
 # -----------------------------
+# SERVO CONTROL
+# -----------------------------
+def move_servo(target_angle):
+    global current_servo_angle
+
+    target_angle = max(SERVO_MIN, min(SERVO_MAX, target_angle))
+    step = 1 if target_angle > current_servo_angle else -1
+
+    for angle in range(int(current_servo_angle), int(target_angle), step):
+        kit.servo[SERVO_CHANNEL].angle = angle
+        time.sleep(SERVO_STEP_DELAY)
+
+    # final snap
+    kit.servo[SERVO_CHANNEL].angle = target_angle
+    current_servo_angle = target_angle
+
+    # allow servo to settle
+    time.sleep(0.15)
+
+    # RELEASE torque to prevent endstop hunting
+    kit.servo[SERVO_CHANNEL].angle = None
+
+
+# -----------------------------
 # CAPTURE STATE MACHINE
 # -----------------------------
 capture_active = False
@@ -149,45 +183,63 @@ def start_capture():
     add_text(f"capture start: {object_id}")
 
     capture_active = True
-    capture_state = "MOVE"
+    capture_state = "CAPTURE"
     state_start_time = time.time()
     view_index = 0
 
 def update_capture():
     global capture_active, capture_state, state_start_time, view_index
 
-    now = time.time()
     view = VIEWS[view_index]
 
-    if capture_state == "MOVE":
-        add_text(f">> positioning for {view}")
-        capture_state = "MOVE_WAIT"
-        state_start_time = now
-
-    elif capture_state == "MOVE_WAIT":
-        if now - state_start_time >= MOTOR_DELAY:
-            capture_state = "CAPTURE"
-
-    elif capture_state == "CAPTURE":
+    # -----------------------------
+    # CAPTURE IMAGE
+    # -----------------------------
+    if capture_state == "CAPTURE":
         add_text(f">> capturing {view}.png")
         img_path = os.path.join(object_dir, f"{view}.png")
         take_photo(img_path)
 
-        if view_index < len(VIEWS) - 1:
-            capture_state = "SHOT_WAIT"
-            state_start_time = now
-        else:
-            capture_state = "DONE"
+        capture_state = "CAPTURE_WAIT"
 
-    elif capture_state == "SHOT_WAIT":
+    # -----------------------------
+    # WAIT AFTER CAPTURE
+    # -----------------------------
+    elif capture_state == "CAPTURE_WAIT":
         if now - state_start_time >= SHOT_DELAY:
-            view_index += 1
-            capture_state = "MOVE"
+            if view_index < len(VIEWS) - 1:
+                capture_state = "MOVE"
+            else:
+                capture_state = "DONE"
 
+    # -----------------------------
+    # MOVE SERVO
+    # -----------------------------
+    elif capture_state == "MOVE":
+        target_angle = current_servo_angle + SERVO_STEP_DEG
+        add_text(f">> rotating to {target_angle * 1.5}°")
+        move_servo(target_angle)
+
+        capture_state = "MOVE_WAIT"
+        state_start_time = now
+
+    # -----------------------------
+    # WAIT AFTER MOVE
+    # -----------------------------
+    elif capture_state == "MOVE_WAIT":
+        if now - state_start_time >= MOTOR_DELAY:
+            view_index += 1
+            capture_state = "CAPTURE"
+
+    # -----------------------------
+    # FINISH
+    # -----------------------------
     elif capture_state == "DONE":
+        add_text(">> returning servo to 0°")
+        move_servo(0)
+
         add_text("capture complete")
         capture_active = False
-
 # -----------------------------
 # INIT
 # -----------------------------
@@ -205,9 +257,14 @@ used_space_mb = 0
 
 os.makedirs(CAPTURE_ROOT, exist_ok=True)
 
-# Initialize gpio button 
+# GPIO Button
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(BUTTON_PIN, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+
+# Servo init
+kit = ServoKit(channels=8)
+current_servo_angle = 0
+kit.servo[SERVO_CHANNEL].angle = current_servo_angle
 
 # Start webcam
 camera = WebcamStream(
@@ -239,18 +296,20 @@ try:
             add_text(">> button triggered")
             start_capture()
             last_object_time = now
+            time.sleep(0.3)  # debounce
 
         if capture_active:
             update_capture()
 
         draw_terminal()
         pygame.display.flip()
+
 except Exception as e:
     print(f"Error: {e}")
+
 finally:
-    # -----------------------------
-    # CLEANUP
-    # -----------------------------
     camera.stop()
+    kit.servo[SERVO_CHANNEL].angle = 0
+    GPIO.cleanup()
     pygame.quit()
     sys.exit()

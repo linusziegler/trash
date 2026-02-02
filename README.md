@@ -1,7 +1,7 @@
 ### Installation
 - flash pi os-lite (with gadget mode enabled) onto the raspberry
     -> instructions on configuring gadget mode: https://www.raspberrypi.com/news/usb-gadget-mode-in-raspberry-pi-os-ssh-over-usb/
-- on pi: install dependencies using`sudo apt-get install python3-opencv` `sudo apt-get install python3-pygame`
+- on pi: install dependencies using`sudo apt-get install python3-opencv` `sudo apt-get install python3-pygame` `sudo apt-get install python3-rpi.gpio` `python3 -m pip3 install adafruit-circuitpython-servokit` (this one can only be installed directly through pip, ignore the warning it gives you about the externally managed environment and force install)
 
 - on main machine: install requirements.txt
 - on main machine: install comfyUI desktop and download the 3d_hunyuan3d_multiview_to_model_turbo workflow 

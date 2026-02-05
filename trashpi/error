@@ -1,0 +1,89 @@
+trash@trash:~ $ python main.py
+pygame 2.6.1 (SDL 2.32.4, Python 3.13.5)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+[ WARN:0@0.536] global cap_gstreamer.cpp:1173 isPipelinePlaying OpenCV | GStreamer warning: GStreamer: pipeline have not been created
+system ready
+>> button triggered
+capture start: object_20260205_143714
+>> capturing front.png
+>> rotating to 90.0°
+Error: [Errno 5] Input/output error
+Traceback (most recent call last):
+  File "/home/trash/main.py", line 312, in <module>
+    kit.servo[SERVO_CHANNEL].angle = 0
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/trash/.local/lib/python3.13/site-packages/adafruit_motor/servo.py", line 133, in angle
+    self.fraction = new_angle / self.actuation_range
+    ^^^^^^^^^^^^^
+  File "/home/trash/.local/lib/python3.13/site-packages/adafruit_motor/servo.py", line 69, in fraction
+    self._pwm_out.duty_cycle = duty_cycle        
+    ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/trash/.local/lib/python3.13/site-packages/adafruit_pca9685.py", line 102, in duty_cycle
+    self._pca.pwm_regs[self._index] = (0, value) 
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/trash/.local/lib/python3.13/site-packages/adafruit_register/i2c_struct_array.py", line 70, in __setitem__
+    i2c.write(buf)
+    ~~~~~~~~~^^^^^
+  File "/home/trash/.local/lib/python3.13/site-packages/adafruit_bus_device/i2c_device.py", line 96, in write
+    self.i2c.writeto(self.device_address, buf, start=start, end=end)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/trash/.local/lib/python3.13/site-packages/busio.py", line 222, in writeto
+    return self._i2c.writeto(address, memoryview(buffer)[start:end], stop=True)
+           ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/trash/.local/lib/python3.13/site-packages/adafruit_blinka/microcontroller/generic_linux/i2c.py", line 60, in writeto
+    self._i2c_bus.write_bytes(address, buffer[start:end])
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/trash/.local/lib/python3.13/site-packages/Adafruit_PureIO/smbus.py", line 303, in write_bytes
+    self._device.write(buf)
+    ~~~~~~~~~~~~~~~~~~^^^^^
+OSError: [Errno 5] Input/output error
+trash@trash:~ $ python main.py
+pygame 2.6.1 (SDL 2.32.4, Python 3.13.5)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+Traceback (most recent call last):
+  File "/home/trash/.local/lib/python3.13/site-packages/adafruit_bus_device/i2c_device.py", line 168, in __probe_for_device
+    self.i2c.writeto(self.device_address, b"")   
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^   
+  File "/home/trash/.local/lib/python3.13/site-packages/busio.py", line 223, in writeto
+    return self._i2c.writeto(address, buffer, stop=True)
+           ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/trash/.local/lib/python3.13/site-packages/adafruit_blinka/microcontroller/generic_linux/i2c.py", line 60, in writeto
+    self._i2c_bus.write_bytes(address, buffer[start:end])
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/trash/.local/lib/python3.13/site-packages/Adafruit_PureIO/smbus.py", line 303, in write_bytes
+    self._device.write(buf)
+    ~~~~~~~~~~~~~~~~~~^^^^^
+OSError: [Errno 121] Remote I/O error
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/trash/.local/lib/python3.13/site-packages/adafruit_bus_device/i2c_device.py", line 174, in __probe_for_device
+    self.i2c.readfrom_into(self.device_address, result)
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/trash/.local/lib/python3.13/site-packages/busio.py", line 213, in readfrom_into     
+    return self._i2c.readfrom_into(address, buffer, stop=True)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/trash/.local/lib/python3.13/site-packages/adafruit_blinka/microcontroller/generic_linux/i2c.py", line 67, in readfrom_into
+    readin = self._i2c_bus.read_bytes(address, end - start)
+  File "/home/trash/.local/lib/python3.13/site-packages/Adafruit_PureIO/smbus.py", line 170, in read_bytes
+    return self._device.read(number)
+           ~~~~~~~~~~~~~~~~~^^^^^^^^
+OSError: [Errno 5] Input/output error
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/trash/main.py", line 265, in <module>
+    kit = ServoKit(channels=8)
+  File "/home/trash/.local/lib/python3.13/site-packages/adafruit_servokit.py", line 90, in __init__
+    self._pca = PCA9685(i2c, address=address, reference_clock_speed=reference_clock_speed)        
+                ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^        
+  File "/home/trash/.local/lib/python3.13/site-packages/adafruit_pca9685.py", line 151, in __init__
+    self.i2c_device = i2c_device.I2CDevice(i2c_bus, address)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "/home/trash/.local/lib/python3.13/site-packages/adafruit_bus_device/i2c_device.py", line 62, in __init__
+    self.__probe_for_device()
+    ~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/home/trash/.local/lib/python3.13/site-packages/adafruit_bus_device/i2c_device.py", line 176, in __probe_for_device
+    raise ValueError("No I2C device at address: 0x%x" % self.device_address)

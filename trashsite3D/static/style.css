@@ -55,6 +55,44 @@ canvas {
     z-index: 10;
 }
 
+.stats-info {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    color: black;
+    z-index: 10;
+}
+
+.view-toggle-container {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    display: flex;
+    gap: 2px;
+    /* background-color: rgba(0, 0, 0, 0.1); */
+    border-radius: 4px;
+    padding: 2px;
+}
+
+.view-btn {
+    padding: 10px 20px;
+    font-size: 18x;
+    text-transform: uppercase;
+    background-color: none;
+    border: none;
+    outline: none;
+}
+
+.view-btn:hover {
+    color: #8846fa;
+}
+
+.view-btn.active {
+    color: #8846fa;
+}
+
 .hidden {
     display: none;
 }

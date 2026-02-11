@@ -15,8 +15,12 @@
             <div id="object-details" class="info-text"></div>
         </div>
     </div>
-    <div id="controls-info" class="controls-info">
+    <div id="stats-info" class="stats-info">
         <div id="stats-global" class="info-text">Loading...</div>
+    </div>
+    <div id="view-toggle-container" class="view-toggle-container">
+        <div id="grid-btn" class="view-btn active">grid</div>
+        <div id="pile-btn" class="view-btn">pile</div>
     </div>
     <div id="mouse-circle" class="mouse-circle"></div>
 </body>
@@ -24,7 +28,8 @@
 {
   "imports": {
     "three": "https://cdn.jsdelivr.net/npm/three@0.182.0/build/three.module.js",
-    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.182.0/examples/jsm/"
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.182.0/examples/jsm/",
+    "cannon": "https://cdn.jsdelivr.net/npm/cannon-es@0.20.0/dist/cannon-es.js"
   }
 }
 </script>

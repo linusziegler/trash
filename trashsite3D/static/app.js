@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import * as CANNON from 'cannon';
 
 // Three.js Scene Setup
 let scene, camera, renderer;
@@ -14,6 +15,16 @@ let cameraOffsetY = 0;
 let gltfLoader = new GLTFLoader();
 
 const itemsPerRow = 8;
+
+// Physics
+let physicsWorld;
+let physicsEnabled = false;
+let currentViewMode = 'grid'; // 'grid' or 'pile'
+let physicsObjects = new Map(); // Maps Three.js object to physics body
+
+// Store initial state
+let initialObjectPositions = new Map();
+let initialCameraPos = new THREE.Vector3();
 
 function init() {
     console.log('Initializing 3D scene...');
@@ -32,6 +43,7 @@ function init() {
     cameraBasePos = new THREE.Vector3(0, 0, 35);
     camera.position.copy(cameraBasePos);
     camera.lookAt(0, 0, 0);
+    initialCameraPos.copy(camera.position);
 
     // Renderer
     renderer = new THREE.WebGLRenderer({ antialias: true });
@@ -56,14 +68,25 @@ function init() {
     directionalLight.shadow.camera.right = 50;
     directionalLight.shadow.camera.top = 50;
     directionalLight.shadow.camera.bottom = -50;
-    scene.add(directionalLight);
+    scene.add(directionalLight);    
     console.log('Lighting initialized');
+
+    // Initialize physics world
+    initPhysics();
 
     // Event Listeners
     window.addEventListener('resize', onWindowResize);
     document.addEventListener('mousemove', onMouseMove);
     document.addEventListener('click', onClick);
     document.addEventListener('wheel', onScroll);
+    
+    // View toggle buttons
+    document.getElementById('grid-btn').addEventListener('click', () => {
+        if (currentViewMode !== 'grid') switchToGridView();
+    });
+    document.getElementById('pile-btn').addEventListener('click', () => {
+        if (currentViewMode !== 'pile') switchToPileView();
+    });
     console.log('Event listeners added');
 
     // Start the animation loop
@@ -76,6 +99,112 @@ function init() {
 
     // Poll for new objects every 2 seconds
     setInterval(loadObjects, 2000);
+}
+
+function initPhysics() {
+    // Create physics world
+    physicsWorld = new CANNON.World();
+    physicsWorld.gravity.set(0, -10, 0);
+    physicsWorld.defaultContactMaterial.friction = 0.8;
+    
+    // Create invisible floor
+    const floorShape = new CANNON.Plane();
+    const floorBody = new CANNON.Body({
+        mass: 0,
+        shape: floorShape
+    });
+    floorBody.quaternion.setFromAxisAngle(new CANNON.Vec3(1, 0, 0), -Math.PI / 2);
+    floorBody.position.y = -30;
+    physicsWorld.addBody(floorBody);
+    
+    console.log('Physics world initialized');
+}
+
+function createPhysicsBody(object) {
+    // Calculate bounding box to get approximate dimensions
+    const bbox = new THREE.Box3().setFromObject(object);
+    const size = bbox.getSize(new THREE.Vector3());
+    
+    // Create physics body with approximate sphere
+    const radius = Math.max(size.x, size.y, size.z) / 2;
+    const shape = new CANNON.Sphere(radius);
+    
+    const body = new CANNON.Body({
+        mass: 2,
+        shape: shape,
+        friction: 1,
+        restitution: 0.05,
+        linearDamping: 0.5,
+        angularDamping: 0.8
+    });
+    
+    body.position.set(
+        object.position.x,
+        object.position.y,
+        object.position.z
+    );
+    
+    // Reset velocity to ensure clean state
+    body.velocity.x = 0;
+    body.velocity.y = 0;
+    body.velocity.z = 0;
+    body.angularVelocity.x = 0;
+    body.angularVelocity.y = 0;
+    body.angularVelocity.z = 0;
+    
+    physicsWorld.addBody(body);
+    physicsObjects.set(object, body);
+}
+
+function switchToPileView() {
+    console.log('Switching to pile view...');
+    currentViewMode = 'pile';
+    physicsEnabled = true;
+    
+    // Create physics bodies for all objects
+    objects.forEach(obj => {
+        createPhysicsBody(obj);
+    });
+    
+    // Update button styling
+    document.getElementById('grid-btn').classList.remove('active');
+    document.getElementById('pile-btn').classList.add('active');
+}
+
+function switchToGridView() {
+    console.log('Switching to grid view...');
+    currentViewMode = 'grid';
+    physicsEnabled = false;
+    
+    // Remove all physics bodies
+    physicsObjects.forEach((body, obj) => {
+        physicsWorld.removeBody(body);
+    });
+    physicsObjects.clear();
+    
+    // Reset objects to grid positions
+    objects.forEach((obj, index) => {
+        const gridPos = gridLayout(index);
+        obj.position.copy(gridPos);
+        obj.rotation.set(0, 0, 0);
+        obj.velocity = new THREE.Vector3(0, 0, 0);
+        // Reset position to initial grid position
+        if (initialObjectPositions.has(obj)) {
+            obj.position.copy(initialObjectPositions.get(obj));
+        }
+    });
+    
+    // Update button styling
+    document.getElementById('grid-btn').classList.add('active');
+    document.getElementById('pile-btn').classList.remove('active');
+}
+
+function toggleViewMode() {
+    if (currentViewMode === 'grid') {
+        switchToPileView();
+    } else {
+        switchToGridView();
+    }
 }
 
 function loadObject(name, position, id, fileSize, addedTime) {
@@ -144,6 +273,7 @@ function loadObject(name, position, id, fileSize, addedTime) {
 
             scene.add(model);
             objects.push(model);
+            initialObjectPositions.set(model, position.clone());
         },
         undefined,
         function (error) {
@@ -155,18 +285,20 @@ function loadObject(name, position, id, fileSize, addedTime) {
 }
 
 function createFallbackCube(name, position, id) {
-    // Fallback: create a simple cube
-    const material = new THREE.MeshPhongMaterial({});
-
+    // Fallback: create a simple cube with metallic chrome material
+    const material = new THREE.MeshStandardMaterial({
+        color: new THREE.Color(0xb0b0b0),
+        metalness: 0.7,
+        roughness: 0.2,
+        emissive: new THREE.Color(0x8846fa),
+        emissiveIntensity: 0.
+    });
 
     const geometry = new THREE.BoxGeometry(2, 2, 2);
     const mesh = new THREE.Mesh(geometry, material);
     mesh.position.copy(position);
     mesh.castShadow = false;
     mesh.receiveShadow = false;
-    mesh.material.color = new THREE.Color(0xffffff);
-    mesh.material.emissive = new THREE.Color(0x8846fa);
-    mesh.material.emissiveIntensity = 0.;
 
     // Store metadata
     mesh.userData = {
@@ -181,6 +313,7 @@ function createFallbackCube(name, position, id) {
 
     scene.add(mesh);
     objects.push(mesh);
+    initialObjectPositions.set(mesh, position.clone());
 }
 
 function gridLayout(index) {
@@ -243,6 +376,9 @@ function onMouseMove(event) {
     const circle = document.getElementById('mouse-circle');
     circle.style.left = `${event.clientX}px`;
     circle.style.top = `${event.clientY}px`;
+    
+    // Check hover on mousemove
+    checkHover();
 }
 
 function onClick(event) {
@@ -284,6 +420,14 @@ function selectObject(obj) {
 
     selectedObject = obj;
     obj.userData.isSelected = true;
+    
+    // Remove emissive effect when object is selected
+    obj.traverse((child) => {
+        if (child.material) {
+            child.material.emissiveIntensity = 0.;
+        }
+    });
+    
     // Show info panel and keep it visible
     showInfoPanel(obj.userData);
 }
@@ -305,12 +449,6 @@ function onWindowResize() {
 function checkHover() {
     // Skip hover checks if an object is selected
     if (selectedObject) {
-        // Reset material and scale for all children (handles both meshes and groups)
-        selectedObject.traverse((child) => {
-            if (child.material) {
-                child.material.emissiveIntensity = 0.;
-            }
-        });
         return;
     }
 
@@ -327,28 +465,30 @@ function checkHover() {
         intersectedRoot = objects.includes(obj) ? obj : null;
     }
 
-    // Remove highlight from previously hovered object
-    if (hoveredObject && hoveredObject !== intersectedRoot) {
-        hoveredObject.traverse((child) => {
-            if (child.material) {
-                child.material.emissiveIntensity = 0.;
-            }
-        });
-    }
+    // Only update materials if hovered object changed
+    if (hoveredObject !== intersectedRoot) {
+        // Remove highlight from previously hovered object
+        if (hoveredObject) {
+            hoveredObject.traverse((child) => {
+                if (child.material) {
+                    child.material.emissiveIntensity = 0.;
+                }
+            });
+        }
 
-    if (intersectedRoot) {
-        intersectedRoot.traverse((child) => {
-            if (child.material) {
-                child.material.emissiveIntensity = 0.5;
-            }
-        });
+        // Highlight new hovered object
+        if (intersectedRoot) {
+            intersectedRoot.traverse((child) => {
+                if (child.material) {
+                    child.material.emissiveIntensity = 0.5;
+                }
+            });
+            showInfoPanel(intersectedRoot.userData);
+        } else {
+            closeInfoPanel();
+        }
+
         hoveredObject = intersectedRoot;
-
-        // Show info panel
-        showInfoPanel(intersectedRoot.userData);
-    } else {
-        hoveredObject = null;
-        closeInfoPanel();
     }
 }
 
@@ -368,7 +508,21 @@ function closeInfoPanel() {
 function animate() {
     requestAnimationFrame(animate);
 
-    checkHover();
+    // Update physics simulation if enabled
+    if (physicsEnabled) {
+        physicsWorld.step(1 / 30);
+        
+        // Sync physics bodies with Three.js objects
+        physicsObjects.forEach((body, object) => {
+            object.position.copy(body.position);
+            object.quaternion.copy(body.quaternion);
+        });
+    } else {
+        // Rotate objects around Y-axis only (in grid mode)
+        objects.forEach(obj => {
+            obj.rotation.y += 0.01;
+        });
+    }
 
     // Handle selected object - move camera in front of it (orthogonally)
     if (selectedObject) {
@@ -388,11 +542,6 @@ function animate() {
         );
         camera.position.lerp(targetCameraPos, 0.05);
     }
-
-    // Rotate objects around Y-axis only
-    objects.forEach(obj => {
-        obj.rotation.y += 0.01;
-    });
 
     renderer.render(scene, camera);
 }

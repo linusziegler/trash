@@ -97,8 +97,14 @@ def get_object_metadata():
                 "type": "glb",
                 "path": f"/objects/{obj_id}.glb",
                 "size": glb_path.stat().st_size,
+                "status": "ready",
             }
             updated = True
+        else:
+            # Update status to ready if GLB now exists
+            if metadata[obj_id].get("status") != "ready":
+                metadata[obj_id]["status"] = "ready"
+                updated = True
 
     # Remove deleted objects
     removed = [obj for obj in metadata if obj not in glb_files]
@@ -142,6 +148,57 @@ def get_glb_model(object_id):
     if glb_path.exists():
         return send_file(glb_path, mimetype="model/gltf-binary")
     return jsonify({"error": "GLB file not found"}), 404
+
+
+@app.route("/api/notify-loading", methods=["POST"])
+def notify_loading():
+    """Webhook called by trash3Dgen when a new folder is detected"""
+    from flask import request
+    
+    try:
+        data = request.get_json()
+        object_id = data.get("object_id")
+        
+        if not object_id:
+            return jsonify({"error": "Missing object_id"}), 400
+        
+        init_metadata()
+        
+        # Load current metadata
+        try:
+            with open(METADATA_FILE, "r") as f:
+                metadata = json.load(f)
+        except json.JSONDecodeError:
+            metadata = {}
+        
+        # Create loading entry if it doesn't exist
+        if object_id not in metadata:
+            metadata[object_id] = {
+                "id": object_id,
+                "name": object_id.removesuffix("_00001_"),
+                "added": datetime.now().isoformat(),
+                "type": "glb",
+                "path": f"/objects/{object_id}.glb",
+                "status": "loading",
+            }
+            
+            with open(METADATA_FILE, "w") as f:
+                json.dump(metadata, f, indent=2)
+            
+            print(f"Created loading entry for {object_id}")
+            return jsonify({"status": "created", "object_id": object_id}), 201
+        else:
+            # Entry already exists, just ensure status is loading if not ready
+            if metadata[object_id].get("status") != "ready":
+                metadata[object_id]["status"] = "loading"
+                with open(METADATA_FILE, "w") as f:
+                    json.dump(metadata, f, indent=2)
+            
+            return jsonify({"status": "exists", "object_id": object_id}), 200
+    
+    except Exception as e:
+        print(f"Error in notify_loading: {e}")
+        return jsonify({"error": str(e)}), 500
 
 
 # -------------------------------------------------------------------

@@ -207,7 +207,7 @@ function toggleViewMode() {
     }
 }
 
-function loadObject(name, position, id, fileSize, addedTime) {
+function loadObject(name, position, id, fileSize, addedTime, status = 'ready') {
     // Try to load GLB file, fallback to cube if not found
     const glbPath = `objects/${id}.glb`;
 
@@ -268,7 +268,9 @@ function loadObject(name, position, id, fileSize, addedTime) {
                 gridPosition: position.clone(),
                 isSelected: false,
                 vertexCount: vertexCount,
-                fileSize: (fileSize) / (1024 * 1024) // Convert bytes to MB
+                fileSize: (fileSize) / (1024 * 1024), // Convert bytes to MB
+                status: 'ready',
+                isLoading: false
             };
 
             scene.add(model);
@@ -279,19 +281,21 @@ function loadObject(name, position, id, fileSize, addedTime) {
         function (error) {
             // GLB failed to load, create fallback cube
             console.log('GLB not found or failed to load for', id, '- using cube fallback');
-            createFallbackCube(name, position, id);
+            createFallbackCube(name, position, id, status);
         }
     );
 }
 
-function createFallbackCube(name, position, id) {
-    // Fallback: create a simple cube with metallic chrome material
+function createFallbackCube(name, position, id, status = 'ready') {
+    // Fallback: create a simple cube with different styling based on status
+    const isLoading = status === 'loading';
+    
     const material = new THREE.MeshStandardMaterial({
-        color: new THREE.Color(0xb0b0b0),
-        metalness: 0.7,
-        roughness: 0.2,
-        emissive: new THREE.Color(0x8846fa),
-        emissiveIntensity: 0.
+        color: isLoading ? new THREE.Color(0x6b7a8f) : new THREE.Color(0xb0b0b0),
+        metalness: isLoading ? 0.4 : 0.7,
+        roughness: isLoading ? 0.6 : 0.2,
+        emissive: isLoading ? new THREE.Color(0x4a5f7f) : new THREE.Color(0x8846fa),
+        emissiveIntensity: isLoading ? 0.3 : 0.
     });
 
     const geometry = new THREE.BoxGeometry(2, 2, 2);
@@ -303,12 +307,14 @@ function createFallbackCube(name, position, id) {
     // Store metadata
     mesh.userData = {
         id: id,
-        name: "loading...",
+        name: isLoading ? "loading..." : name,
         added: new Date().toLocaleString(),
         gridPosition: position.clone(),
         isSelected: false,
         vertexCount: 0,
-        fileSize: 0
+        fileSize: 0,
+        status: status,
+        isLoading: isLoading
     };
 
     scene.add(mesh);
@@ -341,9 +347,10 @@ async function loadObjects() {
         objectsList.forEach((obj, index) => {
             if (!loadedObjectIds.has(obj.id)) {
                 const position = gridLayout(index);
-                loadObject(obj.name, position, obj.id, obj.size, obj.added);
+                const status = obj.status || 'ready'; // Default to ready for backwards compatibility
+                loadObject(obj.name, position, obj.id, obj.size, obj.added, status);
                 loadedObjectIds.add(obj.id);
-                console.log('Added object:', obj.name);
+                console.log('Added object:', obj.name, 'Status:', status);
             }
         });
 
@@ -519,8 +526,17 @@ function animate() {
         });
     } else {
         // Rotate objects around Y-axis only (in grid mode)
+        // Loading objects rotate faster
         objects.forEach(obj => {
-            obj.rotation.y += 0.01;
+            const isLoading = obj.userData.isLoading;
+            const rotationSpeed = isLoading ? 0.025 : 0.01; // Faster rotation for loading
+            obj.rotation.y += rotationSpeed;
+            
+            // Add scale pulsing for loading objects
+            if (isLoading) {
+                const pulse = 0.95 + 0.05 * Math.sin(Date.now() * 0.003);
+                obj.scale.set(pulse, pulse, pulse);
+            }
         });
     }
 

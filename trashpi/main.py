@@ -144,22 +144,29 @@ def take_photo(path):
 def move_servo(target_angle):
     global current_servo_angle
 
-    target_angle = max(SERVO_MIN, min(SERVO_MAX, target_angle))
-    step = 1 if target_angle > current_servo_angle else -1
+    if not servo_connected:
+        add_text("!! servo not connected, skipping move")
+        return
 
-    for angle in range(int(current_servo_angle), int(target_angle), step):
-        kit.servo[SERVO_CHANNEL].angle = angle
-        time.sleep(SERVO_STEP_DELAY)
+    try:
+        target_angle = max(SERVO_MIN, min(SERVO_MAX, target_angle))
+        step = 1 if target_angle > current_servo_angle else -1
 
-    # final snap
-    kit.servo[SERVO_CHANNEL].angle = target_angle
-    current_servo_angle = target_angle
+        for angle in range(int(current_servo_angle), int(target_angle), step):
+            kit.servo[SERVO_CHANNEL].angle = angle
+            time.sleep(SERVO_STEP_DELAY)
 
-    # allow servo to settle
-    time.sleep(0.15)
+        # final snap
+        kit.servo[SERVO_CHANNEL].angle = target_angle
+        current_servo_angle = target_angle
 
-    # RELEASE torque to prevent endstop hunting
-    kit.servo[SERVO_CHANNEL].angle = None
+        # allow servo to settle
+        time.sleep(0.15)
+
+        # RELEASE torque to prevent endstop hunting
+        kit.servo[SERVO_CHANNEL].angle = None
+    except Exception as e:
+        add_text(f"!! servo error")
 
 
 # -----------------------------
@@ -262,9 +269,18 @@ GPIO.setmode(GPIO.BCM)
 GPIO.setup(BUTTON_PIN, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
 # Servo init
-kit = ServoKit(channels=8)
+servo_connected = False
+kit = None
 current_servo_angle = 0
-kit.servo[SERVO_CHANNEL].angle = current_servo_angle
+
+try:
+    kit = ServoKit(channels=8)
+    kit.servo[SERVO_CHANNEL].angle = current_servo_angle
+    servo_connected = True
+    add_text("servo initialized")
+except Exception as e:
+    add_text(f"!! servo init failed")
+    kit = None
 
 # Start webcam
 camera = WebcamStream(
@@ -309,7 +325,11 @@ except Exception as e:
 
 finally:
     camera.stop()
-    kit.servo[SERVO_CHANNEL].angle = 0
+    if servo_connected and kit:
+        try:
+            kit.servo[SERVO_CHANNEL].angle = 0
+        except Exception as e:
+            print(f"Error during servo cleanup: {e}")
     GPIO.cleanup()
     pygame.quit()
     sys.exit()

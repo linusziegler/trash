@@ -5,7 +5,8 @@
     "added": 1768985793.2053459,
     "type": "glb",
     "path": "/objects/mug_00001_.glb",
-    "size": 1369904
+    "size": 1369904,
+    "status": "ready"
   },
   "nuts_00001_": {
     "id": "nuts_00001_",
@@ -13,7 +14,8 @@
     "added": 1768985793.1963792,
     "type": "glb",
     "path": "/objects/nuts_00001_.glb",
-    "size": 3223748
+    "size": 3223748,
+    "status": "ready"
   },
   "trash1": {
     "id": "trash1",
@@ -21,7 +23,8 @@
     "added": 1768820445.946831,
     "type": "glb",
     "path": "/objects/trash1.glb",
-    "size": 1654552
+    "size": 1654552,
+    "status": "ready"
   },
   "trash2": {
     "id": "trash2",
@@ -29,7 +32,8 @@
     "added": 1768820719.715959,
     "type": "glb",
     "path": "/objects/trash2.glb",
-    "size": 1682972
+    "size": 1682972,
+    "status": "ready"
   },
   "trash3": {
     "id": "trash3",
@@ -37,7 +41,8 @@
     "added": 1768821738.8764634,
     "type": "glb",
     "path": "/objects/trash3.glb",
-    "size": 718988
+    "size": 718988,
+    "status": "ready"
   },
   "trash4": {
     "id": "trash4",
@@ -45,7 +50,8 @@
     "added": 1768836714.5122042,
     "type": "glb",
     "path": "/objects/trash4.glb",
-    "size": 1089880
+    "size": 1089880,
+    "status": "ready"
   },
   "trash5": {
     "id": "trash5",
@@ -53,7 +59,8 @@
     "added": 1768838428.1825929,
     "type": "glb",
     "path": "/objects/trash5.glb",
-    "size": 1535244
+    "size": 1535244,
+    "status": "ready"
   },
   "trash6": {
     "id": "trash6",
@@ -61,7 +68,8 @@
     "added": 1768838692.8333497,
     "type": "glb",
     "path": "/objects/trash6.glb",
-    "size": 3009876
+    "size": 3009876,
+    "status": "ready"
   },
   "nuts_00001_ copy": {
     "id": "nuts_00001_ copy",
@@ -69,7 +77,8 @@
     "added": 1768985793.2028036,
     "type": "glb",
     "path": "/objects/nuts_00001_ copy.glb",
-    "size": 3223748
+    "size": 3223748,
+    "status": "ready"
   },
   "trash1 copy": {
     "id": "trash1 copy",
@@ -77,7 +86,8 @@
     "added": 1768938162.9220674,
     "type": "glb",
     "path": "/objects/trash1 copy.glb",
-    "size": 1654552
+    "size": 1654552,
+    "status": "ready"
   },
   "trash2 copy": {
     "id": "trash2 copy",
@@ -85,7 +95,8 @@
     "added": 1768938162.925403,
     "type": "glb",
     "path": "/objects/trash2 copy.glb",
-    "size": 1682972
+    "size": 1682972,
+    "status": "ready"
   },
   "trash3 copy": {
     "id": "trash3 copy",
@@ -93,7 +104,8 @@
     "added": 1768938162.9281244,
     "type": "glb",
     "path": "/objects/trash3 copy.glb",
-    "size": 718988
+    "size": 718988,
+    "status": "ready"
   },
   "trash4 copy": {
     "id": "trash4 copy",
@@ -101,7 +113,8 @@
     "added": 1768938162.9337492,
     "type": "glb",
     "path": "/objects/trash4 copy.glb",
-    "size": 1089880
+    "size": 1089880,
+    "status": "ready"
   },
   "trash5 copy": {
     "id": "trash5 copy",
@@ -109,7 +122,8 @@
     "added": 1768938162.9370575,
     "type": "glb",
     "path": "/objects/trash5 copy.glb",
-    "size": 1535244
+    "size": 1535244,
+    "status": "ready"
   },
   "trash6 copy": {
     "id": "trash6 copy",
@@ -117,7 +131,8 @@
     "added": 1768938162.9419675,
     "type": "glb",
     "path": "/objects/trash6 copy.glb",
-    "size": 3009876
+    "size": 3009876,
+    "status": "ready"
   },
   "trash2 copy 10": {
     "id": "trash2 copy 10",
@@ -125,7 +140,8 @@
     "added": 1770808990.966702,
     "type": "glb",
     "path": "/objects/trash2 copy 10.glb",
-    "size": 1682972
+    "size": 1682972,
+    "status": "ready"
   },
   "trash2 copy 11": {
     "id": "trash2 copy 11",
@@ -133,7 +149,8 @@
     "added": 1770808990.966702,
     "type": "glb",
     "path": "/objects/trash2 copy 11.glb",
-    "size": 1682972
+    "size": 1682972,
+    "status": "ready"
   },
   "trash2 copy 12": {
     "id": "trash2 copy 12",
@@ -141,7 +158,8 @@
     "added": 1770808990.966702,
     "type": "glb",
     "path": "/objects/trash2 copy 12.glb",
-    "size": 1682972
+    "size": 1682972,
+    "status": "ready"
   },
   "trash2 copy 13": {
     "id": "trash2 copy 13",
@@ -149,7 +167,8 @@
     "added": 1770808990.966702,
     "type": "glb",
     "path": "/objects/trash2 copy 13.glb",
-    "size": 1682972
+    "size": 1682972,
+    "status": "ready"
   },
   "trash2 copy 14": {
     "id": "trash2 copy 14",
@@ -157,7 +176,8 @@
     "added": 1770808990.966702,
     "type": "glb",
     "path": "/objects/trash2 copy 14.glb",
-    "size": 1682972
+    "size": 1682972,
+    "status": "ready"
   },
   "trash2 copy 15": {
     "id": "trash2 copy 15",
@@ -165,7 +185,8 @@
     "added": 1770808990.966702,
     "type": "glb",
     "path": "/objects/trash2 copy 15.glb",
-    "size": 1682972
+    "size": 1682972,
+    "status": "ready"
   },
   "trash2 copy 16": {
     "id": "trash2 copy 16",
@@ -173,7 +194,8 @@
     "added": 1770808990.966702,
     "type": "glb",
     "path": "/objects/trash2 copy 16.glb",
-    "size": 1682972
+    "size": 1682972,
+    "status": "ready"
   },
   "trash2 copy 2": {
     "id": "trash2 copy 2",
@@ -181,7 +203,8 @@
     "added": 1770808990.966702,
     "type": "glb",
     "path": "/objects/trash2 copy 2.glb",
-    "size": 1682972
+    "size": 1682972,
+    "status": "ready"
   },
   "trash2 copy 3": {
     "id": "trash2 copy 3",
@@ -189,7 +212,8 @@
     "added": 1770808990.966702,
     "type": "glb",
     "path": "/objects/trash2 copy 3.glb",
-    "size": 1682972
+    "size": 1682972,
+    "status": "ready"
   },
   "trash2 copy 4": {
     "id": "trash2 copy 4",
@@ -197,7 +221,8 @@
     "added": 1770808990.966702,
     "type": "glb",
     "path": "/objects/trash2 copy 4.glb",
-    "size": 1682972
+    "size": 1682972,
+    "status": "ready"
   },
   "trash2 copy 5": {
     "id": "trash2 copy 5",
@@ -205,7 +230,8 @@
     "added": 1770808990.966702,
     "type": "glb",
     "path": "/objects/trash2 copy 5.glb",
-    "size": 1682972
+    "size": 1682972,
+    "status": "ready"
   },
   "trash2 copy 6": {
     "id": "trash2 copy 6",
@@ -213,7 +239,8 @@
     "added": 1770808990.966702,
     "type": "glb",
     "path": "/objects/trash2 copy 6.glb",
-    "size": 1682972
+    "size": 1682972,
+    "status": "ready"
   },
   "trash2 copy 7": {
     "id": "trash2 copy 7",
@@ -221,7 +248,8 @@
     "added": 1770808990.966702,
     "type": "glb",
     "path": "/objects/trash2 copy 7.glb",
-    "size": 1682972
+    "size": 1682972,
+    "status": "ready"
   },
   "trash2 copy 8": {
     "id": "trash2 copy 8",
@@ -229,7 +257,8 @@
     "added": 1770808990.966702,
     "type": "glb",
     "path": "/objects/trash2 copy 8.glb",
-    "size": 1682972
+    "size": 1682972,
+    "status": "ready"
   },
   "trash2 copy 9": {
     "id": "trash2 copy 9",
@@ -237,7 +266,8 @@
     "added": 1770808990.966702,
     "type": "glb",
     "path": "/objects/trash2 copy 9.glb",
-    "size": 1682972
+    "size": 1682972,
+    "status": "ready"
   },
   "trash2 copy 17": {
     "id": "trash2 copy 17",
@@ -245,7 +275,8 @@
     "added": 1770809813.850022,
     "type": "glb",
     "path": "/objects/trash2 copy 17.glb",
-    "size": 1682972
+    "size": 1682972,
+    "status": "ready"
   },
   "trash2 copy 18": {
     "id": "trash2 copy 18",
@@ -253,7 +284,8 @@
     "added": 1770809813.850022,
     "type": "glb",
     "path": "/objects/trash2 copy 18.glb",
-    "size": 1682972
+    "size": 1682972,
+    "status": "ready"
   },
   "trash2 copy 19": {
     "id": "trash2 copy 19",
@@ -261,7 +293,8 @@
     "added": 1770809813.850022,
     "type": "glb",
     "path": "/objects/trash2 copy 19.glb",
-    "size": 1682972
+    "size": 1682972,
+    "status": "ready"
   },
   "trash2 copy 20": {
     "id": "trash2 copy 20",
@@ -269,7 +302,8 @@
     "added": 1770809813.850022,
     "type": "glb",
     "path": "/objects/trash2 copy 20.glb",
-    "size": 1682972
+    "size": 1682972,
+    "status": "ready"
   },
   "trash2 copy 21": {
     "id": "trash2 copy 21",
@@ -277,7 +311,8 @@
     "added": 1770809813.850022,
     "type": "glb",
     "path": "/objects/trash2 copy 21.glb",
-    "size": 1682972
+    "size": 1682972,
+    "status": "ready"
   },
   "trash2 copy 22": {
     "id": "trash2 copy 22",
@@ -285,7 +320,8 @@
     "added": 1770809813.850022,
     "type": "glb",
     "path": "/objects/trash2 copy 22.glb",
-    "size": 1682972
+    "size": 1682972,
+    "status": "ready"
   },
   "trash2 copy 23": {
     "id": "trash2 copy 23",
@@ -293,7 +329,8 @@
     "added": 1770809813.850022,
     "type": "glb",
     "path": "/objects/trash2 copy 23.glb",
-    "size": 1682972
+    "size": 1682972,
+    "status": "ready"
   },
   "trash2 copy 24": {
     "id": "trash2 copy 24",
@@ -301,7 +338,8 @@
     "added": 1770809813.850022,
     "type": "glb",
     "path": "/objects/trash2 copy 24.glb",
-    "size": 1682972
+    "size": 1682972,
+    "status": "ready"
   },
   "trash2 copy 25": {
     "id": "trash2 copy 25",
@@ -309,7 +347,8 @@
     "added": 1770809813.850022,
     "type": "glb",
     "path": "/objects/trash2 copy 25.glb",
-    "size": 1682972
+    "size": 1682972,
+    "status": "ready"
   },
   "trash2 copy 26": {
     "id": "trash2 copy 26",
@@ -317,7 +356,8 @@
     "added": 1770809813.850022,
     "type": "glb",
     "path": "/objects/trash2 copy 26.glb",
-    "size": 1682972
+    "size": 1682972,
+    "status": "ready"
   },
   "trash2 copy 27": {
     "id": "trash2 copy 27",
@@ -325,7 +365,8 @@
     "added": 1770809813.850022,
     "type": "glb",
     "path": "/objects/trash2 copy 27.glb",
-    "size": 1682972
+    "size": 1682972,
+    "status": "ready"
   },
   "trash2 copy 28": {
     "id": "trash2 copy 28",
@@ -333,7 +374,8 @@
     "added": 1770809813.850022,
     "type": "glb",
     "path": "/objects/trash2 copy 28.glb",
-    "size": 1682972
+    "size": 1682972,
+    "status": "ready"
   },
   "trash2 copy 29": {
     "id": "trash2 copy 29",
@@ -341,7 +383,8 @@
     "added": 1770809813.850022,
     "type": "glb",
     "path": "/objects/trash2 copy 29.glb",
-    "size": 1682972
+    "size": 1682972,
+    "status": "ready"
   },
   "trash2 copy 30": {
     "id": "trash2 copy 30",
@@ -349,7 +392,8 @@
     "added": 1770809813.850022,
     "type": "glb",
     "path": "/objects/trash2 copy 30.glb",
-    "size": 1682972
+    "size": 1682972,
+    "status": "ready"
   },
   "trash2 copy 31": {
     "id": "trash2 copy 31",
@@ -357,7 +401,8 @@
     "added": 1770809813.850022,
     "type": "glb",
     "path": "/objects/trash2 copy 31.glb",
-    "size": 1682972
+    "size": 1682972,
+    "status": "ready"
   },
   "trash2 copy 32": {
     "id": "trash2 copy 32",
@@ -365,7 +410,8 @@
     "added": 1770809813.850022,
     "type": "glb",
     "path": "/objects/trash2 copy 32.glb",
-    "size": 1682972
+    "size": 1682972,
+    "status": "ready"
   },
   "trash2 copy 33": {
     "id": "trash2 copy 33",
@@ -373,7 +419,8 @@
     "added": 1770809813.850022,
     "type": "glb",
     "path": "/objects/trash2 copy 33.glb",
-    "size": 1682972
+    "size": 1682972,
+    "status": "ready"
   },
   "trash2 copy 34": {
     "id": "trash2 copy 34",
@@ -381,7 +428,8 @@
     "added": 1770809813.850022,
     "type": "glb",
     "path": "/objects/trash2 copy 34.glb",
-    "size": 1682972
+    "size": 1682972,
+    "status": "ready"
   },
   "trash2 copy 35": {
     "id": "trash2 copy 35",
@@ -389,7 +437,8 @@
     "added": 1770809813.850022,
     "type": "glb",
     "path": "/objects/trash2 copy 35.glb",
-    "size": 1682972
+    "size": 1682972,
+    "status": "ready"
   },
   "trash2 copy 36": {
     "id": "trash2 copy 36",
@@ -397,7 +446,8 @@
     "added": 1770809813.850022,
     "type": "glb",
     "path": "/objects/trash2 copy 36.glb",
-    "size": 1682972
+    "size": 1682972,
+    "status": "ready"
   },
   "trash2 copy 37": {
     "id": "trash2 copy 37",
@@ -405,7 +455,8 @@
     "added": 1770809813.850022,
     "type": "glb",
     "path": "/objects/trash2 copy 37.glb",
-    "size": 1682972
+    "size": 1682972,
+    "status": "ready"
   },
   "trash2 copy 38": {
     "id": "trash2 copy 38",
@@ -413,7 +464,8 @@
     "added": 1770809813.850022,
     "type": "glb",
     "path": "/objects/trash2 copy 38.glb",
-    "size": 1682972
+    "size": 1682972,
+    "status": "ready"
   },
   "trash2 copy 39": {
     "id": "trash2 copy 39",
@@ -421,7 +473,8 @@
     "added": 1770809813.850022,
     "type": "glb",
     "path": "/objects/trash2 copy 39.glb",
-    "size": 1682972
+    "size": 1682972,
+    "status": "ready"
   },
   "trash2 copy 40": {
     "id": "trash2 copy 40",
@@ -429,7 +482,8 @@
     "added": 1770809813.850022,
     "type": "glb",
     "path": "/objects/trash2 copy 40.glb",
-    "size": 1682972
+    "size": 1682972,
+    "status": "ready"
   },
   "trash2 copy 41": {
     "id": "trash2 copy 41",
@@ -437,7 +491,8 @@
     "added": 1770809813.850022,
     "type": "glb",
     "path": "/objects/trash2 copy 41.glb",
-    "size": 1682972
+    "size": 1682972,
+    "status": "ready"
   },
   "trash2 copy 42": {
     "id": "trash2 copy 42",
@@ -445,7 +500,8 @@
     "added": 1770809813.850022,
     "type": "glb",
     "path": "/objects/trash2 copy 42.glb",
-    "size": 1682972
+    "size": 1682972,
+    "status": "ready"
   },
   "trash2 copy 43": {
     "id": "trash2 copy 43",
@@ -453,7 +509,8 @@
     "added": 1770809813.850022,
     "type": "glb",
     "path": "/objects/trash2 copy 43.glb",
-    "size": 1682972
+    "size": 1682972,
+    "status": "ready"
   },
   "trash2 copy 44": {
     "id": "trash2 copy 44",
@@ -461,7 +518,8 @@
     "added": 1770809813.850022,
     "type": "glb",
     "path": "/objects/trash2 copy 44.glb",
-    "size": 1682972
+    "size": 1682972,
+    "status": "ready"
   },
   "trash2 copy 45": {
     "id": "trash2 copy 45",
@@ -469,7 +527,8 @@
     "added": 1770809813.850022,
     "type": "glb",
     "path": "/objects/trash2 copy 45.glb",
-    "size": 1682972
+    "size": 1682972,
+    "status": "ready"
   },
   "trash2 copy 46": {
     "id": "trash2 copy 46",
@@ -477,7 +536,8 @@
     "added": 1770809813.850022,
     "type": "glb",
     "path": "/objects/trash2 copy 46.glb",
-    "size": 1682972
+    "size": 1682972,
+    "status": "ready"
   },
   "trash2 copy 47": {
     "id": "trash2 copy 47",
@@ -485,7 +545,8 @@
     "added": 1770809813.850022,
     "type": "glb",
     "path": "/objects/trash2 copy 47.glb",
-    "size": 1682972
+    "size": 1682972,
+    "status": "ready"
   },
   "trash2 copy 48": {
     "id": "trash2 copy 48",
@@ -493,7 +554,8 @@
     "added": 1770809813.850022,
     "type": "glb",
     "path": "/objects/trash2 copy 48.glb",
-    "size": 1682972
+    "size": 1682972,
+    "status": "ready"
   },
   "trash2 copy 49": {
     "id": "trash2 copy 49",
@@ -501,7 +563,8 @@
     "added": 1770814474.2718115,
     "type": "glb",
     "path": "/objects/trash2 copy 49.glb",
-    "size": 1682972
+    "size": 1682972,
+    "status": "ready"
   },
   "trash2 copy 50": {
     "id": "trash2 copy 50",
@@ -509,7 +572,8 @@
     "added": 1770814474.2718115,
     "type": "glb",
     "path": "/objects/trash2 copy 50.glb",
-    "size": 1682972
+    "size": 1682972,
+    "status": "ready"
   },
   "trash2 copy 51": {
     "id": "trash2 copy 51",
@@ -517,7 +581,8 @@
     "added": 1770814474.2718115,
     "type": "glb",
     "path": "/objects/trash2 copy 51.glb",
-    "size": 1682972
+    "size": 1682972,
+    "status": "ready"
   },
   "trash2 copy 52": {
     "id": "trash2 copy 52",
@@ -525,6 +590,7 @@
     "added": 1770814474.2718115,
     "type": "glb",
     "path": "/objects/trash2 copy 52.glb",
-    "size": 1682972
+    "size": 1682972,
+    "status": "ready"
   }
 }

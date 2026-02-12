@@ -470,7 +470,7 @@ function onTouchMove(event) {
     const deltaY = touchEndY - touchStartY;
     
     // Apply same scrolling logic as wheel scroll
-    cameraOffsetY += deltaY * 0.03;
+    cameraOffsetY += deltaY * 0.1;
     
     // Limit cameraOffsetY to reasonable bounds based on number of objects
     let maxOffset = calculateMaxOffset();

@@ -25,9 +25,29 @@ let physicsObjects = new Map(); // Maps Three.js object to physics body
 // Store initial state
 let initialObjectPositions = new Map();
 let initialCameraPos = new THREE.Vector3();
+// Touch support detection
+let isTouchDevice = false;
+let touchStartY = 0;
+function detectTouchSupport() {
+    isTouchDevice = () => {
+        return (
+            (typeof window !== 'undefined' && window.ontouchstart !== undefined) ||
+            (typeof navigator !== 'undefined' && navigator.maxTouchPoints > 0) ||
+            (typeof navigator !== 'undefined' && navigator.msMaxTouchPoints > 0)
+        );
+    };
+    return isTouchDevice();
+}
 
 function init() {
     console.log('Initializing 3D scene...');
+
+    // Detect touch support and hide mouse cursor on touch devices
+    const hasTouch = detectTouchSupport();
+    console.log('Touch device detected:', hasTouch);
+    if (hasTouch) {
+        document.getElementById('mouse-circle').style.display = 'none';
+    }
 
     // Scene
     scene = new THREE.Scene();
@@ -80,11 +100,22 @@ function init() {
     document.addEventListener('click', onClick);
     document.addEventListener('wheel', onScroll);
     
-    // View toggle buttons
-    document.getElementById('grid-btn').addEventListener('click', () => {
+    // Touch event listeners
+    document.addEventListener('touchstart', onTouchStart);
+    document.addEventListener('touchmove', onTouchMove);
+    
+    // View toggle buttons - prevent event propagation and capture all mouse events
+    const gridBtn = document.getElementById('grid-btn');
+    const pileBtn = document.getElementById('pile-btn');
+    
+    gridBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
         if (currentViewMode !== 'grid') switchToGridView();
     });
-    document.getElementById('pile-btn').addEventListener('click', () => {
+    pileBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
         if (currentViewMode !== 'pile') switchToPileView();
     });
     console.log('Event listeners added');
@@ -381,10 +412,12 @@ function onMouseMove(event) {
     mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
     mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
 
-    // draw circle around mouse
-    const circle = document.getElementById('mouse-circle');
-    circle.style.left = `${event.clientX}px`;
-    circle.style.top = `${event.clientY}px`;
+    // draw circle around mouse (only on non-touch devices)
+    if (!isTouchDevice()) {
+        const circle = document.getElementById('mouse-circle');
+        circle.style.left = `${event.clientX}px`;
+        circle.style.top = `${event.clientY}px`;
+    }
     
     // Check hover on mousemove
     checkHover();
@@ -423,6 +456,28 @@ function onScroll(event) {
 
 function calculateMaxOffset() {
     return -4 * ((loadedObjectIds.size / itemsPerRow) - 1);
+}
+
+function onTouchStart(event) {
+    touchStartY = event.touches[0].clientY;
+}
+
+function onTouchMove(event) {
+    // Get the current touch position
+    if (event.touches.length === 0) return;
+    
+    const touchEndY = event.touches[0].clientY;
+    const deltaY = touchEndY - touchStartY;
+    
+    // Apply same scrolling logic as wheel scroll
+    cameraOffsetY += deltaY * 0.03;
+    
+    // Limit cameraOffsetY to reasonable bounds based on number of objects
+    let maxOffset = calculateMaxOffset();
+    cameraOffsetY = Math.max(maxOffset, Math.min(0, cameraOffsetY));
+    
+    // Update touch start Y for continuous scrolling
+    touchStartY = touchEndY;
 }
 
 function selectObject(obj) {
@@ -481,7 +536,7 @@ function checkHover() {
     // Only update materials if hovered object changed
     if (hoveredObject !== intersectedRoot) {
         // Remove highlight from previously hovered object
-        if (hoveredObject) {
+        if (!isTouchDevice() && hoveredObject) {
             hoveredObject.traverse((child) => {
                 if (child.material) {
                     child.material.emissiveIntensity = 0.;
@@ -490,7 +545,7 @@ function checkHover() {
         }
 
         // Highlight new hovered object
-        if (intersectedRoot) {
+        if (!isTouchDevice() && intersectedRoot) {
             intersectedRoot.traverse((child) => {
                 if (child.material) {
                     child.material.emissiveIntensity = 0.5;

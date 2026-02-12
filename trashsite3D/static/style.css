@@ -65,15 +65,17 @@ canvas {
 
 .view-toggle-container {
     position: fixed;
-    bottom: 20px;
+    bottom: 0px;
     left: 50%;
     transform: translateX(-50%);
-    z-index: 10;
+    z-index: 1000;
     display: flex;
     gap: 2px;
     /* background-color: rgba(0, 0, 0, 0.1); */
     border-radius: 4px;
     padding: 2px;
+    margin: 20px;
+    pointer-events: auto;
 }
 
 .view-btn {
@@ -83,6 +85,7 @@ canvas {
     background-color: none;
     border: none;
     outline: none;
+    pointer-events: auto;
 }
 
 .view-btn:hover {

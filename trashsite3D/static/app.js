@@ -114,7 +114,7 @@ function initPhysics() {
         shape: floorShape
     });
     floorBody.quaternion.setFromAxisAngle(new CANNON.Vec3(1, 0, 0), -Math.PI / 2);
-    floorBody.position.y = -30;
+    floorBody.position.y = calculateMaxOffset() - 10; // Position floor below the lowest grid row
     physicsWorld.addBody(floorBody);
     
     console.log('Physics world initialized');
@@ -160,6 +160,8 @@ function switchToPileView() {
     console.log('Switching to pile view...');
     currentViewMode = 'pile';
     physicsEnabled = true;
+
+    initPhysics(); 
     
     // Create physics bodies for all objects
     objects.forEach(obj => {
@@ -415,8 +417,12 @@ function onClick(event) {
 function onScroll(event) {
     cameraOffsetY -= event.deltaY * 0.03;
     // Limit cameraOffsetY to reasonable bounds based on number of objects
-    let maxOffset = -4 * ((loadedObjectIds.size / itemsPerRow) - 1); // Adjust based on number of rows
+    let maxOffset = calculateMaxOffset(); // Adjust based on number of rows
     cameraOffsetY = Math.max(maxOffset, Math.min(0, cameraOffsetY));
+}
+
+function calculateMaxOffset() {
+    return -4 * ((loadedObjectIds.size / itemsPerRow) - 1);
 }
 
 function selectObject(obj) {

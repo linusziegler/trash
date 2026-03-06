@@ -6,15 +6,35 @@ import * as CANNON from 'cannon';
 let scene, camera, renderer;
 let objects = [];
 let raycaster = new THREE.Raycaster();
-let mouse = new THREE.Vector2();
-let hoveredObject = null;
-let selectedObject = null;
+let selectedObjectIndex = null; // Always track selected by index
 let loadedObjectIds = new Set();
 let cameraBasePos = new THREE.Vector3(0, 15, 25);
-let cameraOffsetY = 0;
 let gltfLoader = new GLTFLoader();
 
 const itemsPerRow = 8;
+
+// Zoom/Inspect mode
+let isZoomed = false;
+let zoomDistance = 8; // Close-up distance for inspecting
+let normalDistance = 35; // Normal grid view distance
+
+// Auto-select first object when it loads
+let shouldSelectFirstObject = false;
+let firstObjectSelected = false;
+
+// Grid navigation uses row/col instead of array index
+let selectedRow = 0;
+let selectedCol = 0;
+
+// key-mapping for navigation using custom keyboard
+const keyMap = {
+    "c" : 'ArrowUp',
+    "m" : 'ArrowDown',
+    "t" : 'ArrowLeft',
+    "ArrowDown" : 'ArrowRight' ,
+    "ArrowUp" : 'i',
+    "i" : 'p',
+};
 
 // Physics
 let physicsWorld;
@@ -25,29 +45,13 @@ let physicsObjects = new Map(); // Maps Three.js object to physics body
 // Store initial state
 let initialObjectPositions = new Map();
 let initialCameraPos = new THREE.Vector3();
-// Touch support detection
-let isTouchDevice = false;
-let touchStartY = 0;
-function detectTouchSupport() {
-    isTouchDevice = () => {
-        return (
-            (typeof window !== 'undefined' && window.ontouchstart !== undefined) ||
-            (typeof navigator !== 'undefined' && navigator.maxTouchPoints > 0) ||
-            (typeof navigator !== 'undefined' && navigator.msMaxTouchPoints > 0)
-        );
-    };
-    return isTouchDevice();
-}
+
+// Grid mapping for efficient neighbor lookup
+let gridIndexMap = new Map(); // Maps "row,col" to object index
+
 
 function init() {
     console.log('Initializing 3D scene...');
-
-    // Detect touch support and hide mouse cursor on touch devices
-    const hasTouch = detectTouchSupport();
-    console.log('Touch device detected:', hasTouch);
-    if (hasTouch) {
-        document.getElementById('mouse-circle').style.display = 'none';
-    }
 
     // Scene
     scene = new THREE.Scene();
@@ -96,29 +100,8 @@ function init() {
 
     // Event Listeners
     window.addEventListener('resize', onWindowResize);
-    document.addEventListener('mousemove', onMouseMove);
-    document.addEventListener('click', onClick);
-    document.addEventListener('wheel', onScroll);
-    
-    // Touch event listeners
-    document.addEventListener('touchstart', onTouchStart);
-    document.addEventListener('touchmove', onTouchMove);
-    
-    // View toggle buttons - prevent event propagation and capture all mouse events
-    const gridBtn = document.getElementById('grid-btn');
-    const pileBtn = document.getElementById('pile-btn');
-    
-    gridBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        if (currentViewMode !== 'grid') switchToGridView();
-    });
-    pileBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        if (currentViewMode !== 'pile') switchToPileView();
-    });
-    console.log('Event listeners added');
+    document.addEventListener('keydown', onKeyDown);
+    console.log('Event listeners added (keyboard control mode)');
 
     // Start the animation loop
     animate();
@@ -145,10 +128,53 @@ function initPhysics() {
         shape: floorShape
     });
     floorBody.quaternion.setFromAxisAngle(new CANNON.Vec3(1, 0, 0), -Math.PI / 2);
-    floorBody.position.y = calculateMaxOffset() - 10; // Position floor below the lowest grid row
+    floorBody.position.y = -200; // Position floor well below all objects
     physicsWorld.addBody(floorBody);
     
     console.log('Physics world initialized');
+}
+
+function findObjectByGridCoordinates(row, col) {
+    // Find object at specific grid coordinates
+    for (let i = 0; i < objects.length; i++) {
+        const obj = objects[i];
+        if (obj.userData.row === row && obj.userData.col === col) {
+            return i;
+        }
+    }
+    return null;
+}
+
+function getNeighbor(direction) {
+    let newRow = selectedRow;
+    let newCol = selectedCol;
+    
+    // Calculate max row based on objects loaded
+    const maxRow = Math.ceil(objects.length / itemsPerRow) - 1;
+    
+    switch(direction) {
+        case 'ArrowUp':
+            newRow = Math.max(0, newRow - 1);
+            break;
+        case 'ArrowDown':
+            newRow = Math.min(maxRow, newRow + 1);
+            break;
+        case 'ArrowLeft':
+            newCol = Math.max(0, newCol - 1);
+            break;
+        case 'ArrowRight':
+            newCol = Math.min(itemsPerRow - 1, newCol + 1);
+            break;
+    }
+    
+    // Find object at new coordinates
+    const neighborIndex = findObjectByGridCoordinates(newRow, newCol);
+    if (neighborIndex !== null) {
+        selectedRow = newRow;
+        selectedCol = newCol;
+        return neighborIndex;
+    }
+    return null;
 }
 
 function createPhysicsBody(object) {
@@ -199,9 +225,7 @@ function switchToPileView() {
         createPhysicsBody(obj);
     });
     
-    // Update button styling
-    document.getElementById('grid-btn').classList.remove('active');
-    document.getElementById('pile-btn').classList.add('active');
+
 }
 
 function switchToGridView() {
@@ -227,9 +251,7 @@ function switchToGridView() {
         }
     });
     
-    // Update button styling
-    document.getElementById('grid-btn').classList.add('active');
-    document.getElementById('pile-btn').classList.remove('active');
+
 }
 
 function toggleViewMode() {
@@ -240,7 +262,7 @@ function toggleViewMode() {
     }
 }
 
-function loadObject(name, position, id, fileSize, addedTime, status = 'ready') {
+function loadObject(name, position, id, fileSize, addedTime, row, col, status = 'ready') {
     // Try to load GLB file, fallback to cube if not found
     const glbPath = `objects/${id}.glb`;
 
@@ -293,7 +315,7 @@ function loadObject(name, position, id, fileSize, addedTime, status = 'ready') {
                 }
             });
 
-            // Store metadata
+            // Store metadata with pre-calculated row/col
             model.userData = {
                 id: id,
                 name: name,
@@ -303,23 +325,33 @@ function loadObject(name, position, id, fileSize, addedTime, status = 'ready') {
                 vertexCount: vertexCount,
                 fileSize: (fileSize) / (1024 * 1024), // Convert bytes to MB
                 status: 'ready',
-                isLoading: false
+                isLoading: false,
+                row: row,
+                col: col
             };
 
             scene.add(model);
             objects.push(model);
+            console.log('Object added to scene and array. Total objects now:', objects.length, 'Name:', name);
             initialObjectPositions.set(model, position.clone());
+            
+            // If this is the first object and we're in first-load mode, select it
+            if (shouldSelectFirstObject && !firstObjectSelected && objects.length === 1) {
+                console.log('First object loaded! Selecting it.');
+                setTimeout(() => selectObjectByIndex(0), 100);
+                firstObjectSelected = true;
+            }
         },
         undefined,
         function (error) {
             // GLB failed to load, create fallback cube
             console.log('GLB not found or failed to load for', id, '- using cube fallback');
-            createFallbackCube(name, position, id, status);
+            createFallbackCube(name, position, id, row, col, status);
         }
     );
 }
 
-function createFallbackCube(name, position, id, status = 'ready') {
+function createFallbackCube(name, position, id, row, col, status = 'ready') {
     // Fallback: create a simple cube with different styling based on status
     const isLoading = status === 'loading';
     
@@ -337,7 +369,7 @@ function createFallbackCube(name, position, id, status = 'ready') {
     mesh.castShadow = false;
     mesh.receiveShadow = false;
 
-    // Store metadata
+    // Store metadata with pre-calculated row/col
     mesh.userData = {
         id: id,
         name: isLoading ? "loading..." : name,
@@ -347,12 +379,22 @@ function createFallbackCube(name, position, id, status = 'ready') {
         vertexCount: 0,
         fileSize: 0,
         status: status,
-        isLoading: isLoading
+        isLoading: isLoading,
+        row: row,
+        col: col
     };
 
     scene.add(mesh);
     objects.push(mesh);
+    console.log('Fallback cube added to scene and array. Total objects now:', objects.length, 'Name:', name);
     initialObjectPositions.set(mesh, position.clone());
+    
+    // If this is the first object and we're in first-load mode, select it
+    if (shouldSelectFirstObject && !firstObjectSelected && objects.length === 1) {
+        console.log('First object (fallback cube) loaded! Selecting it.');
+        setTimeout(() => selectObjectByIndex(0), 100);
+        firstObjectSelected = true;
+    }
 }
 
 function gridLayout(index) {
@@ -374,19 +416,28 @@ async function loadObjects() {
         console.log('Fetching objects from API...');
         const response = await fetch('/api/objects');
         const objectsList = await response.json();
-        console.log('Objects received:', objectsList);
+        console.log('Objects received:', objectsList.length, 'items');
+
+        const wasEmpty = objects.length === 0;
+        // console.log('Was empty before loading?', wasEmpty, 'Current objects.length:', objects.length);
+        
+        // Set flag to select first object if this is a fresh load
+        if (wasEmpty && objectsList.length > 0) {
+            shouldSelectFirstObject = true;
+            // console.log('Setting shouldSelectFirstObject flag');
+        }
 
         // Add new objects
         objectsList.forEach((obj, index) => {
             if (!loadedObjectIds.has(obj.id)) {
                 const position = gridLayout(index);
+                const row = Math.floor(index / itemsPerRow);
+                const col = index % itemsPerRow;
                 const status = obj.status || 'ready'; // Default to ready for backwards compatibility
-                loadObject(obj.name, position, obj.id, obj.size, obj.added, status);
+                loadObject(obj.name, position, obj.id, obj.size, obj.added, row, col, status);
                 loadedObjectIds.add(obj.id);
-                console.log('Added object:', obj.name, 'Status:', status);
             }
         });
-
         // Calculate global stats
         let totalVertexCount = 0;
         let totalFileSize = 0;
@@ -407,103 +458,66 @@ async function loadObjects() {
     }
 }
 
-function onMouseMove(event) {
-    // Update mouse position for raycasting
-    mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-    mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
-
-    // draw circle around mouse (only on non-touch devices)
-    if (!isTouchDevice()) {
-        const circle = document.getElementById('mouse-circle');
-        circle.style.left = `${event.clientX}px`;
-        circle.style.top = `${event.clientY}px`;
-    }
+function onKeyDown(event) {
+    const mappedKey = keyMap[event.key] || event.key;
     
-    // Check hover on mousemove
-    checkHover();
-}
-
-function onClick(event) {
-    raycaster.setFromCamera(mouse, camera);
-    const intersects = raycaster.intersectObjects(objects, true);
-
-    if (intersects.length > 0) {
-        let clickedObject = intersects[0].object;
-        // Traverse up to find the root object in the objects array
-        while (clickedObject.parent && !objects.includes(clickedObject)) {
-            clickedObject = clickedObject.parent;
+    if (["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].includes(mappedKey)) {
+        event.preventDefault();
+        const newIndex = getNeighbor(mappedKey);
+        if (newIndex !== null && newIndex !== selectedObjectIndex) {
+            selectObjectByIndex(newIndex);
         }
-        if (selectedObject === clickedObject) {
-            // Deselect if clicking the same object
-            deselectObject();
-        } else {
-            // Select new object
-            selectObject(clickedObject);
-        }
-    } else {
-        // Deselect if clicking empty space
-        deselectObject();
+    } else if (mappedKey === 'i') {
+        event.preventDefault();
+        toggleZoom();
+    } else if (mappedKey === 'p') {
+        event.preventDefault();
+        toggleViewMode();
     }
 }
 
-// implement scroll logic to move camera up and down
-function onScroll(event) {
-    cameraOffsetY -= event.deltaY * 0.03;
-    // Limit cameraOffsetY to reasonable bounds based on number of objects
-    let maxOffset = calculateMaxOffset(); // Adjust based on number of rows
-    cameraOffsetY = Math.max(maxOffset, Math.min(0, cameraOffsetY));
-}
-
-function calculateMaxOffset() {
-    return -6 * ((loadedObjectIds.size / itemsPerRow) - 1);
-}
-
-function onTouchStart(event) {
-    touchStartY = event.touches[0].clientY;
-}
-
-function onTouchMove(event) {
-    // Get the current touch position
-    if (event.touches.length === 0) return;
-    
-    const touchEndY = event.touches[0].clientY;
-    const deltaY = touchEndY - touchStartY;
-    
-    // Apply same scrolling logic as wheel scroll
-    cameraOffsetY += deltaY * 0.1;
-    
-    // Limit cameraOffsetY to reasonable bounds based on number of objects
-    let maxOffset = calculateMaxOffset();
-    cameraOffsetY = Math.max(maxOffset, Math.min(0, cameraOffsetY));
-    
-    // Update touch start Y for continuous scrolling
-    touchStartY = touchEndY;
-}
-
-function selectObject(obj) {
-    // Deselect previous selection
-    if (selectedObject) {
-        deselectObject();
+function selectObjectByIndex(index) {
+    if (index < 0 || index >= objects.length) {
+        return;
     }
-
-    selectedObject = obj;
+    
+    // Remove highlight from previously selected object
+    if (selectedObjectIndex !== null && selectedObjectIndex < objects.length) {
+        objects[selectedObjectIndex].traverse((child) => {
+            if (child.material) {
+                child.material.emissiveIntensity = 0.;
+            }
+        });
+    }
+    
+    selectedObjectIndex = index;
+    const obj = objects[index];
     obj.userData.isSelected = true;
     
-    // Remove emissive effect when object is selected
+    // Update grid coordinates
+    selectedRow = obj.userData.row;
+    selectedCol = obj.userData.col;
+    
+    // Add visual highlight to selected object
     obj.traverse((child) => {
         if (child.material) {
-            child.material.emissiveIntensity = 0.;
+            child.material.emissiveIntensity = 0.8;
         }
     });
     
-    // Show info panel and keep it visible
+    // Show info panel for the centered object
     showInfoPanel(obj.userData);
 }
 
+function toggleZoom() {
+    isZoomed = !isZoomed;
+    console.log('Zoom toggled:', isZoomed ? 'zoomed in' : 'zoomed out');
+}
+
 function deselectObject() {
-    if (selectedObject) {
-        selectedObject.userData.isSelected = false;
-        selectedObject = null;
+    if (selectedObjectIndex !== null) {
+        objects[selectedObjectIndex].userData.isSelected = false;
+        selectedObjectIndex = null;
         closeInfoPanel();
     }
 }
@@ -514,58 +528,12 @@ function onWindowResize() {
     renderer.setSize(window.innerWidth, window.innerHeight);
 }
 
-function checkHover() {
-    // Skip hover checks if an object is selected
-    if (selectedObject) {
-        return;
-    }
 
-    raycaster.setFromCamera(mouse, camera);
-    const intersects = raycaster.intersectObjects(objects, true);
-
-    // Find root object from intersected child
-    let intersectedRoot = null;
-    if (intersects.length > 0) {
-        let obj = intersects[0].object;
-        while (obj.parent && !objects.includes(obj)) {
-            obj = obj.parent;
-        }
-        intersectedRoot = objects.includes(obj) ? obj : null;
-    }
-
-    // Only update materials if hovered object changed
-    if (hoveredObject !== intersectedRoot) {
-        // Remove highlight from previously hovered object
-        if (!isTouchDevice() && hoveredObject) {
-            hoveredObject.traverse((child) => {
-                if (child.material) {
-                    child.material.emissiveIntensity = 0.;
-                }
-            });
-        }
-
-        // Highlight new hovered object
-        if (!isTouchDevice() && intersectedRoot) {
-            intersectedRoot.traverse((child) => {
-                if (child.material) {
-                    child.material.emissiveIntensity = 0.5;
-                }
-            });
-            showInfoPanel(intersectedRoot.userData);
-        } else {
-            closeInfoPanel();
-        }
-
-        hoveredObject = intersectedRoot;
-    }
-}
 
 function showInfoPanel(data) {
     const detailsEl = document.getElementById('object-details');
     const panel = document.getElementById('info-panel');
-    // detailsEl.innerHTML = `${data.added}<br>${data.vertexCount} Vertices<br>${Math.round(data.fileSize * 100) / 100} MB`;
     detailsEl.innerHTML = `${data.name}<br>${data.vertexCount} Vertices<br>${Math.round(data.fileSize * 100) / 100} MB`;
-
     panel.classList.add('visible');
 }
 
@@ -602,21 +570,20 @@ function animate() {
     }
 
     // Handle selected object - move camera in front of it (orthogonally)
-    if (selectedObject) {
+    if (selectedObjectIndex !== null && selectedObjectIndex < objects.length) {
+        const selectedObject = objects[selectedObjectIndex];
+        // Determine distance based on zoom state
+        const distance = isZoomed ? zoomDistance : normalDistance;
         // Target position: directly in front of the selected object on Z-axis
         const targetCameraPos = new THREE.Vector3(
             selectedObject.position.x,
             selectedObject.position.y,
-            selectedObject.position.z + 8
+            selectedObject.position.z + distance
         );
         camera.position.lerp(targetCameraPos, 0.05);
     } else {
-        // Move camera back to base orthogonal position
-        const targetCameraPos = new THREE.Vector3(
-            0,
-            cameraOffsetY,
-            35
-        );
+        // Move camera back to centered view
+        const targetCameraPos = new THREE.Vector3(0, 0, normalDistance);
         camera.position.lerp(targetCameraPos, 0.05);
     }
 

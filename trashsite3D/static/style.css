@@ -9,7 +9,7 @@ body {
     background: #ffffff;
     overflow: hidden;
     height: 100vh;
-    cursor: none;
+    cursor: auto;
 }
 
 #canvas-container {
@@ -63,50 +63,7 @@ canvas {
     z-index: 10;
 }
 
-.view-toggle-container {
-    position: fixed;
-    bottom: 0px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 1000;
-    display: flex;
-    gap: 2px;
-    /* background-color: rgba(0, 0, 0, 0.1); */
-    border-radius: 4px;
-    padding: 2px;
-    margin: 20px;
-    pointer-events: auto;
-}
-
-.view-btn {
-    padding: 10px 20px;
-    font-size: 18x;
-    text-transform: uppercase;
-    background-color: none;
-    border: none;
-    outline: none;
-    pointer-events: auto;
-}
-
-.view-btn:hover {
-    color: #8846fa;
-}
-
-.view-btn.active {
-    color: #8846fa;
-}
-
 .hidden {
     display: none;
 }
-
-#mouse-circle {
-    position: fixed;
-    width: 30px;
-    height: 30px;
-    border: 2px solid #8846fa;
-    border-radius: 50%;
-    pointer-events: none;
-    transform: translate(-50%, -50%);
-    z-index: 10;
-}
+ 

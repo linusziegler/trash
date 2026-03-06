@@ -455,7 +455,7 @@ function onScroll(event) {
 }
 
 function calculateMaxOffset() {
-    return -4 * ((loadedObjectIds.size / itemsPerRow) - 1);
+    return -6 * ((loadedObjectIds.size / itemsPerRow) - 1);
 }
 
 function onTouchStart(event) {

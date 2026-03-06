@@ -299,16 +299,16 @@ try:
     while running:
         clock.tick(FPS)
 
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                running = False
-            if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
-                running = False
+        # for event in pygame.event.get():
+        #     if event.type == pygame.QUIT:
+        #         running = False
+        #     if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
+        #         running = False
 
         now = time.time()
 
         # trigger capture on button press
-        if not capture_active and GPIO.input(BUTTON_PIN) == GPIO.LOW:
+        if not capture_active and (GPIO.input(BUTTON_PIN) == GPIO.LOW or any(event.type == pygame.KEYDOWN for event in pygame.event.get())):
             add_text(">> button triggered")
             start_capture()
             last_object_time = now

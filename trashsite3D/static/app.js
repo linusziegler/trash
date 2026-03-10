@@ -5,17 +5,16 @@ import * as CANNON from 'cannon';
 // Three.js Scene Setup
 let scene, camera, renderer;
 let objects = [];
-let raycaster = new THREE.Raycaster();
 let selectedObjectIndex = null; // Always track selected by index
 let loadedObjectIds = new Set();
 let cameraBasePos = new THREE.Vector3(0, 15, 25);
 let gltfLoader = new GLTFLoader();
 
-const itemsPerRow = 8;
+const itemsPerRow = 10;
 
 // Zoom/Inspect mode
 let isZoomed = false;
-let zoomDistance = 8; // Close-up distance for inspecting
+let zoomDistance = 10; // Close-up distance for inspecting
 let normalDistance = 35; // Normal grid view distance
 
 // Auto-select first object when it loads
@@ -27,6 +26,7 @@ let selectedRow = 0;
 let selectedCol = 0;
 
 // key-mapping for navigation using custom keyboard
+let customKeyMapping = false; // Set to true to enable custom key mapping
 const keyMap = {
     "c" : 'ArrowUp',
     "m" : 'ArrowDown',
@@ -45,10 +45,6 @@ let physicsObjects = new Map(); // Maps Three.js object to physics body
 // Store initial state
 let initialObjectPositions = new Map();
 let initialCameraPos = new THREE.Vector3();
-
-// Grid mapping for efficient neighbor lookup
-let gridIndexMap = new Map(); // Maps "row,col" to object index
-
 
 function init() {
     console.log('Initializing 3D scene...');
@@ -398,7 +394,7 @@ function createFallbackCube(name, position, id, row, col, status = 'ready') {
 }
 
 function gridLayout(index) {
-    const spacing = 6.2;
+    const spacing = 8;
     const row = Math.floor(index / itemsPerRow);
     const col = index % itemsPerRow;
 
@@ -459,7 +455,10 @@ async function loadObjects() {
 }
 
 function onKeyDown(event) {
-    const mappedKey = keyMap[event.key] || event.key;
+    let mappedKey = event.key;
+    if (customKeyMapping) {
+        mappedKey = keyMap[event.key];
+    }
     
     if (["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].includes(mappedKey)) {
         event.preventDefault();

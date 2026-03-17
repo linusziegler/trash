@@ -96,23 +96,34 @@ class NewFolderHandler(FileSystemEventHandler):
         folder = Path(event.src_path)
         print(f"New folder detected: {folder.name}")
 
+        # keep retrying until all 4 views are found or timeout
+        max_wait = 20  # seconds
+        retry_interval = 2  # seconds
+        elapsed = 0
+        
         # wait briefly for files to finish copying
         time.sleep(1)
 
-        images = {}
-        for img in folder.iterdir():
-            if not img.is_file():
-                continue
-            for suffix in SUFFIX_MAP:
-                if img.stem.endswith(suffix):
-                    images[suffix] = img
+        while elapsed < max_wait:
 
-        if len(images) != 4:
-            print(f"Skipping {folder.name}: missing views")
-            return
+            images = {}
+            for img in folder.iterdir():
+                if not img.is_file():
+                    continue
+                for suffix in SUFFIX_MAP:
+                    if img.stem.endswith(suffix):
+                        images[suffix] = img
 
-        print(f"Found all 4 views for {folder.name}")
-        self.run_comfy(folder.name, images)
+            if len(images) == 4:
+                print(f"Found all 4 views for {folder.name}")
+                self.run_comfy(folder.name, images)
+                return
+
+            print(f"Found {len(images)}/4 views for {folder.name}, retrying...")
+            elapsed += retry_interval
+            time.sleep(retry_interval)
+
+        print(f"Timeout: {folder.name} still missing views after {max_wait}s")
 
     def run_comfy(self, name, images):
         # copy images into ComfyUI/input

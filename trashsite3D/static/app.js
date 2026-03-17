@@ -330,6 +330,8 @@ function loadObject(name, position, id, fileSize, addedTime, row, col, status = 
             objects.push(model);
             console.log('Object added to scene and array. Total objects now:', objects.length, 'Name:', name);
             initialObjectPositions.set(model, position.clone());
+
+
             
             // If this is the first object and we're in first-load mode, select it
             if (shouldSelectFirstObject && !firstObjectSelected && objects.length === 1) {
@@ -424,7 +426,8 @@ async function loadObjects() {
         }
 
         // Track if we added a new loading object
-        let newLoadingObjectIndex = null;
+        let newLoadedObjectIndex = null;
+        let toggleZoom = isZoomed;
 
         // Add new objects and update existing ones
         objectsList.forEach((obj, index) => {
@@ -439,7 +442,7 @@ async function loadObjects() {
                 
                 // Track new loading objects
                 if (status === 'loading') {
-                    newLoadingObjectIndex = objects.length;
+                    newLoadedObjectIndex = objects.length;
                 }
             } else {
                 // Update existing object status if changed from loading to ready
@@ -459,16 +462,18 @@ async function loadObjects() {
                     
                     // Load the new GLB at the same position
                     loadObject(obj.name, gridPos, obj.id, obj.size, obj.added, row, col, 'ready');
+                    newLoadedObjectIndex = objects.length
+                    toggleZoom = true
                 }
             }
         });
         
         // Auto-select loading objects to focus camera on new captures
-        if (newLoadingObjectIndex !== null) {
-            console.log('New loading object detected, auto-selecting:', newLoadingObjectIndex);
+        if (newLoadedObjectIndex !== null) {
+            console.log('New loading object detected, auto-selecting:', newLoadedObjectIndex);
             setTimeout(() => {
-                selectObjectByIndex(newLoadingObjectIndex);
-                isZoomed = true; // Automatically zoom in on new capture
+                selectObjectByIndex(newLoadedObjectIndex);
+                isZoomed = toggleZoom
             }, 100);
         }
         
@@ -616,10 +621,6 @@ function animate() {
             selectedObject.position.y,
             selectedObject.position.z + distance
         );
-        camera.position.lerp(targetCameraPos, 0.05);
-    } else {
-        // Move camera back to centered view
-        const targetCameraPos = new THREE.Vector3(0, 0, normalDistance);
         camera.position.lerp(targetCameraPos, 0.05);
     }
 

@@ -55,7 +55,7 @@ def sync_objects_folder(glb_files: dict[str, Path]):
     Only copy when missing or updated
     """
     for obj_id, src_path in glb_files.items():
-        dst_path = OBJECTS_FOLDER / f"{obj_id}.glb"
+        dst_path = OBJECTS_FOLDER / f"{obj_id.removesuffix("_00001_")}.glb"
 
         if (
             not dst_path.exists()
@@ -80,7 +80,7 @@ def get_object_metadata():
         METADATA_FILE.write_text("{}")
 
     # Scan for GLB files in source folder
-    glb_files = {file.stem: file for file in SCANS_FOLDER.glob("*.glb")}
+    glb_files = {file.stem.removesuffix("_00001_") : file for file in SCANS_FOLDER.glob("*.glb")}
 
     # Sync GLBs to web folder
     sync_objects_folder(glb_files)
@@ -92,7 +92,7 @@ def get_object_metadata():
         if obj_id not in metadata:
             metadata[obj_id] = {
                 "id": obj_id,
-                "name": obj_id.removesuffix("_00001_"),
+                "name": obj_id,
                 "added": glb_path.stat().st_birthtime,
                 "type": "glb",
                 "path": f"/objects/{obj_id}.glb",
@@ -175,7 +175,7 @@ def notify_loading():
         if object_id not in metadata:
             metadata[object_id] = {
                 "id": object_id,
-                "name": object_id.removesuffix("_00001_"),
+                "name": object_id,
                 "added": datetime.now().isoformat(),
                 "type": "glb",
                 "path": f"/objects/{object_id}.glb",

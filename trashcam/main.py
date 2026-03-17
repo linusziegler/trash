@@ -22,7 +22,7 @@ SHOT_DELAY = 3               # seconds between image and motor movement
 MOTOR_DELAY = 3              # seconds for motor settle
 VIEWS = ["front", "left", "back", "right"]
 
-CAMERA_INDEX = 1
+CAMERA_INDEX = 0
 CAM_WIDTH = 1280
 CAM_HEIGHT = 720
 

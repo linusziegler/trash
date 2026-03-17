@@ -162,7 +162,7 @@ if __name__ == "__main__":
     # start robocopy sync thread
     sync_thread = threading.Thread(
         target=robocopy_sync_loop,
-        args=(5,),
+        args=(2,),
         daemon=True
     )
     sync_thread.start()

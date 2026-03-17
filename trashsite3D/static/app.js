@@ -26,7 +26,7 @@ let selectedRow = 0;
 let selectedCol = 0;
 
 // key-mapping for navigation using custom keyboard
-let customKeyMapping = false; // Set to true to enable custom key mapping
+let customKeyMapping = true; // Set to true to enable custom key mapping
 const keyMap = {
     "c" : 'ArrowUp',
     "m" : 'ArrowDown',
@@ -348,15 +348,15 @@ function loadObject(name, position, id, fileSize, addedTime, row, col, status = 
 }
 
 function createFallbackCube(name, position, id, row, col, status = 'ready') {
-    // Fallback: create a simple cube with different styling based on status
+    // Fallback: create a cube with different styling based on status
     const isLoading = status === 'loading';
     
     const material = new THREE.MeshStandardMaterial({
-        color: isLoading ? new THREE.Color(0x6b7a8f) : new THREE.Color(0xb0b0b0),
-        metalness: isLoading ? 0.4 : 0.7,
-        roughness: isLoading ? 0.6 : 0.2,
-        emissive: isLoading ? new THREE.Color(0x4a5f7f) : new THREE.Color(0x8846fa),
-        emissiveIntensity: isLoading ? 0.3 : 0.
+        color: new THREE.Color(0xb0b0b0),
+        metalness: 0.7,
+        roughness: 0.2,
+        emissive: new THREE.Color(0x8846fa),
+        emissiveIntensity:  0.
     });
 
     const geometry = new THREE.BoxGeometry(2, 2, 2);
@@ -423,17 +423,55 @@ async function loadObjects() {
             // console.log('Setting shouldSelectFirstObject flag');
         }
 
-        // Add new objects
+        // Track if we added a new loading object
+        let newLoadingObjectIndex = null;
+
+        // Add new objects and update existing ones
         objectsList.forEach((obj, index) => {
             if (!loadedObjectIds.has(obj.id)) {
+                // New object - add it
                 const position = gridLayout(index);
                 const row = Math.floor(index / itemsPerRow);
                 const col = index % itemsPerRow;
-                const status = obj.status || 'ready'; // Default to ready for backwards compatibility
+                const status = obj.status || 'ready';
                 loadObject(obj.name, position, obj.id, obj.size, obj.added, row, col, status);
                 loadedObjectIds.add(obj.id);
+                
+                // Track new loading objects
+                if (status === 'loading') {
+                    newLoadingObjectIndex = objects.length;
+                }
+            } else {
+                // Update existing object status if changed from loading to ready
+                const existingObj = objects.find(o => o.userData.id === obj.id);
+                if (existingObj && existingObj.userData.status === 'loading' && obj.status === 'ready') {
+                    console.log('Loading complete for', obj.id, '- replacing with GLB');
+                    
+                    // Store grid position before removing
+                    const objIndex = objects.indexOf(existingObj);
+                    const gridPos = existingObj.userData.gridPosition.clone();
+                    const row = existingObj.userData.row;
+                    const col = existingObj.userData.col;
+                    
+                    // Remove the old cube
+                    scene.remove(existingObj);
+                    objects.splice(objIndex, 1);
+                    
+                    // Load the new GLB at the same position
+                    loadObject(obj.name, gridPos, obj.id, obj.size, obj.added, row, col, 'ready');
+                }
             }
         });
+        
+        // Auto-select loading objects to focus camera on new captures
+        if (newLoadingObjectIndex !== null) {
+            console.log('New loading object detected, auto-selecting:', newLoadingObjectIndex);
+            setTimeout(() => {
+                selectObjectByIndex(newLoadingObjectIndex);
+                isZoomed = true; // Automatically zoom in on new capture
+            }, 100);
+        }
+        
         // Calculate global stats
         let totalVertexCount = 0;
         let totalFileSize = 0;
@@ -554,15 +592,14 @@ function animate() {
         });
     } else {
         // Rotate objects around Y-axis only (in grid mode)
-        // Loading objects rotate faster
         objects.forEach(obj => {
-            const isLoading = obj.userData.isLoading;
-            const rotationSpeed = isLoading ? 0.025 : 0.01; // Faster rotation for loading
+            const rotationSpeed = 0.01;
             obj.rotation.y += rotationSpeed;
             
+            const isLoading = obj.userData.isLoading;
             // Add scale pulsing for loading objects
             if (isLoading) {
-                const pulse = 0.95 + 0.05 * Math.sin(Date.now() * 0.003);
+                const pulse = 0.92 + 0.08 * Math.sin(Date.now() * 0.003);
                 obj.scale.set(pulse, pulse, pulse);
             }
         });

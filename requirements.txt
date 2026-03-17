@@ -12,4 +12,8 @@ paramiko
 
 # Requirements for raspberry pi script
 pygame
-opencv-python 
+opencv-python
+pyserial
+
+# Requirements for trashcam (main machine)
+pynput 

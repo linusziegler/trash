@@ -106,8 +106,8 @@ def get_object_metadata():
                 metadata[obj_id]["status"] = "ready"
                 updated = True
 
-    # Remove deleted objects
-    removed = [obj for obj in metadata if obj not in glb_files]
+    # Remove deleted objects (but keep those still loading)
+    removed = [obj for obj in metadata if obj not in glb_files and metadata[obj].get("status") != "loading"]
     for obj in removed:
         del metadata[obj]
         updated = True

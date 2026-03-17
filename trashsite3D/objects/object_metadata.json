@@ -2536,5 +2536,45 @@
     "path": "/objects/trash6.glb",
     "size": 3009876,
     "status": "ready"
+  },
+  "object_20260317_142332": {
+    "id": "object_20260317_142332",
+    "name": "object_20260317_142332",
+    "added": "2026-03-17T14:23:32.687365",
+    "type": "glb",
+    "path": "/objects/object_20260317_142332.glb",
+    "status": "loading"
+  },
+  "object_20260317_142625": {
+    "id": "object_20260317_142625",
+    "name": "object_20260317_142625",
+    "added": "2026-03-17T14:26:25.495552",
+    "type": "glb",
+    "path": "/objects/object_20260317_142625.glb",
+    "status": "loading"
+  },
+  "object_20260317_142717": {
+    "id": "object_20260317_142717",
+    "name": "object_20260317_142717",
+    "added": "2026-03-17T14:27:17.221744",
+    "type": "glb",
+    "path": "/objects/object_20260317_142717.glb",
+    "status": "loading"
+  },
+  "object_20260317_142752": {
+    "id": "object_20260317_142752",
+    "name": "object_20260317_142752",
+    "added": "2026-03-17T14:27:52.495859",
+    "type": "glb",
+    "path": "/objects/object_20260317_142752.glb",
+    "status": "loading"
+  },
+  "object_20260317_142930": {
+    "id": "object_20260317_142930",
+    "name": "object_20260317_142930",
+    "added": "2026-03-17T14:29:30.122139",
+    "type": "glb",
+    "path": "/objects/object_20260317_142930.glb",
+    "status": "loading"
   }
 }

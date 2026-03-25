@@ -23,9 +23,8 @@ MOTOR_DELAY = 3              # seconds for motor settle
 VIEWS = ["front", "left", "back", "right"]
 
 CAMERA_INDEX = 0
-CAM_WIDTH = 1280
+CAM_WIDTH = 1024
 CAM_HEIGHT = 720
-MAX_FRAME_WIDTH = 1024  # Max width for saved images (aspect ratio preserved)
 
 # Serial config for ESP communication
 SERIAL_PORT = "/dev/tty.SLAB_USBtoUART"  # adjust based on your system
@@ -120,13 +119,6 @@ def take_photo(path):
     if frame is None:
         print("[CAPTURE] ERROR: Camera frame missing")
         return False
-
-    # Scale frame to max width while maintaining aspect ratio
-    height, width = frame.shape[:2]
-    if width > MAX_FRAME_WIDTH:
-        scale = MAX_FRAME_WIDTH / width
-        new_height = int(height * scale)
-        frame = cv2.resize(frame, (MAX_FRAME_WIDTH, new_height))
 
     cv2.imwrite(path, frame)
     return True

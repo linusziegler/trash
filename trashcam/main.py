@@ -27,7 +27,7 @@ CAM_WIDTH = 1280
 CAM_HEIGHT = 720
 
 # Serial config for ESP communication
-SERIAL_PORT = "/dev/ttyUSB0"  # adjust based on your system
+SERIAL_PORT = "/dev/tty.SLAB_USBtoUART"  # adjust based on your system
 SERIAL_BAUD = 115200
 SERIAL_TIMEOUT = 1.0
 

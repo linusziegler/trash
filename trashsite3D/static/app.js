@@ -10,7 +10,7 @@ let loadedObjectIds = new Set();
 let cameraBasePos = new THREE.Vector3(0, 15, 25);
 let gltfLoader = new GLTFLoader();
 
-const itemsPerRow = 10;
+const itemsPerRow = 5;
 
 // Zoom/Inspect mode
 let isZoomed = false;
@@ -26,7 +26,7 @@ let selectedRow = 0;
 let selectedCol = 0;
 
 // key-mapping for navigation using custom keyboard
-let customKeyMapping = true; // Set to true to enable custom key mapping
+let customKeyMapping = false; // Set to true to enable custom key mapping
 const keyMap = {
     "c" : 'ArrowUp',
     "m" : 'ArrowDown',

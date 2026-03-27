@@ -80,13 +80,13 @@ def process_image_with_sam2(image_path, output_path):
 
         image = Image.open(image_path).convert("RGB")
         image_np = np.array(image)
+        img_h, img_w = image_np.shape[:2]
 
         # Set image (correct SAM2 API)
         sam2_predictor.set_image(image_np)
 
         # Center point prompt
-        h, w = image_np.shape[:2]
-        point_coords = np.array([[w // 2, h // 2]])
+        point_coords = np.array([[img_w // 2, img_h // 2]])
         point_labels = np.array([1])
 
         masks, scores, logits = sam2_predictor.predict(
@@ -104,14 +104,24 @@ def process_image_with_sam2(image_path, output_path):
         best_mask_idx = int(np.argmax(scores))
         mask = masks[best_mask_idx]
 
+        # Ensure mask matches image dimensions (resize if needed)
+        mask_h, mask_w = mask.shape[:2]
+        if mask_h != img_h or mask_w != img_w:
+            print(f"  Resizing mask from {mask_w}x{mask_h} to {img_w}x{img_h}")
+            mask_pil = Image.fromarray((mask * 255).astype(np.uint8))
+            mask_pil = mask_pil.resize((img_w, img_h), Image.NEAREST)
+            mask = np.array(mask_pil) > 127
+        else:
+            mask = mask.astype(bool)
+
         # Apply mask directly to RGB image (black background)
         masked_np = image_np.copy()
 
-        # Zero out background
-        masked_np[mask == 0] = 0
+        # Zero out background (where mask is False/0)
+        masked_np[~mask] = 0
 
         # Convert back to image
-        masked_image = Image.fromarray(masked_np)
+        masked_image = Image.fromarray(masked_np.astype(np.uint8))
 
         masked_image.save(output_path, "PNG")
         print(f"Saved masked image: {output_path.name}")

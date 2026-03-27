@@ -1,0 +1,18 @@
+{
+  "object_20260327_143406": {
+    "id": "object_20260327_143406",
+    "name": "object_20260327_143406",
+    "added": "2026-03-27T14:34:08.253419",
+    "type": "glb",
+    "path": "/objects/object_20260327_143406.glb",
+    "status": "loading"
+  },
+  "object_20260327_143712": {
+    "id": "object_20260327_143712",
+    "name": "object_20260327_143712",
+    "added": "2026-03-27T14:37:14.597212",
+    "type": "glb",
+    "path": "/objects/object_20260327_143712.glb",
+    "status": "loading"
+  }
+}

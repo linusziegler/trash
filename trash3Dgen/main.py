@@ -85,14 +85,22 @@ def process_image_with_sam2(image_path, output_path):
         # Set image (correct SAM2 API)
         sam2_predictor.set_image(image_np)
 
-        # Center point prompt
-        point_coords = np.array([[img_w // 2, img_h // 2]])
-        point_labels = np.array([1])
+        # Bounding box for center 50% of image
+        box_w = img_w * 0.5
+        box_h = img_h * 0.5
+        x1 = (img_w - box_w) / 2
+        y1 = (img_h - box_h) / 2
+        x2 = x1 + box_w
+        y2 = y1 + box_h
+
+        box = np.array([x1, y1, x2, y2])
+        print(f"  Bounding box: {box}")
 
         masks, scores, logits = sam2_predictor.predict(
-            point_coords=point_coords,
-            point_labels=point_labels,
-            multimask_output=True,
+            point_coords=None,
+            point_labels=None,
+            box=box,
+            multimask_output=False,
         )
 
         if masks is None or len(masks) == 0:
@@ -100,9 +108,8 @@ def process_image_with_sam2(image_path, output_path):
             shutil.copy(image_path, output_path)
             return
 
-        # ✅ HIGHEST SCORE SELECTION
-        best_mask_idx = int(np.argmax(scores))
-        mask = masks[best_mask_idx]
+        # Extract mask (single output from multimask_output=False)
+        mask = masks[0]
 
         # Ensure mask matches image dimensions (resize if needed)
         mask_h, mask_w = mask.shape[:2]

@@ -16,5 +16,4 @@ opencv-python
 pyserial
 
 # Requirements for trashcam (main machine)
-serial
 pynput 

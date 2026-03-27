@@ -33,7 +33,7 @@ OUTPUT_FOLDER = "trashscans"
 COMFY_OUTPUT = COMFY_ROOT / "output" / OUTPUT_FOLDER
 OBJECT_OUT = BASE_DIR / "object_out"
 
-WORKFLOW_JSON = Path("3d_hunyuan3d_multiview_to_model_turbo.json")
+WORKFLOW_JSON = Path("3d_hunyuan3d_multiview_to_model_turbo_sam2.json")
 COMFY_API = "http://127.0.0.1:8000/prompt"
 
 # -----------------------------------------------------------------------------
@@ -144,8 +144,21 @@ class NewFolderHandler(FileSystemEventHandler):
         # output name
         workflow["67"]["inputs"]["filename_prefix"] = f"{OUTPUT_FOLDER}/{name}"
 
-        # send to ComfyUI
-        r = requests.post(COMFY_API, json={"prompt": workflow})
+        for node in workflow.values():
+            node.pop("_meta", None)
+
+        r = requests.post(
+            COMFY_API,
+            json={
+                "prompt": workflow,
+                "client_id": "watchdog-script"
+            }
+        )
+
+        if not r.ok:
+            print("COMFY ERROR:")
+            print(r.text)
+
         r.raise_for_status()
 
         print(f"Started ComfyUI job for {name}")

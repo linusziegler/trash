@@ -4,7 +4,7 @@ import sys
 import os
 import time
 import cv2
-import serial
+from serial import Serial
 import queue
 from threading import Thread
 from datetime import datetime
@@ -27,7 +27,7 @@ CAM_WIDTH = 1024
 CAM_HEIGHT = 720
 
 # Serial config for ESP communication
-SERIAL_PORT = "/dev/tty.SLAB_USBtoUART"  # adjust based on your system
+SERIAL_PORT = "COM4"  # adjust based on your system
 SERIAL_BAUD = 115200
 SERIAL_TIMEOUT = 1.0
 
@@ -79,7 +79,7 @@ class SerialMotorControl:
         
     def connect(self):
         try:
-            self.ser = serial.Serial(self.port, self.baudrate, timeout=self.timeout)
+            self.ser = Serial(self.port, self.baudrate, timeout=self.timeout)
             self.connected = True
             time.sleep(1)  # wait for Arduino to reset
             print(f"[SERIAL] Connected to {self.port}")

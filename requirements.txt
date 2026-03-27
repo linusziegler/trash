@@ -12,15 +12,15 @@ paramiko
 
 # Requirements for raspberry pi script
 pygame
-opencv-python
+opencv-python>=4.8.0
 pyserial
 
 # Requirements for trashcam (main machine)
 pynput
 
 # Requirements for SAM2 segmentation
-torch
-torchvision
-sam2
+torch>=2.0.0
+torchvision>=0.15.0
+sam2>=1.0
 numpy
-pillow 
+pillow

@@ -1,29 +1,37 @@
+# script triggers ComfyUI workflow when a new folder with 4 input images is added to WATCH_DIR
+# and periodically syncs COMFY_OUTPUT -> OBJECT_OUT using robocopy (every 10 seconds)
+# CHANGE COMFY_ROOT to your ComfyUI installation path !!!!!!!
+
 import json
 import time
-import shutil
 import requests
 import subprocess
 import threading
 import numpy as np
+import torch
+import cv2
 from pathlib import Path
+from PIL import Image
 from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
-from PIL import Image
-import torch
-from sam2.build_sam import build_sam2
+
+from sam2.build_sam import build_sam2_hf
 from sam2.sam2_image_predictor import SAM2ImagePredictor
 
 # -----------------------------------------------------------------------------
 # Paths
 # -----------------------------------------------------------------------------
 
+# Directory of this script (trashsite3D/)
 SCRIPT_DIR = Path(__file__).resolve().parent
+# Project root (one level above script dir)
 BASE_DIR = SCRIPT_DIR.parent
 print(f"Specified Base directory: {BASE_DIR}")
 
+# Source folder that images end up in
 WATCH_DIR = BASE_DIR / "image_in"
 
-COMFY_ROOT = Path("C:/Users/duraX/Documents/ComfyUI")  # <-- CHANGE THIS
+COMFY_ROOT = Path("C:/Users/duraX/Documents/ComfyUI")  # <-- CHANGE THIS !!!
 print(f"Specified ComfyUI root: {COMFY_ROOT}")
 
 COMFY_INPUT = COMFY_ROOT / "input"
@@ -34,6 +42,16 @@ OBJECT_OUT = BASE_DIR / "object_out"
 WORKFLOW_JSON = Path("3d_hunyuan3d_multiview_to_model_turbo.json")
 COMFY_API = "http://127.0.0.1:8000/prompt"
 
+SAM2_HF_MODEL_ID = "facebook/sam2-hiera-small"
+
+_SAM2_PREDICTOR = None
+_SAM2_MODEL = None
+ALPHA_THRESHOLD = 64
+
+# -----------------------------------------------------------------------------
+# View mapping
+# -----------------------------------------------------------------------------
+
 SUFFIX_MAP = {
     "front": "front",
     "left": "left",
@@ -41,104 +59,168 @@ SUFFIX_MAP = {
     "back": "back",
 }
 
-# -----------------------------------------------------------------------------
-# SAM2 Initialization
-# -----------------------------------------------------------------------------
 
-sam2_model = None
-sam2_predictor = None
+def get_sam2_device():
+    if torch.cuda.is_available():
+        return "cuda"
+    if hasattr(torch.backends, "mps") and torch.backends.mps.is_available():
+        return "mps"
+    return "cpu"
 
-def initialize_sam2():
-    global sam2_model, sam2_predictor
 
-    if sam2_model is not None:
-        return
+def get_sam2_predictor():
+    global _SAM2_PREDICTOR, _SAM2_MODEL
 
-    print("Initializing SAM2 model...")
+    if _SAM2_PREDICTOR is not None:
+        return _SAM2_PREDICTOR
 
-    device = "cuda" if torch.cuda.is_available() else "cpu"
-    print(f"Using device: {device}")
+    device = get_sam2_device()
+    _SAM2_MODEL = build_sam2_hf(SAM2_HF_MODEL_ID, device=device)
+    _SAM2_PREDICTOR = SAM2ImagePredictor(_SAM2_MODEL)
+    print(f"SAM2 loaded from Hugging Face model: {SAM2_HF_MODEL_ID}")
+    print(f"SAM2 initialized on device: {device}")
+    return _SAM2_PREDICTOR
 
-    sam2_model = build_sam2(
-        config_file="sam2_hiera_b+.yaml",
-        ckpt_path=None,
-        device=device
+
+def create_center_object_mask(image_np, predictor):
+    h, w = image_np.shape[:2]
+    cx, cy = w // 2, h // 2
+    img_area = float(h * w)
+
+    margin = max(10, min(h, w) // 16)
+    pos_points = np.array([[cx, cy]], dtype=np.float32)
+    neg_points = np.array(
+        [
+            [margin, margin],
+            [w - margin - 1, margin],
+            [margin, h - margin - 1],
+            [w - margin - 1, h - margin - 1],
+        ],
+        dtype=np.float32,
     )
 
-    sam2_predictor = SAM2ImagePredictor(sam2_model)
-    print("SAM2 model initialized successfully")
+    point_coords = np.vstack([pos_points, neg_points])
+    point_labels = np.array([1, 0, 0, 0, 0], dtype=np.int32)
 
-# -----------------------------------------------------------------------------
-# SAM2 Processing (HIGHEST SCORE)
-# -----------------------------------------------------------------------------
+    predictor.set_image(image_np)
+    masks, scores, _ = predictor.predict(
+        point_coords=point_coords,
+        point_labels=point_labels,
+        multimask_output=True,
+    )
 
-def process_image_with_sam2(image_path, output_path):
-    global sam2_predictor
+    masks_bool = masks > 0
+    areas = masks_bool.reshape(masks_bool.shape[0], -1).sum(axis=1)
+    contains_center = masks_bool[:, cy, cx]
 
-    try:
-        print(f"Processing {image_path.name} with SAM2...")
+    candidate_idxs = np.where(contains_center)[0]
+    if candidate_idxs.size > 0:
+        best_idx = int(candidate_idxs[np.argmax(areas[candidate_idxs])])
+    else:
+        best_idx = int(np.argmax(areas))
 
-        image = Image.open(image_path).convert("RGB")
-        image_np = np.array(image)
-        img_h, img_w = image_np.shape[:2]
+    best_mask = masks_bool[best_idx]
+    best_area_ratio = float(areas[best_idx]) / img_area
 
-        # Set image (correct SAM2 API)
-        sam2_predictor.set_image(image_np)
+    # Fallback: if the selected mask is unrealistically small, use a centered box prompt.
+    if best_area_ratio < 0.02:
+        x0, y0 = int(w * 0.15), int(h * 0.15)
+        x1, y1 = int(w * 0.85), int(h * 0.85)
 
-        # Bounding box for center 50% of image
-        box_w = img_w * 0.5
-        box_h = img_h * 0.5
-        x1 = (img_w - box_w) / 2
-        y1 = (img_h - box_h) / 2
-        x2 = x1 + box_w
-        y2 = y1 + box_h
-
-        box = np.array([x1, y1, x2, y2])
-        print(f"  Bounding box: {box}")
-
-        masks, scores, logits = sam2_predictor.predict(
-            point_coords=None,
-            point_labels=None,
-            box=box,
-            multimask_output=False,
+        box_masks, box_scores, _ = predictor.predict(
+            box=np.array([x0, y0, x1, y1], dtype=np.float32),
+            point_coords=pos_points,
+            point_labels=np.array([1], dtype=np.int32),
+            multimask_output=True,
         )
 
-        if masks is None or len(masks) == 0:
-            print(f"No mask detected, fallback copy: {image_path.name}")
-            shutil.copy(image_path, output_path)
-            return
+        box_masks_bool = box_masks > 0
+        box_areas = box_masks_bool.reshape(box_masks_bool.shape[0], -1).sum(axis=1)
 
-        # Extract mask (single output from multimask_output=False)
-        mask = masks[0]
+        # Prefer larger masks, but still use score as tie-breaker.
+        box_rank = box_areas.astype(np.float32) + (box_scores * 1e-3)
+        best_box_idx = int(np.argmax(box_rank))
+        best_mask = box_masks_bool[best_box_idx]
 
-        # Ensure mask matches image dimensions (resize if needed)
-        mask_h, mask_w = mask.shape[:2]
-        if mask_h != img_h or mask_w != img_w:
-            print(f"  Resizing mask from {mask_w}x{mask_h} to {img_w}x{img_h}")
-            mask_pil = Image.fromarray((mask * 255).astype(np.uint8))
-            mask_pil = mask_pil.resize((img_w, img_h), Image.NEAREST)
-            mask = np.array(mask_pil) > 127
-        else:
-            mask = mask.astype(bool)
+    return best_mask
 
-        # Apply mask directly to RGB image (black background)
-        masked_np = image_np.copy()
 
-        # Zero out background (where mask is False/0)
-        masked_np[~mask] = 0
+def refine_mask(mask):
+    h, w = mask.shape
+    cy, cx = h // 2, w // 2
 
-        # Convert back to image
-        masked_image = Image.fromarray(masked_np.astype(np.uint8))
+    mask_u8 = (mask.astype(np.uint8) * 255)
+    kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (5, 5))
+    bridge_kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (7, 7))
 
-        masked_image.save(output_path, "PNG")
-        print(f"Saved masked image: {output_path.name}")
+    # Smooth small jaggies and remove isolated speckles.
+    mask_u8 = cv2.morphologyEx(mask_u8, cv2.MORPH_CLOSE, kernel, iterations=1)
+    mask_u8 = cv2.morphologyEx(mask_u8, cv2.MORPH_OPEN, kernel, iterations=1)
 
-    except Exception as e:
-        print(f"Error processing {image_path.name}: {e}")
-        shutil.copy(image_path, output_path)
+    # Break thin accidental connections before picking the main component.
+    cc_seed = cv2.erode(mask_u8, bridge_kernel, iterations=1)
+
+    num_labels, labels, stats, _ = cv2.connectedComponentsWithStats(cc_seed, connectivity=8)
+
+    if num_labels <= 1:
+        return mask_u8 > 0
+
+    # Prefer the component touching center if it is substantial; otherwise keep largest.
+    center_label = int(labels[cy, cx])
+    center_area = int(stats[center_label, cv2.CC_STAT_AREA]) if center_label > 0 else 0
+    min_center_area = int(0.005 * h * w)
+
+    if center_label > 0 and center_area >= min_center_area:
+        keep_label = center_label
+    else:
+        areas = stats[1:, cv2.CC_STAT_AREA]
+        keep_label = int(np.argmax(areas)) + 1
+
+    seed_component = (labels == keep_label).astype(np.uint8) * 255
+    restored_component = cv2.dilate(seed_component, bridge_kernel, iterations=1)
+    refined = cv2.bitwise_and(mask_u8, restored_component)
+
+    # Fill tiny holes inside the kept object.
+    refined = cv2.morphologyEx(refined, cv2.MORPH_CLOSE, kernel, iterations=2)
+
+    # Fill enclosed holes so the object stays solid.
+    flood = refined.copy()
+    ff_mask = np.zeros((h + 2, w + 2), dtype=np.uint8)
+    cv2.floodFill(flood, ff_mask, seedPoint=(0, 0), newVal=255)
+    holes = cv2.bitwise_not(flood)
+    refined = cv2.bitwise_or(refined, holes)
+
+    return refined > 0
+
+
+def segment_center_object_to_black_bg(source_path, target_path):
+    img = Image.open(source_path)
+    alpha_np = None
+
+    if "A" in img.getbands():
+        rgba = img.convert("RGBA")
+        alpha_np = np.array(rgba.getchannel("A"))
+        image_np = np.array(rgba.convert("RGB"))
+    else:
+        image_np = np.array(img.convert("RGB"))
+
+    predictor = get_sam2_predictor()
+    with torch.inference_mode():
+        mask = create_center_object_mask(image_np, predictor)
+
+    mask = refine_mask(mask)
+
+    # Enforce original alpha as hard background if present.
+    if alpha_np is not None:
+        mask = mask & (alpha_np >= ALPHA_THRESHOLD)
+
+    masked = image_np.copy()
+    masked[~mask] = 0
+
+    Image.fromarray(masked).save(target_path, format="PNG")
 
 # -----------------------------------------------------------------------------
-# Robocopy sync
+# Robocopy sync (every 10 seconds)
 # -----------------------------------------------------------------------------
 
 def run_robocopy_once():
@@ -146,22 +228,29 @@ def run_robocopy_once():
         "robocopy",
         str(COMFY_OUTPUT),
         str(OBJECT_OUT),
-        "/E",
-        "/R:0",
-        "/W:0",
-        "/NFL",
-        "/NDL",
-        "/NJH",
-        "/NJS",
+        "/E",        # copy new & updated files, no deletes
+        "/R:0",      # no retries
+        "/W:0",      # no wait
+        "/NFL",      # no file list
+        "/NDL",      # no dir list
+        "/NJH",      # no job header
+        "/NJS",      # no job summary
     ]
 
-    subprocess.run(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, shell=True)
+    # robocopy uses non-zero exit codes for success -> suppress output
+    subprocess.run(
+        cmd,
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
+        shell=True
+    )
+
 
 def robocopy_sync_loop(interval):
     COMFY_OUTPUT.mkdir(parents=True, exist_ok=True)
     OBJECT_OUT.mkdir(parents=True, exist_ok=True)
 
-    print(f"Robocopy sync started ({interval}s)")
+    print(f"Robocopy sync started (every {interval}s)")
 
     while True:
         run_robocopy_once()
@@ -172,27 +261,27 @@ def robocopy_sync_loop(interval):
 # -----------------------------------------------------------------------------
 
 class NewFolderHandler(FileSystemEventHandler):
-
     def on_created(self, event):
         if not event.is_directory:
             return
 
-        folder = Path(event.src_path)
+        folder = Path(str(event.src_path))
         print(f"New folder detected: {folder.name}")
 
-        max_wait = 20
-        retry_interval = 2
+        # keep retrying until all 4 views are found or timeout
+        max_wait = 20  # seconds
+        retry_interval = 2  # seconds
         elapsed = 0
-
+        
+        # wait briefly for files to finish copying
         time.sleep(1)
 
         while elapsed < max_wait:
-            images = {}
 
+            images = {}
             for img in folder.iterdir():
                 if not img.is_file():
                     continue
-
                 for suffix in SUFFIX_MAP:
                     if img.stem.endswith(suffix):
                         images[suffix] = img
@@ -202,33 +291,29 @@ class NewFolderHandler(FileSystemEventHandler):
                 self.run_comfy(folder.name, images)
                 return
 
-            print(f"{folder.name}: {len(images)}/4 images found...")
+            print(f"Found {len(images)}/4 views for {folder.name}, retrying...")
             elapsed += retry_interval
             time.sleep(retry_interval)
 
-        print(f"Timeout waiting for images in {folder.name}")
+        print(f"Timeout: {folder.name} still missing views after {max_wait}s")
 
     def run_comfy(self, name, images):
-        initialize_sam2()
-
-        processed_images = {}
-
+        # segment and write images into ComfyUI/input
         for view, path in images.items():
-            masked_path = path.parent / f"{path.stem}_masked.png"
-            process_image_with_sam2(path, masked_path)
-            processed_images[view] = masked_path
+            target = COMFY_INPUT / f"{view}.png"
+            segment_center_object_to_black_bg(path, target)
 
-        for view, path in processed_images.items():
-            shutil.copy(path, COMFY_INPUT / f"{view}.png")
-
+        # load workflow
         with open(WORKFLOW_JSON, "r", encoding="utf-8") as f:
             workflow = json.load(f)
 
+        # update image nodes
         workflow["56"]["inputs"]["image"] = "front.png"
         workflow["85"]["inputs"]["image"] = "left.png"
         workflow["87"]["inputs"]["image"] = "right.png"
         workflow["82"]["inputs"]["image"] = "back.png"
 
+        # output name
         workflow["67"]["inputs"]["filename_prefix"] = f"{OUTPUT_FOLDER}/{name}"
 
         for node in workflow.values():
@@ -236,14 +321,19 @@ class NewFolderHandler(FileSystemEventHandler):
 
         r = requests.post(
             COMFY_API,
-            json={"prompt": workflow, "client_id": "watchdog-script"}
+            json={
+                "prompt": workflow,
+                "client_id": "watchdog-script"
+            }
         )
 
         if not r.ok:
-            print("COMFY ERROR:", r.text)
+            print("COMFY ERROR:")
+            print(r.text)
 
         r.raise_for_status()
-        print(f"Started ComfyUI job: {name}")
+
+        print(f"Started ComfyUI job for {name}")
 
 # -----------------------------------------------------------------------------
 # Main
@@ -254,18 +344,20 @@ if __name__ == "__main__":
     COMFY_INPUT.mkdir(parents=True, exist_ok=True)
     OBJECT_OUT.mkdir(parents=True, exist_ok=True)
 
-    threading.Thread(
+    # start robocopy sync thread
+    sync_thread = threading.Thread(
         target=robocopy_sync_loop,
         args=(2,),
         daemon=True
-    ).start()
+    )
+    sync_thread.start()
 
     observer = Observer()
     observer.schedule(NewFolderHandler(), str(WATCH_DIR), recursive=False)
     observer.start()
 
     print(f"Watching {WATCH_DIR}")
-    print(f"Syncing {COMFY_OUTPUT} -> {OBJECT_OUT}")
+    print(f"Syncing files between {COMFY_OUTPUT} and {OBJECT_OUT}")
 
     try:
         while True:

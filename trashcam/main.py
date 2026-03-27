@@ -4,7 +4,7 @@ import sys
 import os
 import time
 import cv2
-from serial import Serial
+# from serial import Serial
 import queue
 from threading import Thread
 from datetime import datetime

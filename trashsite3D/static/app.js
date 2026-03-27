@@ -124,7 +124,7 @@ function initPhysics() {
         shape: floorShape
     });
     floorBody.quaternion.setFromAxisAngle(new CANNON.Vec3(1, 0, 0), -Math.PI / 2);
-    floorBody.position.y = -200; // Position floor well below all objects
+    floorBody.position.y = -350; // Position floor well below all objects
     physicsWorld.addBody(floorBody);
     
     console.log('Physics world initialized');

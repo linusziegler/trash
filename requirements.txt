@@ -16,4 +16,11 @@ opencv-python
 pyserial
 
 # Requirements for trashcam (main machine)
-pynput 
+pynput
+
+# Requirements for SAM2 segmentation
+torch
+torchvision
+sam2
+numpy
+pillow 

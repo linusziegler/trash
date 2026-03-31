@@ -48,6 +48,16 @@ _SAM2_PREDICTOR = None
 _SAM2_MODEL = None
 ALPHA_THRESHOLD = 64
 
+# Background subtraction config (negative mask before SAM2)
+BACKGROUND_REFERENCE_IMAGE = WATCH_DIR / "background_reference.png"
+NEG_MASK_THRESHOLD = 20
+NEG_MASK_BLUR = 5
+USE_SAM2 = True
+
+# Debug windows
+DEBUG_MASK_WINDOWS = True
+DEBUG_WAIT_MS = 1
+
 # -----------------------------------------------------------------------------
 # View mapping
 # -----------------------------------------------------------------------------
@@ -80,6 +90,67 @@ def get_sam2_predictor():
     print(f"SAM2 loaded from Hugging Face model: {SAM2_HF_MODEL_ID}")
     print(f"SAM2 initialized on device: {device}")
     return _SAM2_PREDICTOR
+
+
+def load_background_reference_for_shape(shape_hw):
+    if not BACKGROUND_REFERENCE_IMAGE.exists():
+        print(f"[MASK] Warning: reference image not found at {BACKGROUND_REFERENCE_IMAGE}")
+        return None
+
+    ref_bgr = cv2.imread(str(BACKGROUND_REFERENCE_IMAGE), cv2.IMREAD_COLOR)
+    if ref_bgr is None:
+        print(f"[MASK] Warning: failed to load reference image {BACKGROUND_REFERENCE_IMAGE}")
+        return None
+
+    h, w = shape_hw
+    if ref_bgr.shape[:2] != (h, w):
+        ref_bgr = cv2.resize(ref_bgr, (w, h), interpolation=cv2.INTER_AREA)
+
+    return cv2.cvtColor(ref_bgr, cv2.COLOR_BGR2RGB)
+
+
+def create_negative_mask_from_reference(image_np):
+    h, w = image_np.shape[:2]
+    ref_rgb = load_background_reference_for_shape((h, w))
+
+    if ref_rgb is None:
+        return np.ones((h, w), dtype=bool)
+
+    diff = cv2.absdiff(image_np, ref_rgb)
+    diff_gray = cv2.cvtColor(diff, cv2.COLOR_RGB2GRAY)
+
+    blur_ksize = NEG_MASK_BLUR if NEG_MASK_BLUR % 2 == 1 else NEG_MASK_BLUR + 1
+    diff_gray = cv2.GaussianBlur(diff_gray, (blur_ksize, blur_ksize), 0)
+
+    _, fg_mask_u8 = cv2.threshold(diff_gray, NEG_MASK_THRESHOLD, 255, cv2.THRESH_BINARY)
+
+    kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (5, 5))
+    fg_mask_u8 = cv2.morphologyEx(fg_mask_u8, cv2.MORPH_OPEN, kernel, iterations=1)
+    fg_mask_u8 = cv2.morphologyEx(fg_mask_u8, cv2.MORPH_CLOSE, kernel, iterations=2)
+
+    return fg_mask_u8 > 0
+
+
+def show_mask_debug_views(source_path, image_np, negative_mask, final_mask):
+    if not DEBUG_MASK_WINDOWS:
+        return
+
+    negative_masked = image_np.copy()
+    negative_masked[~negative_mask] = 0
+
+    cv2.imshow(
+        "debug_original",
+        cv2.cvtColor(image_np, cv2.COLOR_RGB2BGR),
+    )
+    cv2.imshow(
+        "debug_negative_masked",
+        cv2.cvtColor(negative_masked, cv2.COLOR_RGB2BGR),
+    )
+    cv2.imshow(
+        "debug_final_mask",
+        (final_mask.astype(np.uint8) * 255),
+    )
+    cv2.waitKey(DEBUG_WAIT_MS)
 
 
 def create_center_object_mask(image_np, predictor):
@@ -204,11 +275,19 @@ def segment_center_object_to_black_bg(source_path, target_path):
     else:
         image_np = np.array(img.convert("RGB"))
 
-    predictor = get_sam2_predictor()
-    with torch.inference_mode():
-        mask = create_center_object_mask(image_np, predictor)
+    negative_mask = create_negative_mask_from_reference(image_np)
 
-    mask = refine_mask(mask)
+    sam2_input = image_np.copy()
+    sam2_input[~negative_mask] = 0
+
+    if USE_SAM2:
+        predictor = get_sam2_predictor()
+        with torch.inference_mode():
+            mask = create_center_object_mask(sam2_input, predictor)
+        mask = refine_mask(mask)
+        mask = mask & negative_mask
+    else:
+        mask = negative_mask
 
     # Enforce original alpha as hard background if present.
     if alpha_np is not None:
@@ -216,6 +295,8 @@ def segment_center_object_to_black_bg(source_path, target_path):
 
     masked = image_np.copy()
     masked[~mask] = 0
+
+    show_mask_debug_views(source_path, image_np, negative_mask, mask)
 
     Image.fromarray(masked).save(target_path, format="PNG")
 

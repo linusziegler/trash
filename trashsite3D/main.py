@@ -4,9 +4,51 @@ from pathlib import Path
 import json
 from datetime import datetime
 import shutil
+import queue
+import os
+from pynput import keyboard
 
 app = Flask(__name__, template_folder="templates", static_folder="static")
 CORS(app)
+
+# -------------------------------------------------------------------
+# Global keyboard input (system-wide)
+# -------------------------------------------------------------------
+
+input_queue = queue.Queue()
+keyboard_listener = None
+
+
+def on_key_press(key):
+    """Capture system-wide key presses and enqueue normalized key values."""
+    try:
+        if key == keyboard.Key.up:
+            input_queue.put("ArrowUp")
+        elif key == keyboard.Key.down:
+            input_queue.put("ArrowDown")
+        elif key == keyboard.Key.left:
+            input_queue.put("ArrowLeft")
+        elif key == keyboard.Key.right:
+            input_queue.put("ArrowRight")
+        elif key == keyboard.Key.space:
+            input_queue.put(" ")
+        elif hasattr(key, "char") and key.char:
+            input_queue.put(key.char.lower())
+    except Exception:
+        # Ignore unsupported/special keys.
+        pass
+
+
+def start_keyboard_listener():
+    global keyboard_listener
+
+    if keyboard_listener is not None:
+        return
+
+    keyboard_listener = keyboard.Listener(on_press=on_key_press)
+    keyboard_listener.daemon = True
+    keyboard_listener.start()
+    print("[INPUT] Global keyboard listener started")
 
 # -------------------------------------------------------------------
 # Paths
@@ -201,9 +243,22 @@ def notify_loading():
         return jsonify({"error": str(e)}), 500
 
 
+@app.route("/api/input/next-key")
+def get_next_key():
+    """Return one queued global key press (if available)."""
+    try:
+        key = input_queue.get_nowait()
+        return jsonify({"key": key})
+    except queue.Empty:
+        return jsonify({"key": None})
+
+
 # -------------------------------------------------------------------
 # Main
 # -------------------------------------------------------------------
 
 if __name__ == "__main__":
+    # Start listener in the serving process only (avoids debug reloader duplicates).
+    if not app.debug or os.environ.get("WERKZEUG_RUN_MAIN") == "true":
+        start_keyboard_listener()
     app.run(debug=True, port=5000)

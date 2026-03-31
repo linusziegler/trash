@@ -27,6 +27,8 @@ let selectedCol = 0;
 
 // key-mapping for navigation using custom keyboard
 let customKeyMapping = false; // Set to true to enable custom key mapping
+let useBrowserKeyboardListeners = false; // Disabled for now: controls come from Python global listener
+let keyPollInFlight = false;
 const keyMap = {
     "c" : 'ArrowUp',
     "m" : 'ArrowDown',
@@ -96,8 +98,15 @@ function init() {
 
     // Event Listeners
     window.addEventListener('resize', onWindowResize);
-    document.addEventListener('keydown', onKeyDown);
-    console.log('Event listeners added (keyboard control mode)');
+    if (useBrowserKeyboardListeners) {
+        document.addEventListener('keydown', onKeyDown);
+        console.log('Event listeners added (keyboard control mode)');
+    } else {
+        console.log('Browser keyboard listeners disabled; using Python global key listener');
+    }
+
+    // Poll key events captured by the Python global keyboard listener.
+    setInterval(pollGlobalKeyInput, 75);
 
     // Start the animation loop
     animate();
@@ -502,19 +511,60 @@ function onKeyDown(event) {
     if (customKeyMapping) {
         mappedKey = keyMap[event.key];
     }
+
+    handleControlKey(mappedKey, event);
+}
+
+function handleControlKey(mappedKey, event = null) {
     
     if (["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].includes(mappedKey)) {
-        event.preventDefault();
+        if (event) {
+            event.preventDefault();
+        }
         const newIndex = getNeighbor(mappedKey);
         if (newIndex !== null && newIndex !== selectedObjectIndex) {
             selectObjectByIndex(newIndex);
         }
     } else if (mappedKey === 'i') {
-        event.preventDefault();
+        if (event) {
+            event.preventDefault();
+        }
         toggleZoom();
     } else if (mappedKey === 'p') {
-        event.preventDefault();
+        if (event) {
+            event.preventDefault();
+        }
         toggleViewMode();
+    }
+}
+
+async function pollGlobalKeyInput() {
+    if (keyPollInFlight) {
+        return;
+    }
+
+    keyPollInFlight = true;
+    try {
+        const response = await fetch('/api/input/next-key');
+        if (!response.ok) {
+            return;
+        }
+
+        const data = await response.json();
+        if (!data || !data.key) {
+            return;
+        }
+
+        let mappedKey = data.key;
+        if (customKeyMapping) {
+            mappedKey = keyMap[data.key] || data.key;
+        }
+
+        handleControlKey(mappedKey);
+    } catch (error) {
+        // Keep polling even if the endpoint is briefly unavailable.
+    } finally {
+        keyPollInFlight = false;
     }
 }
 

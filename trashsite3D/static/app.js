@@ -10,11 +10,11 @@ let loadedObjectIds = new Set();
 let cameraBasePos = new THREE.Vector3(0, 15, 25);
 let gltfLoader = new GLTFLoader();
 
-const itemsPerRow = 5;
+const itemsPerRow = 7;
 
 // Zoom/Inspect mode
 let isZoomed = false;
-let zoomDistance = 10; // Close-up distance for inspecting
+let zoomDistance = 8; // Close-up distance for inspecting
 let normalDistance = 35; // Normal grid view distance
 
 // Auto-select first object when it loads
@@ -665,9 +665,10 @@ function animate() {
         const selectedObject = objects[selectedObjectIndex];
         // Determine distance based on zoom state
         const distance = isZoomed ? zoomDistance : normalDistance;
+        const xPos = isZoomed ? selectedObject.position.x : cameraBasePos.x;
         // Target position: directly in front of the selected object on Z-axis
         const targetCameraPos = new THREE.Vector3(
-            selectedObject.position.x,
+            xPos,
             selectedObject.position.y,
             selectedObject.position.z + distance
         );

@@ -1,2556 +1,1001 @@
 {
-  "object_20260327_143406": {
-    "id": "object_20260327_143406",
-    "name": "object_20260327_143406",
-    "added": "2026-03-27T14:34:08.253419",
-    "type": "glb",
-    "path": "/objects/object_20260327_143406.glb",
-    "status": "loading"
-  },
-  "object_20260327_143712": {
-    "id": "object_20260327_143712",
-    "name": "object_20260327_143712",
-    "added": "2026-03-27T14:37:14.597212",
-    "type": "glb",
-    "path": "/objects/object_20260327_143712.glb",
-    "status": "loading"
-  },
-  "mug": {
-    "id": "mug",
-    "name": "mug",
-    "added": 1771255006.0,
-    "type": "glb",
-    "path": "/objects/mug.glb",
-    "size": 1369904,
-    "status": "ready"
-  },
-  "nuts": {
-    "id": "nuts",
-    "name": "nuts",
-    "added": 1771255006.0,
-    "type": "glb",
-    "path": "/objects/nuts.glb",
-    "size": 3223748,
-    "status": "ready"
-  },
   "object_20260207_183552": {
     "id": "object_20260207_183552",
     "name": "object_20260207_183552",
-    "added": 1771255006.0,
+    "added": 0,
     "type": "glb",
     "path": "/objects/object_20260207_183552.glb",
-    "size": 1739884,
-    "status": "ready"
-  },
-  "object_20260207_184058": {
-    "id": "object_20260207_184058",
-    "name": "object_20260207_184058",
-    "added": 1771255008.0,
-    "type": "glb",
-    "path": "/objects/object_20260207_184058.glb",
-    "size": 2676312,
-    "status": "ready"
-  },
-  "object_20260207_184217": {
-    "id": "object_20260207_184217",
-    "name": "object_20260207_184217",
-    "added": 1771255010.0,
-    "type": "glb",
-    "path": "/objects/object_20260207_184217.glb",
-    "size": 1299836,
+    "size": 904,
     "status": "ready"
   },
   "object_20260207_190006": {
     "id": "object_20260207_190006",
     "name": "object_20260207_190006",
-    "added": 1771255012.0,
+    "added": 0,
     "type": "glb",
     "path": "/objects/object_20260207_190006.glb",
-    "size": 960644,
-    "status": "ready"
-  },
-  "object_20260207_190122": {
-    "id": "object_20260207_190122",
-    "name": "object_20260207_190122",
-    "added": 1771255012.0,
-    "type": "glb",
-    "path": "/objects/object_20260207_190122.glb",
-    "size": 581012,
-    "status": "ready"
-  },
-  "object_20260207_190306": {
-    "id": "object_20260207_190306",
-    "name": "object_20260207_190306",
-    "added": 1771255012.0,
-    "type": "glb",
-    "path": "/objects/object_20260207_190306.glb",
-    "size": 597984,
+    "size": 674,
     "status": "ready"
   },
   "object_20260207_190442": {
     "id": "object_20260207_190442",
     "name": "object_20260207_190442",
-    "added": 1771255012.0,
+    "added": 0,
     "type": "glb",
     "path": "/objects/object_20260207_190442.glb",
-    "size": 1829756,
-    "status": "ready"
-  },
-  "object_20260207_192308": {
-    "id": "object_20260207_192308",
-    "name": "object_20260207_192308",
-    "added": 1771255014.0,
-    "type": "glb",
-    "path": "/objects/object_20260207_192308.glb",
-    "size": 1040628,
-    "status": "ready"
-  },
-  "object_20260207_192456": {
-    "id": "object_20260207_192456",
-    "name": "object_20260207_192456",
-    "added": 1771255014.0,
-    "type": "glb",
-    "path": "/objects/object_20260207_192456.glb",
-    "size": 378688,
-    "status": "ready"
-  },
-  "object_20260207_194842": {
-    "id": "object_20260207_194842",
-    "name": "object_20260207_194842",
-    "added": 1771255014.0,
-    "type": "glb",
-    "path": "/objects/object_20260207_194842.glb",
-    "size": 295084,
-    "status": "ready"
-  },
-  "object_20260207_195336": {
-    "id": "object_20260207_195336",
-    "name": "object_20260207_195336",
-    "added": 1771255014.0,
-    "type": "glb",
-    "path": "/objects/object_20260207_195336.glb",
-    "size": 349664,
-    "status": "ready"
-  },
-  "object_20260207_195535": {
-    "id": "object_20260207_195535",
-    "name": "object_20260207_195535",
-    "added": 1771255014.0,
-    "type": "glb",
-    "path": "/objects/object_20260207_195535.glb",
-    "size": 1019292,
-    "status": "ready"
-  },
-  "object_20260207_201037": {
-    "id": "object_20260207_201037",
-    "name": "object_20260207_201037",
-    "added": 1771255014.0,
-    "type": "glb",
-    "path": "/objects/object_20260207_201037.glb",
-    "size": 2336216,
-    "status": "ready"
-  },
-  "object_20260207_202841": {
-    "id": "object_20260207_202841",
-    "name": "object_20260207_202841",
-    "added": 1771255016.0,
-    "type": "glb",
-    "path": "/objects/object_20260207_202841.glb",
-    "size": 1294280,
-    "status": "ready"
-  },
-  "object_20260208_140709": {
-    "id": "object_20260208_140709",
-    "name": "object_20260208_140709",
-    "added": 1771255016.0,
-    "type": "glb",
-    "path": "/objects/object_20260208_140709.glb",
-    "size": 513272,
-    "status": "ready"
-  },
-  "object_20260208_140850": {
-    "id": "object_20260208_140850",
-    "name": "object_20260208_140850",
-    "added": 1771255016.0,
-    "type": "glb",
-    "path": "/objects/object_20260208_140850.glb",
-    "size": 1324632,
-    "status": "ready"
-  },
-  "object_20260208_141214": {
-    "id": "object_20260208_141214",
-    "name": "object_20260208_141214",
-    "added": 1771255016.0,
-    "type": "glb",
-    "path": "/objects/object_20260208_141214.glb",
-    "size": 985928,
-    "status": "ready"
-  },
-  "object_20260208_154335": {
-    "id": "object_20260208_154335",
-    "name": "object_20260208_154335",
-    "added": 1771255018.0,
-    "type": "glb",
-    "path": "/objects/object_20260208_154335.glb",
-    "size": 46592,
+    "size": 1525,
     "status": "ready"
   },
   "object_20260208_155305": {
     "id": "object_20260208_155305",
     "name": "object_20260208_155305",
-    "added": 1771255018.0,
+    "added": 0,
     "type": "glb",
     "path": "/objects/object_20260208_155305.glb",
-    "size": 550148,
-    "status": "ready"
-  },
-  "object_20260208_155417": {
-    "id": "object_20260208_155417",
-    "name": "object_20260208_155417",
-    "added": 1771255018.0,
-    "type": "glb",
-    "path": "/objects/object_20260208_155417.glb",
-    "size": 543392,
-    "status": "ready"
-  },
-  "object_20260208_160102": {
-    "id": "object_20260208_160102",
-    "name": "object_20260208_160102",
-    "added": 1771255018.0,
-    "type": "glb",
-    "path": "/objects/object_20260208_160102.glb",
-    "size": 1058180,
-    "status": "ready"
-  },
-  "object_20260209_125638": {
-    "id": "object_20260209_125638",
-    "name": "object_20260209_125638",
-    "added": 1771255018.0,
-    "type": "glb",
-    "path": "/objects/object_20260209_125638.glb",
-    "size": 817304,
+    "size": 1835,
     "status": "ready"
   },
   "object_20260209_125822": {
     "id": "object_20260209_125822",
     "name": "object_20260209_125822",
-    "added": 1771255018.0,
+    "added": 0,
     "type": "glb",
     "path": "/objects/object_20260209_125822.glb",
-    "size": 868520,
-    "status": "ready"
-  },
-  "object_20260209_125920": {
-    "id": "object_20260209_125920",
-    "name": "object_20260209_125920",
-    "added": 1771255020.0,
-    "type": "glb",
-    "path": "/objects/object_20260209_125920.glb",
-    "size": 662096,
+    "size": 4367,
     "status": "ready"
   },
   "object_20260209_130058": {
     "id": "object_20260209_130058",
     "name": "object_20260209_130058",
-    "added": 1771255020.0,
+    "added": 0,
     "type": "glb",
     "path": "/objects/object_20260209_130058.glb",
-    "size": 1535700,
-    "status": "ready"
-  },
-  "object_20260209_131844": {
-    "id": "object_20260209_131844",
-    "name": "object_20260209_131844",
-    "added": 1771255020.0,
-    "type": "glb",
-    "path": "/objects/object_20260209_131844.glb",
-    "size": 1301000,
-    "status": "ready"
-  },
-  "object_20260209_132037": {
-    "id": "object_20260209_132037",
-    "name": "object_20260209_132037",
-    "added": 1771255020.0,
-    "type": "glb",
-    "path": "/objects/object_20260209_132037.glb",
-    "size": 507284,
+    "size": 1750,
     "status": "ready"
   },
   "object_20260209_132234": {
     "id": "object_20260209_132234",
     "name": "object_20260209_132234",
-    "added": 1771255020.0,
+    "added": 0,
     "type": "glb",
     "path": "/objects/object_20260209_132234.glb",
-    "size": 870388,
-    "status": "ready"
-  },
-  "object_20260209_161548": {
-    "id": "object_20260209_161548",
-    "name": "object_20260209_161548",
-    "added": 1771255020.0,
-    "type": "glb",
-    "path": "/objects/object_20260209_161548.glb",
-    "size": 1954592,
+    "size": 3757,
     "status": "ready"
   },
   "object_20260209_161638": {
     "id": "object_20260209_161638",
     "name": "object_20260209_161638",
-    "added": 1771255022.0,
+    "added": 0,
     "type": "glb",
     "path": "/objects/object_20260209_161638.glb",
-    "size": 248632,
-    "status": "ready"
-  },
-  "object_20260209_161737": {
-    "id": "object_20260209_161737",
-    "name": "object_20260209_161737",
-    "added": 1771255022.0,
-    "type": "glb",
-    "path": "/objects/object_20260209_161737.glb",
-    "size": 581936,
-    "status": "ready"
-  },
-  "object_20260209_161838": {
-    "id": "object_20260209_161838",
-    "name": "object_20260209_161838",
-    "added": 1771255022.0,
-    "type": "glb",
-    "path": "/objects/object_20260209_161838.glb",
-    "size": 1029080,
+    "size": 1239,
     "status": "ready"
   },
   "object_20260209_162027": {
     "id": "object_20260209_162027",
     "name": "object_20260209_162027",
-    "added": 1771255022.0,
+    "added": 0,
     "type": "glb",
     "path": "/objects/object_20260209_162027.glb",
-    "size": 727964,
+    "size": 3673,
     "status": "ready"
   },
   "object_20260209_163654": {
     "id": "object_20260209_163654",
     "name": "object_20260209_163654",
-    "added": 1771255022.0,
+    "added": 0,
     "type": "glb",
     "path": "/objects/object_20260209_163654.glb",
-    "size": 972692,
-    "status": "ready"
-  },
-  "object_20260209_163758": {
-    "id": "object_20260209_163758",
-    "name": "object_20260209_163758",
-    "added": 1771255022.0,
-    "type": "glb",
-    "path": "/objects/object_20260209_163758.glb",
-    "size": 237892,
-    "status": "ready"
-  },
-  "object_20260209_164342": {
-    "id": "object_20260209_164342",
-    "name": "object_20260209_164342",
-    "added": 1771255022.0,
-    "type": "glb",
-    "path": "/objects/object_20260209_164342.glb",
-    "size": 1142624,
-    "status": "ready"
-  },
-  "object_20260209_194900": {
-    "id": "object_20260209_194900",
-    "name": "object_20260209_194900",
-    "added": 1771255024.0,
-    "type": "glb",
-    "path": "/objects/object_20260209_194900.glb",
-    "size": 60752,
-    "status": "ready"
-  },
-  "object_20260212_170009": {
-    "id": "object_20260212_170009",
-    "name": "object_20260212_170009",
-    "added": 1771255024.0,
-    "type": "glb",
-    "path": "/objects/object_20260212_170009.glb",
-    "size": 807848,
-    "status": "ready"
-  },
-  "object_20260212_170034": {
-    "id": "object_20260212_170034",
-    "name": "object_20260212_170034",
-    "added": 1771255024.0,
-    "type": "glb",
-    "path": "/objects/object_20260212_170034.glb",
-    "size": 756872,
-    "status": "ready"
-  },
-  "object_20260212_170417": {
-    "id": "object_20260212_170417",
-    "name": "object_20260212_170417",
-    "added": 1771255024.0,
-    "type": "glb",
-    "path": "/objects/object_20260212_170417.glb",
-    "size": 9816,
-    "status": "ready"
-  },
-  "object_20260212_193407": {
-    "id": "object_20260212_193407",
-    "name": "object_20260212_193407",
-    "added": 1771255024.0,
-    "type": "glb",
-    "path": "/objects/object_20260212_193407.glb",
-    "size": 1420536,
-    "status": "ready"
-  },
-  "object_20260212_193431": {
-    "id": "object_20260212_193431",
-    "name": "object_20260212_193431",
-    "added": 1771255024.0,
-    "type": "glb",
-    "path": "/objects/object_20260212_193431.glb",
-    "size": 1257080,
-    "status": "ready"
-  },
-  "object_20260212_193541": {
-    "id": "object_20260212_193541",
-    "name": "object_20260212_193541",
-    "added": 1771255024.0,
-    "type": "glb",
-    "path": "/objects/object_20260212_193541.glb",
-    "size": 315896,
+    "size": 809,
     "status": "ready"
   },
   "object_20260212_194134": {
     "id": "object_20260212_194134",
     "name": "object_20260212_194134",
-    "added": 1771255024.0,
+    "added": 0,
     "type": "glb",
     "path": "/objects/object_20260212_194134.glb",
-    "size": 1313544,
-    "status": "ready"
-  },
-  "object_20260212_195308": {
-    "id": "object_20260212_195308",
-    "name": "object_20260212_195308",
-    "added": 1771255026.0,
-    "type": "glb",
-    "path": "/objects/object_20260212_195308.glb",
-    "size": 1295348,
-    "status": "ready"
-  },
-  "object_20260212_200317": {
-    "id": "object_20260212_200317",
-    "name": "object_20260212_200317",
-    "added": 1771255026.0,
-    "type": "glb",
-    "path": "/objects/object_20260212_200317.glb",
-    "size": 6073800,
-    "status": "ready"
-  },
-  "object_20260213_180539": {
-    "id": "object_20260213_180539",
-    "name": "object_20260213_180539",
-    "added": 1771255026.0,
-    "type": "glb",
-    "path": "/objects/object_20260213_180539.glb",
-    "size": 2042372,
-    "status": "ready"
-  },
-  "object_20260213_180630": {
-    "id": "object_20260213_180630",
-    "name": "object_20260213_180630",
-    "added": 1771255026.0,
-    "type": "glb",
-    "path": "/objects/object_20260213_180630.glb",
-    "size": 1074884,
-    "status": "ready"
-  },
-  "object_20260213_181604": {
-    "id": "object_20260213_181604",
-    "name": "object_20260213_181604",
-    "added": 1771255028.0,
-    "type": "glb",
-    "path": "/objects/object_20260213_181604.glb",
-    "size": 1546568,
-    "status": "ready"
-  },
-  "object_20260213_183552": {
-    "id": "object_20260213_183552",
-    "name": "object_20260213_183552",
-    "added": 1771255028.0,
-    "type": "glb",
-    "path": "/objects/object_20260213_183552.glb",
-    "size": 1296788,
-    "status": "ready"
-  },
-  "object_20260213_184120": {
-    "id": "object_20260213_184120",
-    "name": "object_20260213_184120",
-    "added": 1771255028.0,
-    "type": "glb",
-    "path": "/objects/object_20260213_184120.glb",
-    "size": 1209716,
-    "status": "ready"
-  },
-  "object_20260213_184412": {
-    "id": "object_20260213_184412",
-    "name": "object_20260213_184412",
-    "added": 1771255028.0,
-    "type": "glb",
-    "path": "/objects/object_20260213_184412.glb",
-    "size": 805484,
-    "status": "ready"
-  },
-  "object_20260213_185312": {
-    "id": "object_20260213_185312",
-    "name": "object_20260213_185312",
-    "added": 1771255030.0,
-    "type": "glb",
-    "path": "/objects/object_20260213_185312.glb",
-    "size": 1276772,
-    "status": "ready"
-  },
-  "object_20260213_185440": {
-    "id": "object_20260213_185440",
-    "name": "object_20260213_185440",
-    "added": 1771255030.0,
-    "type": "glb",
-    "path": "/objects/object_20260213_185440.glb",
-    "size": 975560,
-    "status": "ready"
-  },
-  "object_20260213_185709": {
-    "id": "object_20260213_185709",
-    "name": "object_20260213_185709",
-    "added": 1771255030.0,
-    "type": "glb",
-    "path": "/objects/object_20260213_185709.glb",
-    "size": 342472,
-    "status": "ready"
-  },
-  "object_20260213_185851": {
-    "id": "object_20260213_185851",
-    "name": "object_20260213_185851",
-    "added": 1771255030.0,
-    "type": "glb",
-    "path": "/objects/object_20260213_185851.glb",
-    "size": 1199280,
-    "status": "ready"
-  },
-  "object_20260213_190051": {
-    "id": "object_20260213_190051",
-    "name": "object_20260213_190051",
-    "added": 1771255030.0,
-    "type": "glb",
-    "path": "/objects/object_20260213_190051.glb",
-    "size": 2218580,
-    "status": "ready"
-  },
-  "object_20260213_191224": {
-    "id": "object_20260213_191224",
-    "name": "object_20260213_191224",
-    "added": 1771255030.0,
-    "type": "glb",
-    "path": "/objects/object_20260213_191224.glb",
-    "size": 1295132,
-    "status": "ready"
-  },
-  "object_20260213_191409": {
-    "id": "object_20260213_191409",
-    "name": "object_20260213_191409",
-    "added": 1771255030.0,
-    "type": "glb",
-    "path": "/objects/object_20260213_191409.glb",
-    "size": 1358924,
-    "status": "ready"
-  },
-  "object_20260213_191711": {
-    "id": "object_20260213_191711",
-    "name": "object_20260213_191711",
-    "added": 1771255032.0,
-    "type": "glb",
-    "path": "/objects/object_20260213_191711.glb",
-    "size": 1317956,
-    "status": "ready"
-  },
-  "object_20260213_191817": {
-    "id": "object_20260213_191817",
-    "name": "object_20260213_191817",
-    "added": 1771255032.0,
-    "type": "glb",
-    "path": "/objects/object_20260213_191817.glb",
-    "size": 1650056,
+    "size": 1086,
     "status": "ready"
   },
   "object_20260213_191937": {
     "id": "object_20260213_191937",
     "name": "object_20260213_191937",
-    "added": 1771255032.0,
+    "added": 0,
     "type": "glb",
     "path": "/objects/object_20260213_191937.glb",
-    "size": 2446748,
-    "status": "ready"
-  },
-  "object_20260213_192124": {
-    "id": "object_20260213_192124",
-    "name": "object_20260213_192124",
-    "added": 1771255032.0,
-    "type": "glb",
-    "path": "/objects/object_20260213_192124.glb",
-    "size": 410504,
-    "status": "ready"
-  },
-  "object_20260213_192718": {
-    "id": "object_20260213_192718",
-    "name": "object_20260213_192718",
-    "added": 1771255032.0,
-    "type": "glb",
-    "path": "/objects/object_20260213_192718.glb",
-    "size": 2011080,
-    "status": "ready"
-  },
-  "object_20260213_192734": {
-    "id": "object_20260213_192734",
-    "name": "object_20260213_192734",
-    "added": 1771255032.0,
-    "type": "glb",
-    "path": "/objects/object_20260213_192734.glb",
-    "size": 903884,
-    "status": "ready"
-  },
-  "object_20260213_194012": {
-    "id": "object_20260213_194012",
-    "name": "object_20260213_194012",
-    "added": 1771255032.0,
-    "type": "glb",
-    "path": "/objects/object_20260213_194012.glb",
-    "size": 866912,
-    "status": "ready"
-  },
-  "object_20260213_194033": {
-    "id": "object_20260213_194033",
-    "name": "object_20260213_194033",
-    "added": 1771255032.0,
-    "type": "glb",
-    "path": "/objects/object_20260213_194033.glb",
-    "size": 3205044,
-    "status": "ready"
-  },
-  "object_20260213_194049": {
-    "id": "object_20260213_194049",
-    "name": "object_20260213_194049",
-    "added": 1771255034.0,
-    "type": "glb",
-    "path": "/objects/object_20260213_194049.glb",
-    "size": 489556,
-    "status": "ready"
-  },
-  "object_20260213_194125": {
-    "id": "object_20260213_194125",
-    "name": "object_20260213_194125",
-    "added": 1771255034.0,
-    "type": "glb",
-    "path": "/objects/object_20260213_194125.glb",
-    "size": 3039872,
+    "size": 4859,
     "status": "ready"
   },
   "object_20260213_194141": {
     "id": "object_20260213_194141",
     "name": "object_20260213_194141",
-    "added": 1771255034.0,
+    "added": 0,
     "type": "glb",
     "path": "/objects/object_20260213_194141.glb",
-    "size": 2545592,
-    "status": "ready"
-  },
-  "object_20260213_194203": {
-    "id": "object_20260213_194203",
-    "name": "object_20260213_194203",
-    "added": 1771255034.0,
-    "type": "glb",
-    "path": "/objects/object_20260213_194203.glb",
-    "size": 2217716,
-    "status": "ready"
-  },
-  "object_20260213_194219": {
-    "id": "object_20260213_194219",
-    "name": "object_20260213_194219",
-    "added": 1771255034.0,
-    "type": "glb",
-    "path": "/objects/object_20260213_194219.glb",
-    "size": 3340376,
-    "status": "ready"
-  },
-  "object_20260213_194236": {
-    "id": "object_20260213_194236",
-    "name": "object_20260213_194236",
-    "added": 1771255036.0,
-    "type": "glb",
-    "path": "/objects/object_20260213_194236.glb",
-    "size": 2604344,
-    "status": "ready"
-  },
-  "object_20260213_194252": {
-    "id": "object_20260213_194252",
-    "name": "object_20260213_194252",
-    "added": 1771255036.0,
-    "type": "glb",
-    "path": "/objects/object_20260213_194252.glb",
-    "size": 2951060,
-    "status": "ready"
-  },
-  "object_20260213_194702": {
-    "id": "object_20260213_194702",
-    "name": "object_20260213_194702",
-    "added": 1771255038.0,
-    "type": "glb",
-    "path": "/objects/object_20260213_194702.glb",
-    "size": 1144400,
-    "status": "ready"
-  },
-  "object_20260213_195119": {
-    "id": "object_20260213_195119",
-    "name": "object_20260213_195119",
-    "added": 1771255038.0,
-    "type": "glb",
-    "path": "/objects/object_20260213_195119.glb",
-    "size": 864548,
-    "status": "ready"
-  },
-  "object_20260213_195459": {
-    "id": "object_20260213_195459",
-    "name": "object_20260213_195459",
-    "added": 1771255038.0,
-    "type": "glb",
-    "path": "/objects/object_20260213_195459.glb",
-    "size": 120700,
-    "status": "ready"
-  },
-  "object_20260213_195515": {
-    "id": "object_20260213_195515",
-    "name": "object_20260213_195515",
-    "added": 1771255038.0,
-    "type": "glb",
-    "path": "/objects/object_20260213_195515.glb",
-    "size": 2197728,
-    "status": "ready"
-  },
-  "object_20260213_195532": {
-    "id": "object_20260213_195532",
-    "name": "object_20260213_195532",
-    "added": 1771255038.0,
-    "type": "glb",
-    "path": "/objects/object_20260213_195532.glb",
-    "size": 2431904,
-    "status": "ready"
-  },
-  "object_20260213_195719": {
-    "id": "object_20260213_195719",
-    "name": "object_20260213_195719",
-    "added": 1771255038.0,
-    "type": "glb",
-    "path": "/objects/object_20260213_195719.glb",
-    "size": 1028396,
-    "status": "ready"
-  },
-  "object_20260213_195940": {
-    "id": "object_20260213_195940",
-    "name": "object_20260213_195940",
-    "added": 1771255038.0,
-    "type": "glb",
-    "path": "/objects/object_20260213_195940.glb",
-    "size": 366804,
-    "status": "ready"
-  },
-  "object_20260213_200126": {
-    "id": "object_20260213_200126",
-    "name": "object_20260213_200126",
-    "added": 1771255038.0,
-    "type": "glb",
-    "path": "/objects/object_20260213_200126.glb",
-    "size": 188836,
-    "status": "ready"
-  },
-  "object_20260213_200158": {
-    "id": "object_20260213_200158",
-    "name": "object_20260213_200158",
-    "added": 1771255038.0,
-    "type": "glb",
-    "path": "/objects/object_20260213_200158.glb",
-    "size": 4504704,
-    "status": "ready"
-  },
-  "object_20260213_200739": {
-    "id": "object_20260213_200739",
-    "name": "object_20260213_200739",
-    "added": 1771255042.0,
-    "type": "glb",
-    "path": "/objects/object_20260213_200739.glb",
-    "size": 1279580,
-    "status": "ready"
-  },
-  "object_20260213_200953": {
-    "id": "object_20260213_200953",
-    "name": "object_20260213_200953",
-    "added": 1771255042.0,
-    "type": "glb",
-    "path": "/objects/object_20260213_200953.glb",
-    "size": 1199660,
-    "status": "ready"
-  },
-  "object_20260213_201252": {
-    "id": "object_20260213_201252",
-    "name": "object_20260213_201252",
-    "added": 1771255042.0,
-    "type": "glb",
-    "path": "/objects/object_20260213_201252.glb",
-    "size": 1279016,
-    "status": "ready"
-  },
-  "object_20260213_201438": {
-    "id": "object_20260213_201438",
-    "name": "object_20260213_201438",
-    "added": 1771255042.0,
-    "type": "glb",
-    "path": "/objects/object_20260213_201438.glb",
-    "size": 425392,
-    "status": "ready"
-  },
-  "object_20260213_201454": {
-    "id": "object_20260213_201454",
-    "name": "object_20260213_201454",
-    "added": 1771255042.0,
-    "type": "glb",
-    "path": "/objects/object_20260213_201454.glb",
-    "size": 244540,
-    "status": "ready"
-  },
-  "object_20260213_201606": {
-    "id": "object_20260213_201606",
-    "name": "object_20260213_201606",
-    "added": 1771255042.0,
-    "type": "glb",
-    "path": "/objects/object_20260213_201606.glb",
-    "size": 1521036,
-    "status": "ready"
-  },
-  "object_20260213_201622": {
-    "id": "object_20260213_201622",
-    "name": "object_20260213_201622",
-    "added": 1771255042.0,
-    "type": "glb",
-    "path": "/objects/object_20260213_201622.glb",
-    "size": 1807208,
+    "size": 780,
     "status": "ready"
   },
   "object_20260213_201937": {
     "id": "object_20260213_201937",
     "name": "object_20260213_201937",
-    "added": 1771255044.0,
+    "added": 0,
     "type": "glb",
     "path": "/objects/object_20260213_201937.glb",
-    "size": 2539472,
-    "status": "ready"
-  },
-  "object_20260213_202127": {
-    "id": "object_20260213_202127",
-    "name": "object_20260213_202127",
-    "added": 1771255044.0,
-    "type": "glb",
-    "path": "/objects/object_20260213_202127.glb",
-    "size": 1684160,
-    "status": "ready"
-  },
-  "object_20260213_202501": {
-    "id": "object_20260213_202501",
-    "name": "object_20260213_202501",
-    "added": 1771255046.0,
-    "type": "glb",
-    "path": "/objects/object_20260213_202501.glb",
-    "size": 1921112,
-    "status": "ready"
-  },
-  "object_20260213_202600": {
-    "id": "object_20260213_202600",
-    "name": "object_20260213_202600",
-    "added": 1771255046.0,
-    "type": "glb",
-    "path": "/objects/object_20260213_202600.glb",
-    "size": 1814976,
-    "status": "ready"
-  },
-  "object_20260213_202649": {
-    "id": "object_20260213_202649",
-    "name": "object_20260213_202649",
-    "added": 1771255048.0,
-    "type": "glb",
-    "path": "/objects/object_20260213_202649.glb",
-    "size": 807284,
-    "status": "ready"
-  },
-  "object_20260213_202815": {
-    "id": "object_20260213_202815",
-    "name": "object_20260213_202815",
-    "added": 1771255048.0,
-    "type": "glb",
-    "path": "/objects/object_20260213_202815.glb",
-    "size": 649800,
-    "status": "ready"
-  },
-  "object_20260213_202831": {
-    "id": "object_20260213_202831",
-    "name": "object_20260213_202831",
-    "added": 1771255048.0,
-    "type": "glb",
-    "path": "/objects/object_20260213_202831.glb",
-    "size": 566256,
+    "size": 3664,
     "status": "ready"
   },
   "object_20260213_202907": {
     "id": "object_20260213_202907",
     "name": "object_20260213_202907",
-    "added": 1771255048.0,
+    "added": 0,
     "type": "glb",
     "path": "/objects/object_20260213_202907.glb",
-    "size": 717080,
-    "status": "ready"
-  },
-  "object_20260213_203023": {
-    "id": "object_20260213_203023",
-    "name": "object_20260213_203023",
-    "added": 1771255048.0,
-    "type": "glb",
-    "path": "/objects/object_20260213_203023.glb",
-    "size": 984008,
-    "status": "ready"
-  },
-  "object_20260213_203039": {
-    "id": "object_20260213_203039",
-    "name": "object_20260213_203039",
-    "added": 1771255050.0,
-    "type": "glb",
-    "path": "/objects/object_20260213_203039.glb",
-    "size": 1080392,
-    "status": "ready"
-  },
-  "object_20260213_203559": {
-    "id": "object_20260213_203559",
-    "name": "object_20260213_203559",
-    "added": 1771255050.0,
-    "type": "glb",
-    "path": "/objects/object_20260213_203559.glb",
-    "size": 1967216,
-    "status": "ready"
-  },
-  "object_20260213_203814": {
-    "id": "object_20260213_203814",
-    "name": "object_20260213_203814",
-    "added": 1771255050.0,
-    "type": "glb",
-    "path": "/objects/object_20260213_203814.glb",
-    "size": 1197284,
+    "size": 1736,
     "status": "ready"
   },
   "object_20260213_203943": {
     "id": "object_20260213_203943",
     "name": "object_20260213_203943",
-    "added": 1771255050.0,
+    "added": 0,
     "type": "glb",
     "path": "/objects/object_20260213_203943.glb",
-    "size": 1553808,
+    "size": 4630,
     "status": "ready"
   },
   "object_20260213_204202": {
     "id": "object_20260213_204202",
     "name": "object_20260213_204202",
-    "added": 1771255050.0,
+    "added": 0,
     "type": "glb",
     "path": "/objects/object_20260213_204202.glb",
-    "size": 573728,
+    "size": 1771,
     "status": "ready"
   },
   "object_20260213_205656": {
     "id": "object_20260213_205656",
     "name": "object_20260213_205656",
-    "added": 1771255052.0,
+    "added": 0,
     "type": "glb",
     "path": "/objects/object_20260213_205656.glb",
-    "size": 1491972,
+    "size": 3706,
     "status": "ready"
   },
   "object_20260213_205809": {
     "id": "object_20260213_205809",
     "name": "object_20260213_205809",
-    "added": 1771255052.0,
+    "added": 0,
     "type": "glb",
     "path": "/objects/object_20260213_205809.glb",
-    "size": 2942684,
-    "status": "ready"
-  },
-  "object_20260213_205919": {
-    "id": "object_20260213_205919",
-    "name": "object_20260213_205919",
-    "added": 1771255054.0,
-    "type": "glb",
-    "path": "/objects/object_20260213_205919.glb",
-    "size": 772556,
-    "status": "ready"
-  },
-  "object_20260213_210011": {
-    "id": "object_20260213_210011",
-    "name": "object_20260213_210011",
-    "added": 1771255054.0,
-    "type": "glb",
-    "path": "/objects/object_20260213_210011.glb",
-    "size": 3260216,
-    "status": "ready"
-  },
-  "object_20260213_210118": {
-    "id": "object_20260213_210118",
-    "name": "object_20260213_210118",
-    "added": 1771255054.0,
-    "type": "glb",
-    "path": "/objects/object_20260213_210118.glb",
-    "size": 2265512,
-    "status": "ready"
-  },
-  "object_20260213_210242": {
-    "id": "object_20260213_210242",
-    "name": "object_20260213_210242",
-    "added": 1771255058.0,
-    "type": "glb",
-    "path": "/objects/object_20260213_210242.glb",
-    "size": 1067492,
-    "status": "ready"
-  },
-  "object_20260213_210334": {
-    "id": "object_20260213_210334",
-    "name": "object_20260213_210334",
-    "added": 1771255058.0,
-    "type": "glb",
-    "path": "/objects/object_20260213_210334.glb",
-    "size": 840044,
-    "status": "ready"
-  },
-  "object_20260213_210401": {
-    "id": "object_20260213_210401",
-    "name": "object_20260213_210401",
-    "added": 1771255058.0,
-    "type": "glb",
-    "path": "/objects/object_20260213_210401.glb",
-    "size": 906032,
-    "status": "ready"
-  },
-  "object_20260213_210645": {
-    "id": "object_20260213_210645",
-    "name": "object_20260213_210645",
-    "added": 1771255062.0,
-    "type": "glb",
-    "path": "/objects/object_20260213_210645.glb",
-    "size": 1661508,
-    "status": "ready"
-  },
-  "object_20260213_211000": {
-    "id": "object_20260213_211000",
-    "name": "object_20260213_211000",
-    "added": 1771255062.0,
-    "type": "glb",
-    "path": "/objects/object_20260213_211000.glb",
-    "size": 1356720,
-    "status": "ready"
-  },
-  "object_20260213_211359": {
-    "id": "object_20260213_211359",
-    "name": "object_20260213_211359",
-    "added": 1771255064.0,
-    "type": "glb",
-    "path": "/objects/object_20260213_211359.glb",
-    "size": 1707524,
-    "status": "ready"
-  },
-  "object_20260213_211512": {
-    "id": "object_20260213_211512",
-    "name": "object_20260213_211512",
-    "added": 1771255066.0,
-    "type": "glb",
-    "path": "/objects/object_20260213_211512.glb",
-    "size": 1183136,
-    "status": "ready"
-  },
-  "object_20260213_211651": {
-    "id": "object_20260213_211651",
-    "name": "object_20260213_211651",
-    "added": 1771255068.0,
-    "type": "glb",
-    "path": "/objects/object_20260213_211651.glb",
-    "size": 1483652,
-    "status": "ready"
-  },
-  "object_20260213_211707": {
-    "id": "object_20260213_211707",
-    "name": "object_20260213_211707",
-    "added": 1771255072.0,
-    "type": "glb",
-    "path": "/objects/object_20260213_211707.glb",
-    "size": 1672964,
-    "status": "ready"
-  },
-  "object_20260213_212436": {
-    "id": "object_20260213_212436",
-    "name": "object_20260213_212436",
-    "added": 1771255074.0,
-    "type": "glb",
-    "path": "/objects/object_20260213_212436.glb",
-    "size": 1098308,
-    "status": "ready"
-  },
-  "object_20260213_212606": {
-    "id": "object_20260213_212606",
-    "name": "object_20260213_212606",
-    "added": 1771255076.0,
-    "type": "glb",
-    "path": "/objects/object_20260213_212606.glb",
-    "size": 1013156,
-    "status": "ready"
-  },
-  "object_20260213_212707": {
-    "id": "object_20260213_212707",
-    "name": "object_20260213_212707",
-    "added": 1771255080.0,
-    "type": "glb",
-    "path": "/objects/object_20260213_212707.glb",
-    "size": 1250276,
-    "status": "ready"
-  },
-  "object_20260213_212828": {
-    "id": "object_20260213_212828",
-    "name": "object_20260213_212828",
-    "added": 1771255080.0,
-    "type": "glb",
-    "path": "/objects/object_20260213_212828.glb",
-    "size": 1712348,
-    "status": "ready"
-  },
-  "object_20260213_213134": {
-    "id": "object_20260213_213134",
-    "name": "object_20260213_213134",
-    "added": 1771255084.0,
-    "type": "glb",
-    "path": "/objects/object_20260213_213134.glb",
-    "size": 2671544,
-    "status": "ready"
-  },
-  "object_20260213_213404": {
-    "id": "object_20260213_213404",
-    "name": "object_20260213_213404",
-    "added": 1771255086.0,
-    "type": "glb",
-    "path": "/objects/object_20260213_213404.glb",
-    "size": 227560,
-    "status": "ready"
-  },
-  "object_20260213_213421": {
-    "id": "object_20260213_213421",
-    "name": "object_20260213_213421",
-    "added": 1771255086.0,
-    "type": "glb",
-    "path": "/objects/object_20260213_213421.glb",
-    "size": 646856,
-    "status": "ready"
-  },
-  "object_20260213_213456": {
-    "id": "object_20260213_213456",
-    "name": "object_20260213_213456",
-    "added": 1771255092.0,
-    "type": "glb",
-    "path": "/objects/object_20260213_213456.glb",
-    "size": 60948,
+    "size": 3480,
     "status": "ready"
   },
   "object_20260213_213749": {
     "id": "object_20260213_213749",
     "name": "object_20260213_213749",
-    "added": 1771255092.0,
+    "added": 0,
     "type": "glb",
     "path": "/objects/object_20260213_213749.glb",
-    "size": 3088812,
-    "status": "ready"
-  },
-  "object_20260213_214012": {
-    "id": "object_20260213_214012",
-    "name": "object_20260213_214012",
-    "added": 1771255092.0,
-    "type": "glb",
-    "path": "/objects/object_20260213_214012.glb",
-    "size": 1256804,
-    "status": "ready"
-  },
-  "object_20260213_214201": {
-    "id": "object_20260213_214201",
-    "name": "object_20260213_214201",
-    "added": 1771255094.0,
-    "type": "glb",
-    "path": "/objects/object_20260213_214201.glb",
-    "size": 4917756,
+    "size": 354,
     "status": "ready"
   },
   "object_20260213_214524": {
     "id": "object_20260213_214524",
     "name": "object_20260213_214524",
-    "added": 1771255098.0,
+    "added": 0,
     "type": "glb",
     "path": "/objects/object_20260213_214524.glb",
-    "size": 1784988,
-    "status": "ready"
-  },
-  "object_20260213_214847": {
-    "id": "object_20260213_214847",
-    "name": "object_20260213_214847",
-    "added": 1771255100.0,
-    "type": "glb",
-    "path": "/objects/object_20260213_214847.glb",
-    "size": 1816088,
-    "status": "ready"
-  },
-  "object_20260213_215051": {
-    "id": "object_20260213_215051",
-    "name": "object_20260213_215051",
-    "added": 1771255100.0,
-    "type": "glb",
-    "path": "/objects/object_20260213_215051.glb",
-    "size": 942560,
-    "status": "ready"
-  },
-  "object_20260213_215228": {
-    "id": "object_20260213_215228",
-    "name": "object_20260213_215228",
-    "added": 1771255104.0,
-    "type": "glb",
-    "path": "/objects/object_20260213_215228.glb",
-    "size": 1047032,
-    "status": "ready"
-  },
-  "object_20260213_215323": {
-    "id": "object_20260213_215323",
-    "name": "object_20260213_215323",
-    "added": 1771255106.0,
-    "type": "glb",
-    "path": "/objects/object_20260213_215323.glb",
-    "size": 1469120,
-    "status": "ready"
-  },
-  "object_20260213_215350": {
-    "id": "object_20260213_215350",
-    "name": "object_20260213_215350",
-    "added": 1771255108.0,
-    "type": "glb",
-    "path": "/objects/object_20260213_215350.glb",
-    "size": 1799988,
-    "status": "ready"
-  },
-  "object_20260213_220359": {
-    "id": "object_20260213_220359",
-    "name": "object_20260213_220359",
-    "added": 1771255110.0,
-    "type": "glb",
-    "path": "/objects/object_20260213_220359.glb",
-    "size": 1375544,
-    "status": "ready"
-  },
-  "object_20260213_220454": {
-    "id": "object_20260213_220454",
-    "name": "object_20260213_220454",
-    "added": 1771255112.0,
-    "type": "glb",
-    "path": "/objects/object_20260213_220454.glb",
-    "size": 1403388,
-    "status": "ready"
-  },
-  "object_20260213_220917": {
-    "id": "object_20260213_220917",
-    "name": "object_20260213_220917",
-    "added": 1771255116.0,
-    "type": "glb",
-    "path": "/objects/object_20260213_220917.glb",
-    "size": 5213964,
+    "size": 4367,
     "status": "ready"
   },
   "object_20260213_221043": {
     "id": "object_20260213_221043",
     "name": "object_20260213_221043",
-    "added": 1771255120.0,
+    "added": 0,
     "type": "glb",
     "path": "/objects/object_20260213_221043.glb",
-    "size": 1451708,
-    "status": "ready"
-  },
-  "object_20260213_221911": {
-    "id": "object_20260213_221911",
-    "name": "object_20260213_221911",
-    "added": 1771255122.0,
-    "type": "glb",
-    "path": "/objects/object_20260213_221911.glb",
-    "size": 1750908,
-    "status": "ready"
-  },
-  "object_20260213_222419": {
-    "id": "object_20260213_222419",
-    "name": "object_20260213_222419",
-    "added": 1771255122.0,
-    "type": "glb",
-    "path": "/objects/object_20260213_222419.glb",
-    "size": 714812,
-    "status": "ready"
-  },
-  "object_20260213_222435": {
-    "id": "object_20260213_222435",
-    "name": "object_20260213_222435",
-    "added": 1771255124.0,
-    "type": "glb",
-    "path": "/objects/object_20260213_222435.glb",
-    "size": 781400,
-    "status": "ready"
-  },
-  "object_20260213_222513": {
-    "id": "object_20260213_222513",
-    "name": "object_20260213_222513",
-    "added": 1771255124.0,
-    "type": "glb",
-    "path": "/objects/object_20260213_222513.glb",
-    "size": 2146580,
-    "status": "ready"
-  },
-  "object_20260213_223032": {
-    "id": "object_20260213_223032",
-    "name": "object_20260213_223032",
-    "added": 1771255128.0,
-    "type": "glb",
-    "path": "/objects/object_20260213_223032.glb",
-    "size": 1357124,
-    "status": "ready"
-  },
-  "object_20260213_223517": {
-    "id": "object_20260213_223517",
-    "name": "object_20260213_223517",
-    "added": 1771255130.0,
-    "type": "glb",
-    "path": "/objects/object_20260213_223517.glb",
-    "size": 424556,
-    "status": "ready"
-  },
-  "object_20260213_223625": {
-    "id": "object_20260213_223625",
-    "name": "object_20260213_223625",
-    "added": 1771255130.0,
-    "type": "glb",
-    "path": "/objects/object_20260213_223625.glb",
-    "size": 1952196,
-    "status": "ready"
-  },
-  "object_20260213_223737": {
-    "id": "object_20260213_223737",
-    "name": "object_20260213_223737",
-    "added": 1771255134.0,
-    "type": "glb",
-    "path": "/objects/object_20260213_223737.glb",
-    "size": 2421524,
-    "status": "ready"
-  },
-  "object_20260213_223900": {
-    "id": "object_20260213_223900",
-    "name": "object_20260213_223900",
-    "added": 1771255136.0,
-    "type": "glb",
-    "path": "/objects/object_20260213_223900.glb",
-    "size": 1446596,
+    "size": 2624,
     "status": "ready"
   },
   "object_20260213_223917": {
     "id": "object_20260213_223917",
     "name": "object_20260213_223917",
-    "added": 1771255138.0,
+    "added": 0,
     "type": "glb",
     "path": "/objects/object_20260213_223917.glb",
-    "size": 1547204,
-    "status": "ready"
-  },
-  "object_20260213_224620": {
-    "id": "object_20260213_224620",
-    "name": "object_20260213_224620",
-    "added": 1771255140.0,
-    "type": "glb",
-    "path": "/objects/object_20260213_224620.glb",
-    "size": 1269296,
-    "status": "ready"
-  },
-  "object_20260213_224640": {
-    "id": "object_20260213_224640",
-    "name": "object_20260213_224640",
-    "added": 1771255140.0,
-    "type": "glb",
-    "path": "/objects/object_20260213_224640.glb",
-    "size": 1767228,
-    "status": "ready"
-  },
-  "object_20260213_224817": {
-    "id": "object_20260213_224817",
-    "name": "object_20260213_224817",
-    "added": 1771255142.0,
-    "type": "glb",
-    "path": "/objects/object_20260213_224817.glb",
-    "size": 1765892,
-    "status": "ready"
-  },
-  "object_20260213_225057": {
-    "id": "object_20260213_225057",
-    "name": "object_20260213_225057",
-    "added": 1771255144.0,
-    "type": "glb",
-    "path": "/objects/object_20260213_225057.glb",
-    "size": 1348568,
+    "size": 565,
     "status": "ready"
   },
   "object_20260213_225241": {
     "id": "object_20260213_225241",
     "name": "object_20260213_225241",
-    "added": 1771255146.0,
+    "added": 0,
     "type": "glb",
     "path": "/objects/object_20260213_225241.glb",
-    "size": 3020028,
-    "status": "ready"
-  },
-  "object_20260213_225546": {
-    "id": "object_20260213_225546",
-    "name": "object_20260213_225546",
-    "added": 1771255150.0,
-    "type": "glb",
-    "path": "/objects/object_20260213_225546.glb",
-    "size": 1831452,
-    "status": "ready"
-  },
-  "object_20260213_230104": {
-    "id": "object_20260213_230104",
-    "name": "object_20260213_230104",
-    "added": 1771255152.0,
-    "type": "glb",
-    "path": "/objects/object_20260213_230104.glb",
-    "size": 2755224,
-    "status": "ready"
-  },
-  "object_20260213_230226": {
-    "id": "object_20260213_230226",
-    "name": "object_20260213_230226",
-    "added": 1771255156.0,
-    "type": "glb",
-    "path": "/objects/object_20260213_230226.glb",
-    "size": 1140680,
-    "status": "ready"
-  },
-  "object_20260213_231913": {
-    "id": "object_20260213_231913",
-    "name": "object_20260213_231913",
-    "added": 1771255156.0,
-    "type": "glb",
-    "path": "/objects/object_20260213_231913.glb",
-    "size": 2757660,
-    "status": "ready"
-  },
-  "object_20260213_231929": {
-    "id": "object_20260213_231929",
-    "name": "object_20260213_231929",
-    "added": 1771255156.0,
-    "type": "glb",
-    "path": "/objects/object_20260213_231929.glb",
-    "size": 2315144,
-    "status": "ready"
-  },
-  "object_20260213_233118": {
-    "id": "object_20260213_233118",
-    "name": "object_20260213_233118",
-    "added": 1771255160.0,
-    "type": "glb",
-    "path": "/objects/object_20260213_233118.glb",
-    "size": 1712936,
-    "status": "ready"
-  },
-  "object_20260213_233238": {
-    "id": "object_20260213_233238",
-    "name": "object_20260213_233238",
-    "added": 1771255160.0,
-    "type": "glb",
-    "path": "/objects/object_20260213_233238.glb",
-    "size": 1368968,
-    "status": "ready"
-  },
-  "object_20260213_233601": {
-    "id": "object_20260213_233601",
-    "name": "object_20260213_233601",
-    "added": 1771255160.0,
-    "type": "glb",
-    "path": "/objects/object_20260213_233601.glb",
-    "size": 911024,
-    "status": "ready"
-  },
-  "object_20260214_001700": {
-    "id": "object_20260214_001700",
-    "name": "object_20260214_001700",
-    "added": 1771255160.0,
-    "type": "glb",
-    "path": "/objects/object_20260214_001700.glb",
-    "size": 733184,
-    "status": "ready"
-  },
-  "object_20260214_001742": {
-    "id": "object_20260214_001742",
-    "name": "object_20260214_001742",
-    "added": 1771255166.0,
-    "type": "glb",
-    "path": "/objects/object_20260214_001742.glb",
-    "size": 2666588,
-    "status": "ready"
-  },
-  "object_20260214_002804": {
-    "id": "object_20260214_002804",
-    "name": "object_20260214_002804",
-    "added": 1771255168.0,
-    "type": "glb",
-    "path": "/objects/object_20260214_002804.glb",
-    "size": 2735432,
-    "status": "ready"
-  },
-  "object_20260214_002821": {
-    "id": "object_20260214_002821",
-    "name": "object_20260214_002821",
-    "added": 1771255168.0,
-    "type": "glb",
-    "path": "/objects/object_20260214_002821.glb",
-    "size": 2064260,
-    "status": "ready"
-  },
-  "object_20260214_002851": {
-    "id": "object_20260214_002851",
-    "name": "object_20260214_002851",
-    "added": 1771255172.0,
-    "type": "glb",
-    "path": "/objects/object_20260214_002851.glb",
-    "size": 5660,
-    "status": "ready"
-  },
-  "object_20260214_002916": {
-    "id": "object_20260214_002916",
-    "name": "object_20260214_002916",
-    "added": 1771255172.0,
-    "type": "glb",
-    "path": "/objects/object_20260214_002916.glb",
-    "size": 1703240,
-    "status": "ready"
-  },
-  "object_20260214_003632": {
-    "id": "object_20260214_003632",
-    "name": "object_20260214_003632",
-    "added": 1771255174.0,
-    "type": "glb",
-    "path": "/objects/object_20260214_003632.glb",
-    "size": 13848,
+    "size": 3399,
     "status": "ready"
   },
   "object_20260214_003754": {
     "id": "object_20260214_003754",
     "name": "object_20260214_003754",
-    "added": 1771255174.0,
+    "added": 0,
     "type": "glb",
     "path": "/objects/object_20260214_003754.glb",
-    "size": 1515864,
-    "status": "ready"
-  },
-  "object_20260214_004015": {
-    "id": "object_20260214_004015",
-    "name": "object_20260214_004015",
-    "added": 1771255176.0,
-    "type": "glb",
-    "path": "/objects/object_20260214_004015.glb",
-    "size": 1544856,
-    "status": "ready"
-  },
-  "object_20260214_004208": {
-    "id": "object_20260214_004208",
-    "name": "object_20260214_004208",
-    "added": 1771255178.0,
-    "type": "glb",
-    "path": "/objects/object_20260214_004208.glb",
-    "size": 1301456,
-    "status": "ready"
-  },
-  "object_20260214_163058": {
-    "id": "object_20260214_163058",
-    "name": "object_20260214_163058",
-    "added": 1771255180.0,
-    "type": "glb",
-    "path": "/objects/object_20260214_163058.glb",
-    "size": 883792,
-    "status": "ready"
-  },
-  "object_20260214_163357": {
-    "id": "object_20260214_163357",
-    "name": "object_20260214_163357",
-    "added": 1771255184.0,
-    "type": "glb",
-    "path": "/objects/object_20260214_163357.glb",
-    "size": 1594104,
-    "status": "ready"
-  },
-  "object_20260214_164205": {
-    "id": "object_20260214_164205",
-    "name": "object_20260214_164205",
-    "added": 1771255186.0,
-    "type": "glb",
-    "path": "/objects/object_20260214_164205.glb",
-    "size": 1608008,
-    "status": "ready"
-  },
-  "object_20260214_171107": {
-    "id": "object_20260214_171107",
-    "name": "object_20260214_171107",
-    "added": 1771255186.0,
-    "type": "glb",
-    "path": "/objects/object_20260214_171107.glb",
-    "size": 1295888,
-    "status": "ready"
-  },
-  "object_20260214_171500": {
-    "id": "object_20260214_171500",
-    "name": "object_20260214_171500",
-    "added": 1771255190.0,
-    "type": "glb",
-    "path": "/objects/object_20260214_171500.glb",
-    "size": 1233656,
-    "status": "ready"
-  },
-  "object_20260214_171729": {
-    "id": "object_20260214_171729",
-    "name": "object_20260214_171729",
-    "added": 1771255190.0,
-    "type": "glb",
-    "path": "/objects/object_20260214_171729.glb",
-    "size": 1668416,
-    "status": "ready"
-  },
-  "object_20260214_171846": {
-    "id": "object_20260214_171846",
-    "name": "object_20260214_171846",
-    "added": 1771255194.0,
-    "type": "glb",
-    "path": "/objects/object_20260214_171846.glb",
-    "size": 1200632,
-    "status": "ready"
-  },
-  "object_20260214_172909": {
-    "id": "object_20260214_172909",
-    "name": "object_20260214_172909",
-    "added": 1771255198.0,
-    "type": "glb",
-    "path": "/objects/object_20260214_172909.glb",
-    "size": 1757996,
-    "status": "ready"
-  },
-  "object_20260214_173031": {
-    "id": "object_20260214_173031",
-    "name": "object_20260214_173031",
-    "added": 1771255200.0,
-    "type": "glb",
-    "path": "/objects/object_20260214_173031.glb",
-    "size": 1874708,
-    "status": "ready"
-  },
-  "object_20260214_173551": {
-    "id": "object_20260214_173551",
-    "name": "object_20260214_173551",
-    "added": 1771255202.0,
-    "type": "glb",
-    "path": "/objects/object_20260214_173551.glb",
-    "size": 942512,
-    "status": "ready"
-  },
-  "object_20260214_173607": {
-    "id": "object_20260214_173607",
-    "name": "object_20260214_173607",
-    "added": 1771255202.0,
-    "type": "glb",
-    "path": "/objects/object_20260214_173607.glb",
-    "size": 782144,
-    "status": "ready"
-  },
-  "object_20260214_173624": {
-    "id": "object_20260214_173624",
-    "name": "object_20260214_173624",
-    "added": 1771255208.0,
-    "type": "glb",
-    "path": "/objects/object_20260214_173624.glb",
-    "size": 1144664,
-    "status": "ready"
-  },
-  "object_20260214_174438": {
-    "id": "object_20260214_174438",
-    "name": "object_20260214_174438",
-    "added": 1771255208.0,
-    "type": "glb",
-    "path": "/objects/object_20260214_174438.glb",
-    "size": 364388,
-    "status": "ready"
-  },
-  "object_20260214_175256": {
-    "id": "object_20260214_175256",
-    "name": "object_20260214_175256",
-    "added": 1771255208.0,
-    "type": "glb",
-    "path": "/objects/object_20260214_175256.glb",
-    "size": 1044488,
-    "status": "ready"
-  },
-  "object_20260214_175420": {
-    "id": "object_20260214_175420",
-    "name": "object_20260214_175420",
-    "added": 1771255210.0,
-    "type": "glb",
-    "path": "/objects/object_20260214_175420.glb",
-    "size": 2771532,
-    "status": "ready"
-  },
-  "object_20260214_175513": {
-    "id": "object_20260214_175513",
-    "name": "object_20260214_175513",
-    "added": 1771255214.0,
-    "type": "glb",
-    "path": "/objects/object_20260214_175513.glb",
-    "size": 469100,
-    "status": "ready"
-  },
-  "object_20260214_180340": {
-    "id": "object_20260214_180340",
-    "name": "object_20260214_180340",
-    "added": 1771255214.0,
-    "type": "glb",
-    "path": "/objects/object_20260214_180340.glb",
-    "size": 1403432,
-    "status": "ready"
-  },
-  "object_20260214_181020": {
-    "id": "object_20260214_181020",
-    "name": "object_20260214_181020",
-    "added": 1771255216.0,
-    "type": "glb",
-    "path": "/objects/object_20260214_181020.glb",
-    "size": 1478168,
-    "status": "ready"
-  },
-  "object_20260214_181037": {
-    "id": "object_20260214_181037",
-    "name": "object_20260214_181037",
-    "added": 1771255220.0,
-    "type": "glb",
-    "path": "/objects/object_20260214_181037.glb",
-    "size": 2250384,
-    "status": "ready"
-  },
-  "object_20260214_182452": {
-    "id": "object_20260214_182452",
-    "name": "object_20260214_182452",
-    "added": 1771255222.0,
-    "type": "glb",
-    "path": "/objects/object_20260214_182452.glb",
-    "size": 980828,
-    "status": "ready"
-  },
-  "object_20260214_182841": {
-    "id": "object_20260214_182841",
-    "name": "object_20260214_182841",
-    "added": 1771255224.0,
-    "type": "glb",
-    "path": "/objects/object_20260214_182841.glb",
-    "size": 57000,
-    "status": "ready"
-  },
-  "object_20260214_184010": {
-    "id": "object_20260214_184010",
-    "name": "object_20260214_184010",
-    "added": 1771255224.0,
-    "type": "glb",
-    "path": "/objects/object_20260214_184010.glb",
-    "size": 1531376,
-    "status": "ready"
-  },
-  "object_20260214_185848": {
-    "id": "object_20260214_185848",
-    "name": "object_20260214_185848",
-    "added": 1771255226.0,
-    "type": "glb",
-    "path": "/objects/object_20260214_185848.glb",
-    "size": 1556352,
-    "status": "ready"
-  },
-  "object_20260214_190221": {
-    "id": "object_20260214_190221",
-    "name": "object_20260214_190221",
-    "added": 1771255226.0,
-    "type": "glb",
-    "path": "/objects/object_20260214_190221.glb",
-    "size": 1793364,
-    "status": "ready"
-  },
-  "object_20260214_190237": {
-    "id": "object_20260214_190237",
-    "name": "object_20260214_190237",
-    "added": 1771255230.0,
-    "type": "glb",
-    "path": "/objects/object_20260214_190237.glb",
-    "size": 2969768,
-    "status": "ready"
-  },
-  "object_20260214_190434": {
-    "id": "object_20260214_190434",
-    "name": "object_20260214_190434",
-    "added": 1771255232.0,
-    "type": "glb",
-    "path": "/objects/object_20260214_190434.glb",
-    "size": 1294568,
-    "status": "ready"
-  },
-  "object_20260214_190522": {
-    "id": "object_20260214_190522",
-    "name": "object_20260214_190522",
-    "added": 1771255232.0,
-    "type": "glb",
-    "path": "/objects/object_20260214_190522.glb",
-    "size": 1807824,
-    "status": "ready"
-  },
-  "object_20260214_190612": {
-    "id": "object_20260214_190612",
-    "name": "object_20260214_190612",
-    "added": 1771255236.0,
-    "type": "glb",
-    "path": "/objects/object_20260214_190612.glb",
-    "size": 3471528,
-    "status": "ready"
-  },
-  "object_20260214_190758": {
-    "id": "object_20260214_190758",
-    "name": "object_20260214_190758",
-    "added": 1771255240.0,
-    "type": "glb",
-    "path": "/objects/object_20260214_190758.glb",
-    "size": 1465172,
-    "status": "ready"
-  },
-  "object_20260214_191400": {
-    "id": "object_20260214_191400",
-    "name": "object_20260214_191400",
-    "added": 1771255240.0,
-    "type": "glb",
-    "path": "/objects/object_20260214_191400.glb",
-    "size": 405356,
-    "status": "ready"
-  },
-  "object_20260214_191539": {
-    "id": "object_20260214_191539",
-    "name": "object_20260214_191539",
-    "added": 1771255244.0,
-    "type": "glb",
-    "path": "/objects/object_20260214_191539.glb",
-    "size": 332092,
-    "status": "ready"
-  },
-  "object_20260214_193414": {
-    "id": "object_20260214_193414",
-    "name": "object_20260214_193414",
-    "added": 1771255246.0,
-    "type": "glb",
-    "path": "/objects/object_20260214_193414.glb",
-    "size": 1135796,
-    "status": "ready"
-  },
-  "object_20260214_194201": {
-    "id": "object_20260214_194201",
-    "name": "object_20260214_194201",
-    "added": 1771255246.0,
-    "type": "glb",
-    "path": "/objects/object_20260214_194201.glb",
-    "size": 1180424,
-    "status": "ready"
-  },
-  "object_20260214_195451": {
-    "id": "object_20260214_195451",
-    "name": "object_20260214_195451",
-    "added": 1771255248.0,
-    "type": "glb",
-    "path": "/objects/object_20260214_195451.glb",
-    "size": 622928,
-    "status": "ready"
-  },
-  "object_20260214_200813": {
-    "id": "object_20260214_200813",
-    "name": "object_20260214_200813",
-    "added": 1771255248.0,
-    "type": "glb",
-    "path": "/objects/object_20260214_200813.glb",
-    "size": 366896,
-    "status": "ready"
-  },
-  "object_20260214_200911": {
-    "id": "object_20260214_200911",
-    "name": "object_20260214_200911",
-    "added": 1771255254.0,
-    "type": "glb",
-    "path": "/objects/object_20260214_200911.glb",
-    "size": 1933944,
-    "status": "ready"
-  },
-  "object_20260214_201049": {
-    "id": "object_20260214_201049",
-    "name": "object_20260214_201049",
-    "added": 1771255254.0,
-    "type": "glb",
-    "path": "/objects/object_20260214_201049.glb",
-    "size": 1931088,
-    "status": "ready"
-  },
-  "object_20260214_202004": {
-    "id": "object_20260214_202004",
-    "name": "object_20260214_202004",
-    "added": 1771255258.0,
-    "type": "glb",
-    "path": "/objects/object_20260214_202004.glb",
-    "size": 1699472,
-    "status": "ready"
-  },
-  "object_20260214_202259": {
-    "id": "object_20260214_202259",
-    "name": "object_20260214_202259",
-    "added": 1771255262.0,
-    "type": "glb",
-    "path": "/objects/object_20260214_202259.glb",
-    "size": 949448,
-    "status": "ready"
-  },
-  "object_20260214_202328": {
-    "id": "object_20260214_202328",
-    "name": "object_20260214_202328",
-    "added": 1771255262.0,
-    "type": "glb",
-    "path": "/objects/object_20260214_202328.glb",
-    "size": 2082408,
-    "status": "ready"
-  },
-  "object_20260214_202656": {
-    "id": "object_20260214_202656",
-    "name": "object_20260214_202656",
-    "added": 1771255264.0,
-    "type": "glb",
-    "path": "/objects/object_20260214_202656.glb",
-    "size": 1457300,
-    "status": "ready"
-  },
-  "object_20260214_204036": {
-    "id": "object_20260214_204036",
-    "name": "object_20260214_204036",
-    "added": 1771255268.0,
-    "type": "glb",
-    "path": "/objects/object_20260214_204036.glb",
-    "size": 1295388,
-    "status": "ready"
-  },
-  "object_20260214_204105": {
-    "id": "object_20260214_204105",
-    "name": "object_20260214_204105",
-    "added": 1771255268.0,
-    "type": "glb",
-    "path": "/objects/object_20260214_204105.glb",
-    "size": 632432,
-    "status": "ready"
-  },
-  "object_20260214_204121": {
-    "id": "object_20260214_204121",
-    "name": "object_20260214_204121",
-    "added": 1771255270.0,
-    "type": "glb",
-    "path": "/objects/object_20260214_204121.glb",
-    "size": 886376,
-    "status": "ready"
-  },
-  "object_20260214_204213": {
-    "id": "object_20260214_204213",
-    "name": "object_20260214_204213",
-    "added": 1771255270.0,
-    "type": "glb",
-    "path": "/objects/object_20260214_204213.glb",
-    "size": 998240,
-    "status": "ready"
-  },
-  "object_20260214_204729": {
-    "id": "object_20260214_204729",
-    "name": "object_20260214_204729",
-    "added": 1771255274.0,
-    "type": "glb",
-    "path": "/objects/object_20260214_204729.glb",
-    "size": 1927920,
-    "status": "ready"
-  },
-  "object_20260214_204745": {
-    "id": "object_20260214_204745",
-    "name": "object_20260214_204745",
-    "added": 1771255274.0,
-    "type": "glb",
-    "path": "/objects/object_20260214_204745.glb",
-    "size": 101212,
+    "size": 1809,
     "status": "ready"
   },
   "object_20260214_205425": {
     "id": "object_20260214_205425",
     "name": "object_20260214_205425",
-    "added": 1771255274.0,
+    "added": 0,
     "type": "glb",
     "path": "/objects/object_20260214_205425.glb",
-    "size": 673940,
+    "size": 404,
     "status": "ready"
   },
   "object_20260214_211013": {
     "id": "object_20260214_211013",
     "name": "object_20260214_211013",
-    "added": 1771255276.0,
+    "added": 0,
     "type": "glb",
     "path": "/objects/object_20260214_211013.glb",
-    "size": 5026572,
-    "status": "ready"
-  },
-  "object_20260214_211553": {
-    "id": "object_20260214_211553",
-    "name": "object_20260214_211553",
-    "added": 1771255280.0,
-    "type": "glb",
-    "path": "/objects/object_20260214_211553.glb",
-    "size": 1497128,
+    "size": 2012,
     "status": "ready"
   },
   "object_20260214_211622": {
     "id": "object_20260214_211622",
     "name": "object_20260214_211622",
-    "added": 1771255282.0,
+    "added": 0,
     "type": "glb",
     "path": "/objects/object_20260214_211622.glb",
-    "size": 1660344,
-    "status": "ready"
-  },
-  "object_20260214_211732": {
-    "id": "object_20260214_211732",
-    "name": "object_20260214_211732",
-    "added": 1771255284.0,
-    "type": "glb",
-    "path": "/objects/object_20260214_211732.glb",
-    "size": 1006320,
+    "size": 947,
     "status": "ready"
   },
   "object_20260214_212842": {
     "id": "object_20260214_212842",
     "name": "object_20260214_212842",
-    "added": 1771255284.0,
+    "added": 0,
     "type": "glb",
     "path": "/objects/object_20260214_212842.glb",
-    "size": 3710316,
-    "status": "ready"
-  },
-  "object_20260214_213018": {
-    "id": "object_20260214_213018",
-    "name": "object_20260214_213018",
-    "added": 1771255286.0,
-    "type": "glb",
-    "path": "/objects/object_20260214_213018.glb",
-    "size": 1323672,
-    "status": "ready"
-  },
-  "object_20260214_213116": {
-    "id": "object_20260214_213116",
-    "name": "object_20260214_213116",
-    "added": 1771255290.0,
-    "type": "glb",
-    "path": "/objects/object_20260214_213116.glb",
-    "size": 1184504,
-    "status": "ready"
-  },
-  "object_20260214_213152": {
-    "id": "object_20260214_213152",
-    "name": "object_20260214_213152",
-    "added": 1771255290.0,
-    "type": "glb",
-    "path": "/objects/object_20260214_213152.glb",
-    "size": 1557464,
-    "status": "ready"
-  },
-  "object_20260214_213230": {
-    "id": "object_20260214_213230",
-    "name": "object_20260214_213230",
-    "added": 1771255292.0,
-    "type": "glb",
-    "path": "/objects/object_20260214_213230.glb",
-    "size": 1097816,
-    "status": "ready"
-  },
-  "object_20260214_213334": {
-    "id": "object_20260214_213334",
-    "name": "object_20260214_213334",
-    "added": 1771255296.0,
-    "type": "glb",
-    "path": "/objects/object_20260214_213334.glb",
-    "size": 1464596,
-    "status": "ready"
-  },
-  "object_20260214_213633": {
-    "id": "object_20260214_213633",
-    "name": "object_20260214_213633",
-    "added": 1771255298.0,
-    "type": "glb",
-    "path": "/objects/object_20260214_213633.glb",
-    "size": 2247224,
-    "status": "ready"
-  },
-  "object_20260214_213711": {
-    "id": "object_20260214_213711",
-    "name": "object_20260214_213711",
-    "added": 1771255302.0,
-    "type": "glb",
-    "path": "/objects/object_20260214_213711.glb",
-    "size": 2699696,
-    "status": "ready"
-  },
-  "object_20260214_213753": {
-    "id": "object_20260214_213753",
-    "name": "object_20260214_213753",
-    "added": 1771255302.0,
-    "type": "glb",
-    "path": "/objects/object_20260214_213753.glb",
-    "size": 390392,
-    "status": "ready"
-  },
-  "object_20260214_213837": {
-    "id": "object_20260214_213837",
-    "name": "object_20260214_213837",
-    "added": 1771255304.0,
-    "type": "glb",
-    "path": "/objects/object_20260214_213837.glb",
-    "size": 537456,
-    "status": "ready"
-  },
-  "object_20260214_213853": {
-    "id": "object_20260214_213853",
-    "name": "object_20260214_213853",
-    "added": 1771255308.0,
-    "type": "glb",
-    "path": "/objects/object_20260214_213853.glb",
-    "size": 393320,
-    "status": "ready"
-  },
-  "object_20260215_135507": {
-    "id": "object_20260215_135507",
-    "name": "object_20260215_135507",
-    "added": 1771255308.0,
-    "type": "glb",
-    "path": "/objects/object_20260215_135507.glb",
-    "size": 999260,
-    "status": "ready"
-  },
-  "object_20260215_152059": {
-    "id": "object_20260215_152059",
-    "name": "object_20260215_152059",
-    "added": 1771255308.0,
-    "type": "glb",
-    "path": "/objects/object_20260215_152059.glb",
-    "size": 1132352,
-    "status": "ready"
-  },
-  "object_20260215_152200": {
-    "id": "object_20260215_152200",
-    "name": "object_20260215_152200",
-    "added": 1771255310.0,
-    "type": "glb",
-    "path": "/objects/object_20260215_152200.glb",
-    "size": 1221560,
-    "status": "ready"
-  },
-  "object_20260215_152238": {
-    "id": "object_20260215_152238",
-    "name": "object_20260215_152238",
-    "added": 1771255310.0,
-    "type": "glb",
-    "path": "/objects/object_20260215_152238.glb",
-    "size": 1040048,
-    "status": "ready"
-  },
-  "object_20260215_152314": {
-    "id": "object_20260215_152314",
-    "name": "object_20260215_152314",
-    "added": 1771255314.0,
-    "type": "glb",
-    "path": "/objects/object_20260215_152314.glb",
-    "size": 4732620,
-    "status": "ready"
-  },
-  "object_20260215_153832": {
-    "id": "object_20260215_153832",
-    "name": "object_20260215_153832",
-    "added": 1771255316.0,
-    "type": "glb",
-    "path": "/objects/object_20260215_153832.glb",
-    "size": 1773792,
-    "status": "ready"
-  },
-  "object_20260215_154019": {
-    "id": "object_20260215_154019",
-    "name": "object_20260215_154019",
-    "added": 1771255320.0,
-    "type": "glb",
-    "path": "/objects/object_20260215_154019.glb",
-    "size": 1939404,
-    "status": "ready"
-  },
-  "object_20260215_155650": {
-    "id": "object_20260215_155650",
-    "name": "object_20260215_155650",
-    "added": 1771255324.0,
-    "type": "glb",
-    "path": "/objects/object_20260215_155650.glb",
-    "size": 1272272,
+    "size": 1268,
     "status": "ready"
   },
   "object_20260215_161117": {
     "id": "object_20260215_161117",
     "name": "object_20260215_161117",
-    "added": 1771255324.0,
+    "added": 0,
     "type": "glb",
     "path": "/objects/object_20260215_161117.glb",
-    "size": 1422092,
-    "status": "ready"
-  },
-  "object_20260215_161233": {
-    "id": "object_20260215_161233",
-    "name": "object_20260215_161233",
-    "added": 1771255328.0,
-    "type": "glb",
-    "path": "/objects/object_20260215_161233.glb",
-    "size": 1008128,
-    "status": "ready"
-  },
-  "object_20260215_161252": {
-    "id": "object_20260215_161252",
-    "name": "object_20260215_161252",
-    "added": 1771255330.0,
-    "type": "glb",
-    "path": "/objects/object_20260215_161252.glb",
-    "size": 1845516,
+    "size": 454,
     "status": "ready"
   },
   "object_20260215_161407": {
     "id": "object_20260215_161407",
     "name": "object_20260215_161407",
-    "added": 1771255332.0,
+    "added": 0,
     "type": "glb",
     "path": "/objects/object_20260215_161407.glb",
-    "size": 1441736,
-    "status": "ready"
-  },
-  "object_20260215_161549": {
-    "id": "object_20260215_161549",
-    "name": "object_20260215_161549",
-    "added": 1771255336.0,
-    "type": "glb",
-    "path": "/objects/object_20260215_161549.glb",
-    "size": 1073552,
-    "status": "ready"
-  },
-  "object_20260215_161745": {
-    "id": "object_20260215_161745",
-    "name": "object_20260215_161745",
-    "added": 1771255338.0,
-    "type": "glb",
-    "path": "/objects/object_20260215_161745.glb",
-    "size": 875360,
-    "status": "ready"
-  },
-  "object_20260215_162242": {
-    "id": "object_20260215_162242",
-    "name": "object_20260215_162242",
-    "added": 1771255342.0,
-    "type": "glb",
-    "path": "/objects/object_20260215_162242.glb",
-    "size": 1206800,
-    "status": "ready"
-  },
-  "object_20260215_162614": {
-    "id": "object_20260215_162614",
-    "name": "object_20260215_162614",
-    "added": 1771255342.0,
-    "type": "glb",
-    "path": "/objects/object_20260215_162614.glb",
-    "size": 879992,
-    "status": "ready"
-  },
-  "object_20260215_165533": {
-    "id": "object_20260215_165533",
-    "name": "object_20260215_165533",
-    "added": 1771255344.0,
-    "type": "glb",
-    "path": "/objects/object_20260215_165533.glb",
-    "size": 1130396,
+    "size": 1958,
     "status": "ready"
   },
   "object_20260215_170240": {
     "id": "object_20260215_170240",
     "name": "object_20260215_170240",
-    "added": 1771255344.0,
+    "added": 0,
     "type": "glb",
     "path": "/objects/object_20260215_170240.glb",
-    "size": 1602572,
-    "status": "ready"
-  },
-  "object_20260215_170331": {
-    "id": "object_20260215_170331",
-    "name": "object_20260215_170331",
-    "added": 1771255346.0,
-    "type": "glb",
-    "path": "/objects/object_20260215_170331.glb",
-    "size": 1906820,
-    "status": "ready"
-  },
-  "object_20260215_170502": {
-    "id": "object_20260215_170502",
-    "name": "object_20260215_170502",
-    "added": 1771255350.0,
-    "type": "glb",
-    "path": "/objects/object_20260215_170502.glb",
-    "size": 1613940,
-    "status": "ready"
-  },
-  "object_20260215_170519": {
-    "id": "object_20260215_170519",
-    "name": "object_20260215_170519",
-    "added": 1771255350.0,
-    "type": "glb",
-    "path": "/objects/object_20260215_170519.glb",
-    "size": 1496940,
-    "status": "ready"
-  },
-  "object_20260215_172129": {
-    "id": "object_20260215_172129",
-    "name": "object_20260215_172129",
-    "added": 1771255352.0,
-    "type": "glb",
-    "path": "/objects/object_20260215_172129.glb",
-    "size": 924872,
-    "status": "ready"
-  },
-  "object_20260215_172242": {
-    "id": "object_20260215_172242",
-    "name": "object_20260215_172242",
-    "added": 1771255352.0,
-    "type": "glb",
-    "path": "/objects/object_20260215_172242.glb",
-    "size": 2205872,
+    "size": 225,
     "status": "ready"
   },
   "object_20260215_172803": {
     "id": "object_20260215_172803",
     "name": "object_20260215_172803",
-    "added": 1771255356.0,
+    "added": 0,
     "type": "glb",
     "path": "/objects/object_20260215_172803.glb",
-    "size": 1547880,
+    "size": 158,
     "status": "ready"
   },
-  "object_20260215_172944": {
-    "id": "object_20260215_172944",
-    "name": "object_20260215_172944",
-    "added": 1771255356.0,
+  "object_20260330_131938": {
+    "id": "object_20260330_131938",
+    "name": "object_20260330_131938",
+    "added": 0,
     "type": "glb",
-    "path": "/objects/object_20260215_172944.glb",
-    "size": 2029508,
+    "path": "/objects/object_20260330_131938.glb",
+    "size": 1008,
     "status": "ready"
   },
-  "object_20260215_173131": {
-    "id": "object_20260215_173131",
-    "name": "object_20260215_173131",
-    "added": 1771255360.0,
+  "object_20260331_201147": {
+    "id": "object_20260331_201147",
+    "name": "object_20260331_201147",
+    "added": 0,
     "type": "glb",
-    "path": "/objects/object_20260215_173131.glb",
-    "size": 1180088,
+    "path": "/objects/object_20260331_201147.glb",
+    "size": 3501,
     "status": "ready"
   },
-  "object_20260215_173514": {
-    "id": "object_20260215_173514",
-    "name": "object_20260215_173514",
-    "added": 1771255362.0,
+  "object_20260331_202638": {
+    "id": "object_20260331_202638",
+    "name": "object_20260331_202638",
+    "added": 0,
     "type": "glb",
-    "path": "/objects/object_20260215_173514.glb",
-    "size": 1647852,
+    "path": "/objects/object_20260331_202638.glb",
+    "size": 4999,
     "status": "ready"
   },
-  "object_20260215_173726": {
-    "id": "object_20260215_173726",
-    "name": "object_20260215_173726",
-    "added": 1771255362.0,
+  "object_20260401_104609": {
+    "id": "object_20260401_104609",
+    "name": "object_20260401_104609",
+    "added": 0,
     "type": "glb",
-    "path": "/objects/object_20260215_173726.glb",
-    "size": 1585676,
+    "path": "/objects/object_20260401_104609.glb",
+    "size": 4039,
     "status": "ready"
   },
-  "object_20260215_173814": {
-    "id": "object_20260215_173814",
-    "name": "object_20260215_173814",
-    "added": 1771255364.0,
+  "object_20260401_105424": {
+    "id": "object_20260401_105424",
+    "name": "object_20260401_105424",
+    "added": 0,
     "type": "glb",
-    "path": "/objects/object_20260215_173814.glb",
-    "size": 1823364,
+    "path": "/objects/object_20260401_105424.glb",
+    "size": 157,
     "status": "ready"
   },
-  "object_20260215_173915": {
-    "id": "object_20260215_173915",
-    "name": "object_20260215_173915",
-    "added": 1771255366.0,
+  "object_20260401_110027": {
+    "id": "object_20260401_110027",
+    "name": "object_20260401_110027",
+    "added": 0,
     "type": "glb",
-    "path": "/objects/object_20260215_173915.glb",
-    "size": 2029712,
+    "path": "/objects/object_20260401_110027.glb",
+    "size": 1137,
     "status": "ready"
   },
-  "object_20260215_174008": {
-    "id": "object_20260215_174008",
-    "name": "object_20260215_174008",
-    "added": 1771255368.0,
+  "object_20260401_113719": {
+    "id": "object_20260401_113719",
+    "name": "object_20260401_113719",
+    "added": 0,
     "type": "glb",
-    "path": "/objects/object_20260215_174008.glb",
-    "size": 1330628,
+    "path": "/objects/object_20260401_113719.glb",
+    "size": 3009,
     "status": "ready"
   },
-  "object_20260215_174024": {
-    "id": "object_20260215_174024",
-    "name": "object_20260215_174024",
-    "added": 1771255370.0,
+  "object_20260401_151530": {
+    "id": "object_20260401_151530",
+    "name": "object_20260401_151530",
+    "added": 0,
     "type": "glb",
-    "path": "/objects/object_20260215_174024.glb",
-    "size": 1305356,
+    "path": "/objects/object_20260401_151530.glb",
+    "size": 501,
     "status": "ready"
   },
-  "object_20260215_175338": {
-    "id": "object_20260215_175338",
-    "name": "object_20260215_175338",
-    "added": 1771255372.0,
+  "object_20260401_152303": {
+    "id": "object_20260401_152303",
+    "name": "object_20260401_152303",
+    "added": 0,
     "type": "glb",
-    "path": "/objects/object_20260215_175338.glb",
-    "size": 2034392,
+    "path": "/objects/object_20260401_152303.glb",
+    "size": 431,
     "status": "ready"
   },
-  "object_20260215_181345": {
-    "id": "object_20260215_181345",
-    "name": "object_20260215_181345",
-    "added": 1771255376.0,
+  "object_20260401_153346": {
+    "id": "object_20260401_153346",
+    "name": "object_20260401_153346",
+    "added": 0,
     "type": "glb",
-    "path": "/objects/object_20260215_181345.glb",
-    "size": 1465272,
+    "path": "/objects/object_20260401_153346.glb",
+    "size": 1742,
     "status": "ready"
   },
-  "object_20260215_181726": {
-    "id": "object_20260215_181726",
-    "name": "object_20260215_181726",
-    "added": 1771255376.0,
+  "object_20260401_155853": {
+    "id": "object_20260401_155853",
+    "name": "object_20260401_155853",
+    "added": 0,
     "type": "glb",
-    "path": "/objects/object_20260215_181726.glb",
-    "size": 1132412,
+    "path": "/objects/object_20260401_155853.glb",
+    "size": 837,
     "status": "ready"
   },
-  "object_20260215_181814": {
-    "id": "object_20260215_181814",
-    "name": "object_20260215_181814",
-    "added": 1771255378.0,
+  "object_20260401_160902": {
+    "id": "object_20260401_160902",
+    "name": "object_20260401_160902",
+    "added": 0,
     "type": "glb",
-    "path": "/objects/object_20260215_181814.glb",
-    "size": 1210436,
+    "path": "/objects/object_20260401_160902.glb",
+    "size": 3042,
     "status": "ready"
   },
-  "object_20260215_181930": {
-    "id": "object_20260215_181930",
-    "name": "object_20260215_181930",
-    "added": 1771255382.0,
+  "object_20260401_161039": {
+    "id": "object_20260401_161039",
+    "name": "object_20260401_161039",
+    "added": 0,
     "type": "glb",
-    "path": "/objects/object_20260215_181930.glb",
-    "size": 1394880,
+    "path": "/objects/object_20260401_161039.glb",
+    "size": 3952,
     "status": "ready"
   },
-  "object_20260215_182103": {
-    "id": "object_20260215_182103",
-    "name": "object_20260215_182103",
-    "added": 1771255384.0,
+  "object_20260401_162923": {
+    "id": "object_20260401_162923",
+    "name": "object_20260401_162923",
+    "added": 0,
     "type": "glb",
-    "path": "/objects/object_20260215_182103.glb",
-    "size": 2701320,
+    "path": "/objects/object_20260401_162923.glb",
+    "size": 1422,
     "status": "ready"
   },
-  "object_20260215_182119": {
-    "id": "object_20260215_182119",
-    "name": "object_20260215_182119",
-    "added": 1771255390.0,
+  "object_20260401_163615": {
+    "id": "object_20260401_163615",
+    "name": "object_20260401_163615",
+    "added": 0,
     "type": "glb",
-    "path": "/objects/object_20260215_182119.glb",
-    "size": 2133212,
+    "path": "/objects/object_20260401_163615.glb",
+    "size": 2208,
     "status": "ready"
   },
-  "trash1": {
-    "id": "trash1",
-    "name": "trash1",
-    "added": 1771255392.0,
+  "object_20260401_164911": {
+    "id": "object_20260401_164911",
+    "name": "object_20260401_164911",
+    "added": 0,
     "type": "glb",
-    "path": "/objects/trash1.glb",
-    "size": 1654552,
+    "path": "/objects/object_20260401_164911.glb",
+    "size": 636,
+    "status": "ready"
+  },
+  "object_20260401_165222": {
+    "id": "object_20260401_165222",
+    "name": "object_20260401_165222",
+    "added": 0,
+    "type": "glb",
+    "path": "/objects/object_20260401_165222.glb",
+    "size": 1634,
+    "status": "ready"
+  },
+  "object_20260401_170655": {
+    "id": "object_20260401_170655",
+    "name": "object_20260401_170655",
+    "added": 0,
+    "type": "glb",
+    "path": "/objects/object_20260401_170655.glb",
+    "size": 2622,
+    "status": "ready"
+  },
+  "object_20260402_150636": {
+    "id": "object_20260402_150636",
+    "name": "object_20260402_150636",
+    "added": 0,
+    "type": "glb",
+    "path": "/objects/object_20260402_150636.glb",
+    "size": 3808,
+    "status": "ready"
+  },
+  "object_20260402_150923": {
+    "id": "object_20260402_150923",
+    "name": "object_20260402_150923",
+    "added": 0,
+    "type": "glb",
+    "path": "/objects/object_20260402_150923.glb",
+    "size": 2721,
+    "status": "ready"
+  },
+  "object_20260402_151827": {
+    "id": "object_20260402_151827",
+    "name": "object_20260402_151827",
+    "added": 0,
+    "type": "glb",
+    "path": "/objects/object_20260402_151827.glb",
+    "size": 2587,
+    "status": "ready"
+  },
+  "object_20260402_151946": {
+    "id": "object_20260402_151946",
+    "name": "object_20260402_151946",
+    "added": 0,
+    "type": "glb",
+    "path": "/objects/object_20260402_151946.glb",
+    "size": 1415,
+    "status": "ready"
+  },
+  "object_20260402_152353": {
+    "id": "object_20260402_152353",
+    "name": "object_20260402_152353",
+    "added": 0,
+    "type": "glb",
+    "path": "/objects/object_20260402_152353.glb",
+    "size": 4288,
+    "status": "ready"
+  },
+  "object_20260402_152917": {
+    "id": "object_20260402_152917",
+    "name": "object_20260402_152917",
+    "added": 0,
+    "type": "glb",
+    "path": "/objects/object_20260402_152917.glb",
+    "size": 2283,
+    "status": "ready"
+  },
+  "object_20260402_154812": {
+    "id": "object_20260402_154812",
+    "name": "object_20260402_154812",
+    "added": 0,
+    "type": "glb",
+    "path": "/objects/object_20260402_154812.glb",
+    "size": 4372,
+    "status": "ready"
+  },
+  "object_20260402_161037": {
+    "id": "object_20260402_161037",
+    "name": "object_20260402_161037",
+    "added": 0,
+    "type": "glb",
+    "path": "/objects/object_20260402_161037.glb",
+    "size": 1129,
+    "status": "ready"
+  },
+  "object_20260402_170844": {
+    "id": "object_20260402_170844",
+    "name": "object_20260402_170844",
+    "added": 0,
+    "type": "glb",
+    "path": "/objects/object_20260402_170844.glb",
+    "size": 768,
+    "status": "ready"
+  },
+  "object_20260402_171351": {
+    "id": "object_20260402_171351",
+    "name": "object_20260402_171351",
+    "added": 0,
+    "type": "glb",
+    "path": "/objects/object_20260402_171351.glb",
+    "size": 1558,
+    "status": "ready"
+  },
+  "object_20260402_172154": {
+    "id": "object_20260402_172154",
+    "name": "object_20260402_172154",
+    "added": 0,
+    "type": "glb",
+    "path": "/objects/object_20260402_172154.glb",
+    "size": 1411,
+    "status": "ready"
+  },
+  "object_20260402_173116": {
+    "id": "object_20260402_173116",
+    "name": "object_20260402_173116",
+    "added": 0,
+    "type": "glb",
+    "path": "/objects/object_20260402_173116.glb",
+    "size": 4552,
+    "status": "ready"
+  },
+  "object_20260402_174014": {
+    "id": "object_20260402_174014",
+    "name": "object_20260402_174014",
+    "added": 0,
+    "type": "glb",
+    "path": "/objects/object_20260402_174014.glb",
+    "size": 2965,
+    "status": "ready"
+  },
+  "object_20260403_123412": {
+    "id": "object_20260403_123412",
+    "name": "object_20260403_123412",
+    "added": 0,
+    "type": "glb",
+    "path": "/objects/object_20260403_123412.glb",
+    "size": 4163,
+    "status": "ready"
+  },
+  "object_20260403_124651": {
+    "id": "object_20260403_124651",
+    "name": "object_20260403_124651",
+    "added": 0,
+    "type": "glb",
+    "path": "/objects/object_20260403_124651.glb",
+    "size": 4523,
+    "status": "ready"
+  },
+  "object_20260403_124806": {
+    "id": "object_20260403_124806",
+    "name": "object_20260403_124806",
+    "added": 0,
+    "type": "glb",
+    "path": "/objects/object_20260403_124806.glb",
+    "size": 1442,
+    "status": "ready"
+  },
+  "object_20260403_124900": {
+    "id": "object_20260403_124900",
+    "name": "object_20260403_124900",
+    "added": 0,
+    "type": "glb",
+    "path": "/objects/object_20260403_124900.glb",
+    "size": 1039,
+    "status": "ready"
+  },
+  "object_20260403_125242": {
+    "id": "object_20260403_125242",
+    "name": "object_20260403_125242",
+    "added": 0,
+    "type": "glb",
+    "path": "/objects/object_20260403_125242.glb",
+    "size": 282,
+    "status": "ready"
+  },
+  "object_20260403_125323": {
+    "id": "object_20260403_125323",
+    "name": "object_20260403_125323",
+    "added": 0,
+    "type": "glb",
+    "path": "/objects/object_20260403_125323.glb",
+    "size": 4360,
+    "status": "ready"
+  },
+  "object_20260403_131744": {
+    "id": "object_20260403_131744",
+    "name": "object_20260403_131744",
+    "added": 0,
+    "type": "glb",
+    "path": "/objects/object_20260403_131744.glb",
+    "size": 1940,
+    "status": "ready"
+  },
+  "object_20260403_131946": {
+    "id": "object_20260403_131946",
+    "name": "object_20260403_131946",
+    "added": 0,
+    "type": "glb",
+    "path": "/objects/object_20260403_131946.glb",
+    "size": 1302,
+    "status": "ready"
+  },
+  "object_20260403_181630": {
+    "id": "object_20260403_181630",
+    "name": "object_20260403_181630",
+    "added": 0,
+    "type": "glb",
+    "path": "/objects/object_20260403_181630.glb",
+    "size": 2023,
+    "status": "ready"
+  },
+  "object_20260403_182410": {
+    "id": "object_20260403_182410",
+    "name": "object_20260403_182410",
+    "added": 0,
+    "type": "glb",
+    "path": "/objects/object_20260403_182410.glb",
+    "size": 3440,
+    "status": "ready"
+  },
+  "object_20260403_182606": {
+    "id": "object_20260403_182606",
+    "name": "object_20260403_182606",
+    "added": 0,
+    "type": "glb",
+    "path": "/objects/object_20260403_182606.glb",
+    "size": 3489,
+    "status": "ready"
+  },
+  "object_20260403_183313": {
+    "id": "object_20260403_183313",
+    "name": "object_20260403_183313",
+    "added": 0,
+    "type": "glb",
+    "path": "/objects/object_20260403_183313.glb",
+    "size": 1564,
+    "status": "ready"
+  },
+  "object_20260403_183606": {
+    "id": "object_20260403_183606",
+    "name": "object_20260403_183606",
+    "added": 0,
+    "type": "glb",
+    "path": "/objects/object_20260403_183606.glb",
+    "size": 604,
+    "status": "ready"
+  },
+  "object_20260403_184924": {
+    "id": "object_20260403_184924",
+    "name": "object_20260403_184924",
+    "added": 0,
+    "type": "glb",
+    "path": "/objects/object_20260403_184924.glb",
+    "size": 561,
+    "status": "ready"
+  },
+  "object_20260403_185047": {
+    "id": "object_20260403_185047",
+    "name": "object_20260403_185047",
+    "added": 0,
+    "type": "glb",
+    "path": "/objects/object_20260403_185047.glb",
+    "size": 3815,
+    "status": "ready"
+  },
+  "object_20260403_185802": {
+    "id": "object_20260403_185802",
+    "name": "object_20260403_185802",
+    "added": 0,
+    "type": "glb",
+    "path": "/objects/object_20260403_185802.glb",
+    "size": 876,
+    "status": "ready"
+  },
+  "object_20260403_185825": {
+    "id": "object_20260403_185825",
+    "name": "object_20260403_185825",
+    "added": 0,
+    "type": "glb",
+    "path": "/objects/object_20260403_185825.glb",
+    "size": 3748,
+    "status": "ready"
+  },
+  "object_20260403_185912": {
+    "id": "object_20260403_185912",
+    "name": "object_20260403_185912",
+    "added": 0,
+    "type": "glb",
+    "path": "/objects/object_20260403_185912.glb",
+    "size": 158,
+    "status": "ready"
+  },
+  "object_20260403_190112": {
+    "id": "object_20260403_190112",
+    "name": "object_20260403_190112",
+    "added": 0,
+    "type": "glb",
+    "path": "/objects/object_20260403_190112.glb",
+    "size": 2218,
+    "status": "ready"
+  },
+  "object_20260404_134428": {
+    "id": "object_20260404_134428",
+    "name": "object_20260404_134428",
+    "added": 0,
+    "type": "glb",
+    "path": "/objects/object_20260404_134428.glb",
+    "size": 3780,
+    "status": "ready"
+  },
+  "object_20260404_134657": {
+    "id": "object_20260404_134657",
+    "name": "object_20260404_134657",
+    "added": 0,
+    "type": "glb",
+    "path": "/objects/object_20260404_134657.glb",
+    "size": 273,
+    "status": "ready"
+  },
+  "object_20260404_141405": {
+    "id": "object_20260404_141405",
+    "name": "object_20260404_141405",
+    "added": 0,
+    "type": "glb",
+    "path": "/objects/object_20260404_141405.glb",
+    "size": 2231,
+    "status": "ready"
+  },
+  "object_20260404_141801": {
+    "id": "object_20260404_141801",
+    "name": "object_20260404_141801",
+    "added": 0,
+    "type": "glb",
+    "path": "/objects/object_20260404_141801.glb",
+    "size": 483,
+    "status": "ready"
+  },
+  "object_20260404_145132": {
+    "id": "object_20260404_145132",
+    "name": "object_20260404_145132",
+    "added": 0,
+    "type": "glb",
+    "path": "/objects/object_20260404_145132.glb",
+    "size": 2267,
+    "status": "ready"
+  },
+  "object_20260404_145330": {
+    "id": "object_20260404_145330",
+    "name": "object_20260404_145330",
+    "added": 0,
+    "type": "glb",
+    "path": "/objects/object_20260404_145330.glb",
+    "size": 4236,
+    "status": "ready"
+  },
+  "object_20260404_145425": {
+    "id": "object_20260404_145425",
+    "name": "object_20260404_145425",
+    "added": 0,
+    "type": "glb",
+    "path": "/objects/object_20260404_145425.glb",
+    "size": 3557,
+    "status": "ready"
+  },
+  "object_20260404_145555": {
+    "id": "object_20260404_145555",
+    "name": "object_20260404_145555",
+    "added": 0,
+    "type": "glb",
+    "path": "/objects/object_20260404_145555.glb",
+    "size": 4135,
+    "status": "ready"
+  },
+  "object_20260404_145829": {
+    "id": "object_20260404_145829",
+    "name": "object_20260404_145829",
+    "added": 0,
+    "type": "glb",
+    "path": "/objects/object_20260404_145829.glb",
+    "size": 4950,
+    "status": "ready"
+  },
+  "object_20260404_150743": {
+    "id": "object_20260404_150743",
+    "name": "object_20260404_150743",
+    "added": 0,
+    "type": "glb",
+    "path": "/objects/object_20260404_150743.glb",
+    "size": 785,
+    "status": "ready"
+  },
+  "object_20260404_151514": {
+    "id": "object_20260404_151514",
+    "name": "object_20260404_151514",
+    "added": 0,
+    "type": "glb",
+    "path": "/objects/object_20260404_151514.glb",
+    "size": 1947,
+    "status": "ready"
+  },
+  "object_20260405_121514": {
+    "id": "object_20260405_121514",
+    "name": "object_20260405_121514",
+    "added": 0,
+    "type": "glb",
+    "path": "/objects/object_20260405_121514.glb",
+    "size": 3434,
+    "status": "ready"
+  },
+  "object_20260405_123030": {
+    "id": "object_20260405_123030",
+    "name": "object_20260405_123030",
+    "added": 0,
+    "type": "glb",
+    "path": "/objects/object_20260405_123030.glb",
+    "size": 2029,
+    "status": "ready"
+  },
+  "object_20260405_123537": {
+    "id": "object_20260405_123537",
+    "name": "object_20260405_123537",
+    "added": 0,
+    "type": "glb",
+    "path": "/objects/object_20260405_123537.glb",
+    "size": 418,
+    "status": "ready"
+  },
+  "object_20260405_130036": {
+    "id": "object_20260405_130036",
+    "name": "object_20260405_130036",
+    "added": 0,
+    "type": "glb",
+    "path": "/objects/object_20260405_130036.glb",
+    "size": 242,
+    "status": "ready"
+  },
+  "object_20260405_130314": {
+    "id": "object_20260405_130314",
+    "name": "object_20260405_130314",
+    "added": 0,
+    "type": "glb",
+    "path": "/objects/object_20260405_130314.glb",
+    "size": 1459,
+    "status": "ready"
+  },
+  "object_20260405_130755": {
+    "id": "object_20260405_130755",
+    "name": "object_20260405_130755",
+    "added": 0,
+    "type": "glb",
+    "path": "/objects/object_20260405_130755.glb",
+    "size": 1401,
+    "status": "ready"
+  },
+  "object_20260405_133821": {
+    "id": "object_20260405_133821",
+    "name": "object_20260405_133821",
+    "added": 0,
+    "type": "glb",
+    "path": "/objects/object_20260405_133821.glb",
+    "size": 918,
+    "status": "ready"
+  },
+  "object_20260405_134336": {
+    "id": "object_20260405_134336",
+    "name": "object_20260405_134336",
+    "added": 0,
+    "type": "glb",
+    "path": "/objects/object_20260405_134336.glb",
+    "size": 2880,
+    "status": "ready"
+  },
+  "object_20260405_134506": {
+    "id": "object_20260405_134506",
+    "name": "object_20260405_134506",
+    "added": 0,
+    "type": "glb",
+    "path": "/objects/object_20260405_134506.glb",
+    "size": 2536,
+    "status": "ready"
+  },
+  "object_20260405_134545": {
+    "id": "object_20260405_134545",
+    "name": "object_20260405_134545",
+    "added": 0,
+    "type": "glb",
+    "path": "/objects/object_20260405_134545.glb",
+    "size": 3396,
+    "status": "ready"
+  },
+  "object_20260405_134914": {
+    "id": "object_20260405_134914",
+    "name": "object_20260405_134914",
+    "added": 0,
+    "type": "glb",
+    "path": "/objects/object_20260405_134914.glb",
+    "size": 354,
+    "status": "ready"
+  },
+  "object_20260405_144314": {
+    "id": "object_20260405_144314",
+    "name": "object_20260405_144314",
+    "added": 0,
+    "type": "glb",
+    "path": "/objects/object_20260405_144314.glb",
+    "size": 2188,
+    "status": "ready"
+  },
+  "object_20260405_152014": {
+    "id": "object_20260405_152014",
+    "name": "object_20260405_152014",
+    "added": 0,
+    "type": "glb",
+    "path": "/objects/object_20260405_152014.glb",
+    "size": 127,
     "status": "ready"
   },
   "trash2": {
     "id": "trash2",
     "name": "trash2",
-    "added": 1771255394.0,
+    "added": 0,
     "type": "glb",
     "path": "/objects/trash2.glb",
-    "size": 1682972,
+    "size": 203,
     "status": "ready"
   },
   "trash3": {
     "id": "trash3",
     "name": "trash3",
-    "added": 1771255396.0,
+    "added": 0,
     "type": "glb",
     "path": "/objects/trash3.glb",
-    "size": 718988,
+    "size": 4292,
     "status": "ready"
   },
   "trash4": {
     "id": "trash4",
     "name": "trash4",
-    "added": 1771255396.0,
+    "added": 0,
     "type": "glb",
     "path": "/objects/trash4.glb",
-    "size": 1089880,
+    "size": 3652,
     "status": "ready"
   },
   "trash5": {
     "id": "trash5",
     "name": "trash5",
-    "added": 1771255400.0,
+    "added": 0,
     "type": "glb",
     "path": "/objects/trash5.glb",
-    "size": 1535244,
-    "status": "ready"
-  },
-  "trash6": {
-    "id": "trash6",
-    "name": "trash6",
-    "added": 1771255402.0,
-    "type": "glb",
-    "path": "/objects/trash6.glb",
-    "size": 3009876,
+    "size": 872,
     "status": "ready"
   }
 }

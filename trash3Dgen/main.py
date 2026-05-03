@@ -31,7 +31,7 @@ print(f"Specified Base directory: {BASE_DIR}")
 # Source folder that images end up in
 WATCH_DIR = BASE_DIR / "image_in"
 
-COMFY_ROOT = Path("C:/Users/duraX/Documents/ComfyUI")  # <-- CHANGE THIS !!!
+COMFY_ROOT = Path(r"C:\Users\User\Desktop\Salma\comfyUI")  # <-- CHANGE THIS !!!
 print(f"Specified ComfyUI root: {COMFY_ROOT}")
 
 COMFY_INPUT = COMFY_ROOT / "input"

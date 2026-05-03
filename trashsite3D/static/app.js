@@ -15,7 +15,7 @@ const itemsPerRow = 7;
 // Zoom/Inspect mode
 let isZoomed = false;
 let zoomDistance = 8; // Close-up distance for inspecting
-let normalDistance = 35; // Normal grid view distance
+let normalDistance = 40; // Normal grid view distance
 
 // Auto-select first object when it loads
 let shouldSelectFirstObject = false;
@@ -133,7 +133,7 @@ function initPhysics() {
         shape: floorShape
     });
     floorBody.quaternion.setFromAxisAngle(new CANNON.Vec3(1, 0, 0), -Math.PI / 2);
-    floorBody.position.y = -350; // Position floor well below all objects
+    floorBody.position.y = -550; // Position floor well below all objects
     physicsWorld.addBody(floorBody);
     
     console.log('Physics world initialized');
@@ -328,7 +328,7 @@ function loadObject(name, position, id, fileSize, addedTime, row, col, status = 
                 gridPosition: position.clone(),
                 isSelected: false,
                 vertexCount: vertexCount,
-                fileSize: (fileSize) / (1024 * 1024), // Convert bytes to MB
+                fileSize: (fileSize) / (1024), // Convert bytes to MB
                 status: 'ready',
                 isLoading: false,
                 row: row,
@@ -469,8 +469,10 @@ async function loadObjects() {
                     scene.remove(existingObj);
                     objects.splice(objIndex, 1);
                     
+                    const fakeSize = Math.random() * 1000000 + 0.1; // Random size for loading object, since we don't have the real GLB yet
+                    
                     // Load the new GLB at the same position
-                    loadObject(obj.name, gridPos, obj.id, obj.size, obj.added, row, col, 'ready');
+                    loadObject(obj.name, gridPos, obj.id, fakeSize, obj.added, row, col, 'ready');
                     newLoadedObjectIndex = objects.length
                     toggleZoom = true
                 }

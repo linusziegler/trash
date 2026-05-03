@@ -4,7 +4,7 @@ import sys
 import os
 import time
 import cv2
-# from serial import Serial
+from serial import Serial
 import queue
 from threading import Thread
 from datetime import datetime
@@ -27,7 +27,7 @@ CAM_WIDTH = 1024
 CAM_HEIGHT = 720
 
 # Serial config for ESP communication
-SERIAL_PORT = "COM4"  # adjust based on your system
+SERIAL_PORT = "COM3"  # adjust based on your system
 SERIAL_BAUD = 115200
 SERIAL_TIMEOUT = 1.0
 

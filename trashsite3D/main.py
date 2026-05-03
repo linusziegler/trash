@@ -6,6 +6,7 @@ from datetime import datetime
 import shutil
 import queue
 import os
+from numpy import random
 from pynput import keyboard
 
 app = Flask(__name__, template_folder="templates", static_folder="static")
@@ -62,7 +63,7 @@ BASE_DIR = SCRIPT_DIR.parent
 print(f"Base directory: {BASE_DIR}")
 
 # Source folder where GLBs are produced
-SCANS_FOLDER = BASE_DIR / "object_out"
+SCANS_FOLDER = BASE_DIR / "object_out2"
 
 # Web-accessible folder (next to app.py)
 OBJECTS_FOLDER = SCRIPT_DIR / "objects"
@@ -97,7 +98,7 @@ def sync_objects_folder(glb_files: dict[str, Path]):
     Only copy when missing or updated
     """
     for obj_id, src_path in glb_files.items():
-        dst_path = OBJECTS_FOLDER / f"{obj_id.removesuffix("_00001_")}.glb"
+        dst_path = OBJECTS_FOLDER / f"{obj_id.removesuffix('_00001_')}.glb"
 
         if (
             not dst_path.exists()
@@ -135,10 +136,10 @@ def get_object_metadata():
             metadata[obj_id] = {
                 "id": obj_id,
                 "name": obj_id,
-                "added": glb_path.stat().st_birthtime,
+                "added": 0,
                 "type": "glb",
                 "path": f"/objects/{obj_id}.glb",
-                "size": glb_path.stat().st_size,
+                "size": random.randint(100, 5000),
                 "status": "ready",
             }
             updated = True
